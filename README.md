@@ -1,4 +1,6 @@
 Teal
 ====
+Teal is WJRH's Core Data API.
+We love the color teal.
 
-Teal is WJRH's Core Data API
+![](http://www.color-hex.com/palettes/309.png)
