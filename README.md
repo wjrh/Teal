@@ -4,4 +4,4 @@ Teal
 
 Teal is WJRH's Core Data API.
 
-![](http://www.color-hex.com/palettes/309.png)
+![](http://www.pilotfish-images.co.uk/Pens/Sharpie_Pens/Sharpie_Fine_Aqua3.jpg)
