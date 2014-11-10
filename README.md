@@ -12,4 +12,4 @@ We're building Teal to manage the information from shows and events WJRH sponsor
 - manage DJs
 - make it easy to discover, add and edit station information.
 
-In the future, this core API will help us build our new website, apps on various platforms and set our eyes on larger goals.
+In the future, this core API will help us build our new website, apps on various platforms and let us set our eyes on larger goals.
