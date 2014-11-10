@@ -4,7 +4,7 @@ Teal
 
 Teal is WJRH's Core Data API.
 
-![](http://www.pilotfish-images.co.uk/Pens/Sharpie_Pens/Sharpie_Fine_Aqua3.jpg)
+![](https://www.dropbox.com/s/6cvottwi5e7v9ib/teal_sharpie.jpg)
 
 We're building Teal to manage the information from shows and events WJRH sponsors. We want to:
 - collect song, album, artist names as they play on the radio
