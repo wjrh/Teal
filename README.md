@@ -1,6 +1,6 @@
 Teal
 ====
-Totally Easy API LOL.
+(Totally Easy API LOL)
 
 Teal is WJRH's Core Data API.
 
