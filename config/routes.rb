@@ -3,8 +3,10 @@ Rails.application.routes.draw do
   get 'episodes/episodes'
 
   resources :episodes
-  
-  get':controller(/:action(/:id))'
+  resources :shows
+  resources :djs
+
+  #get':controller(/:action(/:id))'
 
   
 
