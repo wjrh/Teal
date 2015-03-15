@@ -30,3 +30,5 @@ bower.json
 # Ignore pow environment settings
 .powenv
 .env
+
+.DS_Store
