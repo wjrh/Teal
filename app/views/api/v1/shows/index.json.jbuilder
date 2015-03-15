@@ -1,0 +1,1 @@
+json.shows @currentshows, :title, :description

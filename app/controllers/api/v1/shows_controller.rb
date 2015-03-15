@@ -1,15 +1,14 @@
 module Api
 	module V1
 		class ShowsController < ApplicationController
-			skip_before_filter :verify_authenticity_token
-
-			def create 
-				currentshow = Show.new(show_params)
-				currentshow.save
-				render json: currentshow
-			end
 
 			def index
+				@currentshows = Show.all.to_a
+			end
+
+			def create 
+				@currentshow = Show.new(show_params)
+				@currentshow.save
 			end
 
 			def edit
