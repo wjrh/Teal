@@ -9,6 +9,8 @@ module Api
 			end
 
 			def index
+				currentshows = Show.all.to_a
+				render json: currentshows
 			end
 
 			def edit
