@@ -28,4 +28,7 @@ pickle-email-*.html
 bower.json
 
 # Ignore pow environment settings
-.powenv.env
+.powenv
+.env
+
+.DS_Store
