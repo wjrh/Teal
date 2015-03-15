@@ -79,7 +79,6 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
-  database: WJRH-Teal_production
-  username: WJRH-Teal
-  password: <%= ENV['WJRH-TEAL_DATABASE_PASSWORD'] %>
+  url: <%= ENV['HEROKU_POSTGRESQL_TEAL_URL'] %>
+  adapter: postgresql
+  encoding: unicode
