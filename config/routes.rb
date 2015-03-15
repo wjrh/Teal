@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
-
-  get 'episodes/episodes'
-
-  resources :episodes
-  resources :shows
-  resources :djs
+  
+  namespace :api do
+    namespace :v1 do
+      resources :shows
+    end
+  end
+  
 
   #get':controller(/:action(/:id))'
 
