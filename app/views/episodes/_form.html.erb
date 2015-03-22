@@ -1,0 +1,33 @@
+<%= form_for(@episode) do |f| %>
+  <% if @episode.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@episode.errors.count, "error") %> prohibited this episode from being saved:</h2>
+
+      <ul>
+      <% @episode.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :recording_url %><br>
+    <%= f.text_field :recording_url %>
+  </div>
+  <div class="field">
+    <%= f.label :downloadable %><br>
+    <%= f.check_box :downloadable %>
+  </div>
+  <div class="field">
+    <%= f.label :online_listens %><br>
+    <%= f.number_field :online_listens %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

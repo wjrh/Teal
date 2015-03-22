@@ -1,11 +1,15 @@
 Rails.application.routes.draw do
-  
-  namespace :api do
-    namespace :v1 do
-      resources :shows
-    end
-  end
-  
+
+  resources :djs
+
+  resources :airings
+
+  resources :songs
+
+  resources :episodes
+
+  resources :shows
+
 
   #get':controller(/:action(/:id))'
 

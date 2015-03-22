@@ -1,0 +1,29 @@
+<%= form_for(@airing) do |f| %>
+  <% if @airing.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@airing.errors.count, "error") %> prohibited this airing from being saved:</h2>
+
+      <ul>
+      <% @airing.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :start_time %><br>
+    <%= f.datetime_select :start_time %>
+  </div>
+  <div class="field">
+    <%= f.label :end_time %><br>
+    <%= f.datetime_select :end_time %>
+  </div>
+  <div class="field">
+    <%= f.label :listens %><br>
+    <%= f.number_field :listens %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,2 @@
+module AiringsHelper
+end

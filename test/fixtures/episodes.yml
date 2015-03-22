@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  recording_url: MyString
+  downloadable: false
+  online_listens: 1
+
+two:
+  name: MyString
+  recording_url: MyString
+  downloadable: false
+  online_listens: 1
