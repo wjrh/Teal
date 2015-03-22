@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150322175711) do
+ActiveRecord::Schema.define(version: 20150322184858) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,16 @@ ActiveRecord::Schema.define(version: 20150322175711) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "djs_episodes", id: false, force: :cascade do |t|
+    t.integer "dj_id",      null: false
+    t.integer "episode_id", null: false
+  end
+
+  create_table "djs_shows", id: false, force: :cascade do |t|
+    t.integer "dj_id",   null: false
+    t.integer "show_id", null: false
+  end
+
   create_table "episodes", force: :cascade do |t|
     t.string   "name"
     t.string   "recording_url"
@@ -41,6 +51,12 @@ ActiveRecord::Schema.define(version: 20150322175711) do
     t.integer  "online_listens"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+  end
+
+  create_table "episodes_songs", id: false, force: :cascade do |t|
+    t.integer "song_id",            null: false
+    t.integer "episode_id",         null: false
+    t.integer "seconds_from_start"
   end
 
   create_table "shows", force: :cascade do |t|
