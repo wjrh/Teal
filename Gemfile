@@ -30,7 +30,7 @@ gem 'bootstrap-sass', '~> 3.3.3'
 gem 'puma'
 
 #for heroku logging to stdout and static file serving
-gem 'rails_12factor', group: :production
+#gem 'rails_12factor', group: :production
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
