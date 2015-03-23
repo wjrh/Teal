@@ -12,6 +12,11 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :dj_ids %><br>
+    <%= f.collection_check_boxes(:dj_ids, Dj.all, :id, :dj_name, {}, {:multiple => true}) %>
+  </div>
+
+  <div class="field">
     <%= f.label :title %><br>
     <%= f.text_field :title %>
   </div>

@@ -39,10 +39,16 @@ ActiveRecord::Schema.define(version: 20150322184858) do
     t.integer "episode_id", null: false
   end
 
+  add_index "djs_episodes", ["dj_id", "episode_id"], name: "index_djs_episodes_on_dj_id_and_episode_id", using: :btree
+  add_index "djs_episodes", ["episode_id", "dj_id"], name: "index_djs_episodes_on_episode_id_and_dj_id", using: :btree
+
   create_table "djs_shows", id: false, force: :cascade do |t|
     t.integer "dj_id",   null: false
     t.integer "show_id", null: false
   end
+
+  add_index "djs_shows", ["dj_id", "show_id"], name: "index_djs_shows_on_dj_id_and_show_id", using: :btree
+  add_index "djs_shows", ["show_id", "dj_id"], name: "index_djs_shows_on_show_id_and_dj_id", using: :btree
 
   create_table "episodes", force: :cascade do |t|
     t.string   "name"
@@ -58,6 +64,9 @@ ActiveRecord::Schema.define(version: 20150322184858) do
     t.integer "episode_id",         null: false
     t.integer "seconds_from_start"
   end
+
+  add_index "episodes_songs", ["episode_id", "song_id"], name: "index_episodes_songs_on_episode_id_and_song_id", using: :btree
+  add_index "episodes_songs", ["song_id", "episode_id"], name: "index_episodes_songs_on_song_id_and_episode_id", using: :btree
 
   create_table "shows", force: :cascade do |t|
     t.string   "title"
