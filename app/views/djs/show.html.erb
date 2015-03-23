@@ -25,5 +25,10 @@
   <%= @dj.description %>
 </p>
 
+<p>
+  <strong>Associated Shows:</strong>
+  <%= @dj.shows.map(&:title).join(", ") %>
+</p>
+
 <%= link_to 'Edit', edit_dj_path(@dj) %> |
 <%= link_to 'Back', djs_path %>
