@@ -29,6 +29,9 @@ gem 'bootstrap-sass', '~> 3.3.3'
 #heroku webserver
 gem 'puma'
 
+#Fonts
+gem 'font-awesome-sass'
+
 #for heroku logging to stdout and static file serving
 #gem 'rails_12factor', group: :production
 

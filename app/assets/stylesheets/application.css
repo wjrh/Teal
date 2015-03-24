@@ -13,3 +13,10 @@
  *= require_tree .
  *= require_self
  */
+
+
+/*FONTS*/
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600|Open+Sans+Condensed:700);
+@import "font-awesome-sprockets";
+@import "font-awesome";
+

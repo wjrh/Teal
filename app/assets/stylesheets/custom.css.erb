@@ -1,0 +1,123 @@
+
+.logo
+{
+    height: 60px;
+    background-size: auto 60px;
+    width: 200px;
+    background-image: url(<%= asset_path 'wjrh_logo.svg' %>);
+    background-repeat: no-repeat;
+
+    display: block;
+    margin: auto;
+    max-width:100%;
+    max-height:100%;
+}
+
+div.nowplaying
+{
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+div.nowplaying a{
+    color: #222;
+    text-decoration: none;
+}
+
+div.nowplaying div{
+    font-size: 1.4rem;
+    display: inline;
+}
+div.nowplaying i{
+    color:red;
+    display: inline;
+}
+div.nowplaying i:before{
+    padding-left: 16px;
+}
+.vert-divider{
+    position:absolute;
+    margin-left: -20px;
+    top: 0px;
+    height: 60px;
+    border-left:1px solid #aaaaaa;
+}
+
+.play{
+    width: 130px;
+    padding: 0px;
+    padding-right: 6px;
+}
+
+.navbar{
+    font-family: "Open Sans Condensed", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.row{
+    margin-top: 40px;
+}
+
+.main-title {
+  font-family: "Open Sans Condensed", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.main-title p {
+  font-family: "Open Sans", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-align: left;
+}
+.main-title .button {
+  font-family: "Open Sans", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: #f8a31b;
+  border-color: #f8a31b;
+}
+.main-title.button:hover,
+.main-title.button:focus,{
+  background-color: #B22400;
+  border-color: #B22400;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Open Sans Condensed", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.featured h6{
+    margin-bottom: 0px;
+}
+
+.featured a i{
+  font-size: 1.3rem;
+}
+
+a {
+  color: #222;
+  text-decoration: none;
+}
+
+.bottom a {
+  color: #222;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #0FA0CE;
+  text-decoration: none
+}
+
+.bottom{
+  margin-top: 40px;
+  padding-top: 20px;
+  padding-bottom: 160px;
+  background-color: #aaa;
+}
+.bottom p{
+  font-size: 1.3rem;
+  margin-bottom: 0px;
+}
+
+
+
+/*DISABLE RESPONSIVENESS FOR NOW*/
+.container{
+    width: 960px !important;
+}
