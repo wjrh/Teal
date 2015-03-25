@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   resources :djs
   resources :airings
   resources :songs
-
   resources :shows
   resources :episodes
 
