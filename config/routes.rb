@@ -1,20 +1,14 @@
 Rails.application.routes.draw do
 
   resources :djs
-
   resources :airings
-
   resources :songs
 
-  resources :episodes
-
   resources :shows
+  resources :episodes
 
 
   #get':controller(/:action(/:id))'
-
-  
-
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
