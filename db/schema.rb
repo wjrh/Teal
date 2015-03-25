@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150325022553) do
+ActiveRecord::Schema.define(version: 20150325024703) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,7 +22,10 @@ ActiveRecord::Schema.define(version: 20150325022553) do
     t.integer  "listens"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "episode_id"
   end
+
+  add_index "airings", ["episode_id"], name: "index_airings_on_episode_id", using: :btree
 
   create_table "djs", force: :cascade do |t|
     t.string   "net_id"
@@ -86,5 +89,6 @@ ActiveRecord::Schema.define(version: 20150325022553) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "airings", "episodes"
   add_foreign_key "episodes", "shows"
 end
