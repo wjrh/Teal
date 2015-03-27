@@ -37,6 +37,7 @@ Teal runs WJRH.
 ### Popularity view:
 - [ ] collect listener information from icecast and put max listeners to episode/airing
 - [ ] feature shows depending on their popularity on the home page
+- [ ] sort "most popular" shows/episodes and display them.
 
 ### Real time feedback:
 - [ ] delay the song information by 12 seconds so that it is fully synced
