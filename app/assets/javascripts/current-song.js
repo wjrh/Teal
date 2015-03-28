@@ -5,8 +5,8 @@ setInterval( "updateSongInfo();", 7000 );
 $(function() {
 	updateSongInfo = function(){
 
-		$('#djdata').load("show_dj.php").fadeIn("slow");
-		$('#songdata').load("show_song.php").fadeIn("slow");
+		$('#djdata').load("http://wjrh.org/show_dj.php").fadeIn("slow");
+		$('#songdata').load("http://wjrh.org/show_song.php").fadeIn("slow");
 	}
 });
 

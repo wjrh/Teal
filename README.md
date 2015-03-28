@@ -6,10 +6,14 @@ Teal runs WJRH.
 ![](http://wjrh.org/teal_sharpie.jpg)
 
 ### Short term to-do:
-- [ ] switch to shallow routes
+- [ ] switch to shallow routes (minimal for what we need)
 - [ ] restructure forms to ask for necessary information
 - [ ] restructure indexes so that it gives necessary information
+- [X]  DJ
+- [ ]  Show
+- [ ]  Episode
 - [ ] focus on episode logging essentials
+- [ ] have a system of querying already existing songs when associating songs with episodes
 - [ ] limit the system so that there is only one person logging live shows
 
 - [ ] create a simple api to view the latest logged song
@@ -21,6 +25,9 @@ Teal runs WJRH.
 - [ ] SSO w/ lafayette
 
 - [ ] autocomplete on the episode/song logger page! (Musicbrainz, JS)
+
+- [ ] Implement profile picures for shows and djs
+
 - [ ] start rolling out/testing with real DJs
 
 ### Shows view:

@@ -10,13 +10,20 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
- *= require_self
+ *
+ *
  */
 
 
 /*FONTS*/
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600|Open+Sans+Condensed:700);
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "custon.scss";
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
+/*
+.rows{
+	padding-bottom: 25px;
+}*/

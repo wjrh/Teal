@@ -13,10 +13,10 @@
 
   <div class="container">
     <div class="row navbar">
-      <div class="three columns">
+      <div class="col-md-3">
         <div class="logo"></div>
       </div>
-      <div class="nine columns">
+      <div class="col-md-9">
         <div class="vert-divider"></div>
         <div class="nowplaying" id="nowplaying">
           <button id="play" class="play" onclick="togglePlay()">
@@ -38,35 +38,26 @@
     </div>
 
 
-    <div class="row">
+    
       <%= yield %>
-    </div>
-  </div>
-
-
+    
+  
+</div>
 
 
 
   <div class = "bottom">
     <div class="container">
       <div class="row">
-        <div class="three columns">
+        <div class="col-md-3">
           <div class="logo"></div>
         </div>
-        <div class="three columns">
+        <div class="col-md-3">
           <h5>About</h5>
           <p>WJRH is Lafayette College’s student run radio station located broadcasting since 1946. You can listen to us on 104.9MHz on the radio in the Lehigh Valley area. Our studios are located in Hogg Hall, on Lafayette College’s campus.</p>
-          <br>
-
-          
-          <h5>Follow us</h5>
-          <a href="https://twitter.com/wjrh1049fm/"><p>Twitter</p></a>
-          <a href="https://www.facebook.com/WJRH1049"><p>Facebook</p></a>
-          <a href="http://instagram.com/wjrhradio"><p>Instagram</p></a>
         </div>
-        <div class="three columns">
+        <div class="col-md-3">
           <h5>Contact</h5>
-          
           <p>WJRH Secretariat</p>
           <p>Box 9473<br>111 Quad Drive<br>Easton, PA 18042</p>
           <br>
@@ -78,29 +69,16 @@
           </p>
           <br>
           <p>Please do not use the words "unsubscribe", "click", "♫" and "GOP" in your emails. </p>
-
         </div>
-
-
-        <div class="three columns">
-          <h5>Links</h5>
-          <%= link_to "Airings", airings_path %> <br>
-          <%= link_to "DJs", djs_path %><br>
-          <%= link_to "Episodes", episodes_path %><br>
-          <%= link_to "Shows", shows_path %><br>
-          <%= link_to "Songs", songs_path %>
-
-        </div>
-
-
-        <div class="three columns">
-          
+        <div class="col-md-3">
+          <h5>Follow us</h5>
+          <a href="https://twitter.com/wjrh1049fm/"><p>Twitter</p></a>
+          <a href="https://www.facebook.com/WJRH1049"><p>Facebook</p></a>
+          <a href="http://instagram.com/wjrhradio"><p>Instagram</p></a>
         </div>
       </div>
     </div>
   </div>
-
-
 </body>
 </html>
 

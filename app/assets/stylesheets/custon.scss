@@ -1,10 +1,9 @@
-
 .logo
 {
     height: 60px;
     background-size: auto 60px;
     width: 200px;
-    background-image: url(<%= image_url('wjrh_logo.svg')  %>);
+    background-image: url(wjrh_logo.svg);
     background-repeat: no-repeat;
 
     display: block;
@@ -51,6 +50,7 @@ div.nowplaying i:before{
 
 .navbar{
     font-family: "Open Sans Condensed", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin-top: 40px;
 }
 .row{
     margin-top: 40px;
@@ -93,12 +93,6 @@ a {
   color: #222;
   text-decoration: none;
 }
-
-.bottom a {
-  color: #222;
-  text-decoration: none;
-}
-
 a:hover {
   color: #0FA0CE;
   text-decoration: none
@@ -114,10 +108,6 @@ a:hover {
   font-size: 1.3rem;
   margin-bottom: 0px;
 }
-
-
-
-/*DISABLE RESPONSIVENESS FOR NOW*/
-.container{
-    width: 960px !important;
-}
+body {
+  font-family: "Open Sans", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #222; }

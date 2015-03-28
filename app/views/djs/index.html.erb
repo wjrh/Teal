@@ -1,35 +1,36 @@
+<div class="container">
 <p id="notice"><%= notice %></p>
+</div>
 
-<h1>Listing Djs</h1>
+<div class="container">
+  <h1 class="text-center">All Radio DJs</h1>
 
-<table>
-  <thead>
-    <tr>
-      <!-- <th>Net</th> -->
-      <!-- <th>Email</th> -->
-      <th>Dj name</th>
-      <th>Real name</th>
-      <!-- <th>Description</th> -->
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+    <% @djs.order(dj_name: :asc).each_slice(4) do |dj_row| %>
+    <div class="row">
+      <% dj_row.each do |dj| %>
+      <div class="col-sm-3">
 
-  <tbody>
-    <% @djs.each do |dj| %>
-      <tr>
-        <!-- <td><%= dj.net_id %></td> -->
-        <!-- <td><%= dj.email %></td> -->
-        <td><%= dj.dj_name %></td>
-        <td><%= dj.real_name %></td>
-        <!-- <td><%= dj.description %></td> -->
-        <td><%= link_to 'Show', dj %></td>
-        <td><%= link_to 'Edit', edit_dj_path(dj) %></td>
-        <td><%= link_to 'Destroy', dj, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+        <img src="<%=Faker::Avatar.image(Random.rand(1000),"300x200")%>" class="img-responsive" alt="Responsive image">
+
+        <h3><%= dj.dj_name %><br><small>(<%= dj.real_name %>)</small></h3>
+
+        <p><%= link_to "edit", edit_dj_path(dj) %> | 
+          <%= link_to "delete", dj, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+
+        <p><%= dj.description %></p>
+
+      </div>
+      <% end %>
+      </div>
     <% end %>
-  </tbody>
-</table>
 
-<br>
+<div class="row">
+  <div class="col-sm-4 col-sm-offset-4">
+    <%= button_to "Create new DJ", new_dj_path, :method => :get, class: 'btn btn-primary btn-block btn-lg' %>
+ </div>
+</div>
 
-<%= link_to 'New Dj', new_dj_path %>
+
+</div>
+
+

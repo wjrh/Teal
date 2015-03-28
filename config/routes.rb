@@ -1,10 +1,24 @@
 Rails.application.routes.draw do
 
-  resources :djs
-  resources :airings
-  resources :songs
-  resources :shows
-  resources :episodes
+  root 'shows#index'
+
+  # Djs should have shows
+  # episodes should have show
+  # songs and airings should have episodes
+
+  resources :djs do
+    resources :shows, shallow: true do
+      resources :episodes, shallow: true do
+        # resources :songs, shallow: true
+        # resources :airings, shallow: true
+      end
+    end
+  end
+
+
+
+
+
 
 
   #get':controller(/:action(/:id))'
@@ -26,7 +40,7 @@ Rails.application.routes.draw do
 
   # Example resource route with options:
   #   resources :products do
-  #     member do
+  #     member d
   #       get 'short'
   #       post 'toggle'
   #     end

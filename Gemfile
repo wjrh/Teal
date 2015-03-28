@@ -24,13 +24,20 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # bootstrap
-gem 'bootstrap-sass', '~> 3.3.3'
+gem 'bootstrap-sass', '~> 3.3.4'
 
 #heroku webserver
 gem 'puma'
 
+#bower
+gem "bower-rails", "~> 0.9.2"
+
 #Fonts
-gem 'font-awesome-sass'
+gem 'font-awesome-sass', '~> 4.3.0'
+
+#forging
+gem "forgery"
+gem "faker"
 
 #for heroku logging to stdout and static file serving
 #gem 'rails_12factor', group: :production
