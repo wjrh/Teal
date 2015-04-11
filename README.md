@@ -7,14 +7,15 @@ Teal runs WJRH.
 
 ### Short term to-do:
 - [ ] switch to shallow routes (minimal for what we need)
-- [ ] restructure forms to ask for necessary information
-- [ ] restructure indexes so that it gives necessary information
-- [X]  DJ
-- [ ]  Show
-- [ ]  Episode
+- [ ] restructure index pages in API so that it gives necessary information
+- [ ] restructure forms to ask for necessary information:
+- [X] DJ form
+- [ ] Show form
+- [ ] Episode form
 - [ ] focus on episode logging essentials
+
+
 - [ ] have a system of querying already existing songs when associating songs with episodes
-- [ ] limit the system so that there is only one person logging live shows
 
 - [ ] create a simple api to view the latest logged song
 - [ ] extend that api to include functionality from old PHPs
@@ -29,6 +30,7 @@ Teal runs WJRH.
 - [ ] Implement profile picures for shows and djs
 
 - [ ] start rolling out/testing with real DJs
+- [ ] Start using vanity urls for shows and djs. (descriptive url)
 
 ### Shows view:
 - [ ] make page to view all shows
@@ -53,4 +55,4 @@ Teal runs WJRH.
 
 ### Recording Shows
 - [ ] record shows and commit them into the db with a recording url
-- [ ] connect the record action to the logging and make it clear that it is being recorded
+- [ ] connect the record action to the logging and make it clear that it is being recorded.

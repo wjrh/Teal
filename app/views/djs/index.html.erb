@@ -10,7 +10,7 @@
       <% dj_row.each do |dj| %>
       <div class="col-sm-3">
 
-        <img src="<%=Faker::Avatar.image(Random.rand(1000),"300x200")%>" class="img-responsive" alt="Responsive image">
+        <img src="<%=Faker::Avatar.image(dj.id,"300x200")%>" class="img-responsive" alt="Responsive image">
 
         <h3><%= dj.dj_name %><br><small>(<%= dj.real_name %>)</small></h3>
 
