@@ -1,4 +1,4 @@
-<%= form_for (@episode) do |f| %>
+<%= form_for [@show, @episode] do |f| %>
   <% if @episode.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@episode.errors.count, "error") %> prohibited this episode from being saved:</h2>
@@ -14,10 +14,6 @@
   <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :recording_url %><br>
-    <%= f.text_field :recording_url %>
   </div>
   <div class="field">
     <%= f.label :downloadable %><br>

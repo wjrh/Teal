@@ -14,8 +14,8 @@
 
         <h3><%= dj.dj_name %><br><small>(<%= dj.real_name %>)</small></h3>
 
-        <p><%= link_to "edit", edit_dj_path(dj) %> | 
-          <%= link_to "delete", dj, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+          <%= link_to "edit",  edit_dj_path(dj), class: "btn btn-default btn-xs", role: "button" %>
+          <%= link_to "delete", dj, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-xs", role: "button" %>
 
         <p><%= dj.description %></p>
 

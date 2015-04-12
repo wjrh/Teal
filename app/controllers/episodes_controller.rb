@@ -14,7 +14,8 @@ class EpisodesController < ApplicationController
 
   # GET /episodes/new
   def new
-    @episode = Episode.new
+    @show = Show.find(params[:show_id])
+    @episode = @show.episodes.build
   end
 
   # GET /episodes/1/edit

@@ -6,13 +6,13 @@ Teal runs WJRH.
 ![](http://wjrh.org/teal_sharpie.jpg)
 
 ### Short term to-do:
-- [ ] switch to shallow routes (minimal for what we need)
+- [x] switch to shallow routes (minimal for what we need)
 - [ ] restructure index pages in API so that it gives necessary information
 - [ ] restructure forms to ask for necessary information:
-- [X] DJ form
-- [ ] Show form
-- [ ] Episode form
-- [ ] focus on episode logging essentials
+- [x] DJ form
+- [x] Show form
+- [x] Episode form
+- [ ] focus on episode logging essentials (airings)
 
 
 - [ ] have a system of querying already existing songs when associating songs with episodes

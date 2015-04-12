@@ -6,12 +6,11 @@ Rails.application.routes.draw do
   # episodes should have show
   # songs and airings should have episodes
 
-  resources :djs do
-    resources :shows, shallow: true do
-      resources :episodes, shallow: true do
+  resources :djs
+  resources :shows, shallow: true do
+    resources :episodes, shallow: true do
         # resources :songs, shallow: true
         # resources :airings, shallow: true
-      end
     end
   end
 
