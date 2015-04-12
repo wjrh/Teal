@@ -8,19 +8,20 @@ Teal runs WJRH.
 ### Short term to-do:
 - [x] switch to shallow routes (minimal for what we need)
 - [ ] restructure index pages in API so that it gives necessary information
-- [ ] restructure forms to ask for necessary information:
+- [X] restructure forms to ask for necessary information:
 - [x] DJ form
 - [x] Show form
 - [x] Episode form
+- [ ] work on 
 - [ ] focus on episode logging essentials (airings)
-
 
 - [ ] have a system of querying already existing songs when associating songs with episodes
 
 - [ ] create a simple api to view the latest logged song
 - [ ] extend that api to include functionality from old PHPs
 - [ ] make sure both the new logger and the old logger works (transition)
-- [ ] transition to the production server fully working on Teal
+- [ ] transition to the production server fully working on Tel
+
 - [ ] add static content/pages to the website
 
 - [ ] SSO w/ lafayette
@@ -56,3 +57,13 @@ Teal runs WJRH.
 ### Recording Shows
 - [ ] record shows and commit them into the db with a recording url
 - [ ] connect the record action to the logging and make it clear that it is being recorded.
+- [ ] 
+
+###servers
+-icecast
+-airtime/airtimedb
+-web=teal
+-musicbrainz
+-storage and listening & processing hard drives
+-backups
+
