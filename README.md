@@ -59,6 +59,9 @@ Teal runs WJRH.
 - [ ] connect the record action to the logging and make it clear that it is being recorded.
 - [ ] 
 
+### lyric checker service
+- The dj needs to check the lyrics for profainty of a song before she plays a song
+
 ###servers
 -icecast
 -airtime/airtimedb
