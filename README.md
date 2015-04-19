@@ -3,7 +3,7 @@ Teal
 
 Teal runs WJRH.
 
-![](https://dl-web.dropbox.com/get/WJRH/Teal%20Large.png?_subject_uid=8751265&w=AABJwLsIc3_4CaI_j4AutWm40BanHNRDCFDtqKpmojAdlA)
+![](http://wjrh.org/teal-logo.png)
 
 ### Short term to-do:
 - [x] switch to shallow routes (minimal for what we need)
