@@ -1,9 +1,6 @@
-Teal
-====
-
-Teal runs WJRH.
-
 ![](http://wjrh.org/teal-logo.png)
+
+Teal is WJRH's DJ-Show-Episode management app, built with Rails.
 
 ### Short term to-do:
 - [x] switch to shallow routes (minimal for what we need)
