@@ -1,6 +1,7 @@
 ![](http://wjrh.org/teal-logo.png)
 
 Teal is WJRH's DJ-Show-Episode management app, built with Ruby on Rails.
+Teal also provides an API endpoint for mobile applications and external data consumption.
 
 ## User stories Teal serves:
 ### Logging / Archiving
