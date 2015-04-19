@@ -43,6 +43,20 @@ Teal also provides an API endpoint for mobile applications and external data con
  - [ ] As a station administrator I want the content to be easily editable
  - [ ] As a station administrator I want to see if shows are happening as planned
 
+### API
+ - [ ] As a developer I want to get the current song and dj information
+ - [ ] As a developer I want to get the schedule
+ - [ ] As a developer I want to get upcoming shows
+ - [ ] As a developer I want to get shows
+ - [ ] As a developer I want to get djs
+ - [ ] As a developer I want to get episodes
+ - [ ] As a developer I want to get songs
+ - [ ] As a developer I want to get popular shows
+ - [ ] As a developer I want to get latest shows
+ - [ ] As a developer I want to get streaming links for shows
+ - [ ] As a developer I want to get news from the newspaper
+ - [ ] As a developer I want to get events
+
 ## Todos
 ### Short term to-do:
 - [x] switch to shallow routes (minimal for what we need)
@@ -96,7 +110,6 @@ Teal also provides an API endpoint for mobile applications and external data con
 ### Recording Shows
 - [ ] record shows and commit them into the db with a recording url
 - [ ] connect the record action to the logging and make it clear that it is being recorded.
-- [ ] 
 
 ### lyric checker service
 - The dj needs to check the lyrics for profainty of a song before she plays a song
