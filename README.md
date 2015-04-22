@@ -3,6 +3,7 @@
 Teal is [WJRH](http://wjrh.org)'s DJ-Show-Episode management app, built with Ruby on Rails. It powers the station website for users and the song logger for the DJs. Teal also provides an API endpoint for mobile applications and external data consumption.
 
 ## User stories Teal serves:
+(checkboxes don't mean anything)
 ### Logging / Archiving
  - [ ] As a DJ I want to log my music so that my listeners can see what songs I have played
  - [ ] As a DJ I want to see what songs I have already played so that I do not repeat songs
