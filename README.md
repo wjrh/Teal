@@ -121,3 +121,5 @@ Teal is [WJRH](http://wjrh.org)'s DJ-Show-Episode management app, built with Rub
 -storage and listening & processing hard drives
 -backups
 
+[![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com)
+
