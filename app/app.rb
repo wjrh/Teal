@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'bundler'
 require 'dotenv'
+require 'sinatra/activerecord'
 
 Dotenv.load
 Bundler.require
@@ -8,7 +9,7 @@ Bundler.require
 module Teal
   class App < Sinatra::Base
     get '/' do
-      "Hello Renan!"
+      "this is teal speaking"
     end 
   end
 end
