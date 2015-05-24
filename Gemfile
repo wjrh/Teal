@@ -12,3 +12,7 @@ gem 'test-unit' # testing
 gem "activerecord" # db
 gem "sinatra-activerecord" # db
 gem "pg" # db
+
+group :development do
+ gem "tux" # for interacting with the app
+end
