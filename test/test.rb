@@ -3,6 +3,7 @@ ENV['RACK_ENV'] = 'test'
 require File.expand_path("../../app/app", __FILE__)
 require "rack/test"
 
+
 class TealTest < Test::Unit::TestCase
   include Rack::Test::Methods
 
@@ -10,10 +11,22 @@ class TealTest < Test::Unit::TestCase
     Teal::App
   end
 
-  def test_it_says_hello
-    get '/'
-    assert last_response.ok?
-    assert_equal 'this is teal speaking', last_response.body
+
+
+  def test_listing_djs
+  	get '/djs'
+  	assert last_response.ok?
   end
+
+  def test_listing_episoes
+  	get '/episodes'
+  	assert last_response.ok?
+  end
+
+  def test_listing_shows
+  	get '/shows'
+  	assert last_response.ok?
+  end
+
 
 end
