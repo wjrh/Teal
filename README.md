@@ -3,10 +3,10 @@
 Teal is [WJRH](http://wjrh.org)'s DJ-Show-Episode management app, complementing other services, like recording, automation etc.
 Teal also provides an API endpoint for mobile applications and external data consumption.
 
-## User stories Teal serves:
-### Logging / Archiving
-### Live Streaming / Show Information
-### Show Info /  Archive / Log Viewing
+## Functions
+- Logging / Archiving
+- Live Streaming / Show Information
+- Show Info /  Archive / Log Viewing
 
 ## Todos
 ### Short term to-do:
