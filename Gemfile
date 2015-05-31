@@ -21,5 +21,6 @@ end
  
 group :test do
   gem 'rack-test'
-  gem 'test-unit' # testing
+  gem 'factory_girl'
+  gem 'test-unit'
 end
