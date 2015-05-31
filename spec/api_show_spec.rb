@@ -1,6 +1,6 @@
 require_relative 'spec_helper'
  
-describe 'Show Api' do
+describe 'Show API' do
   describe 'GET /shows' do
     before { get '/shows' }
  
@@ -15,6 +15,11 @@ describe 'Show Api' do
     it 'is successful' do
       expect(last_response.status).to eq 200
     end
+
+    it 'lists all shows' do
+      expect(last_response.body).to eq
+    end
+
   end
 
 end
