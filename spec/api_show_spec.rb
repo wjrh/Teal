@@ -10,18 +10,17 @@ describe 'Show API' do
   end
 
   describe 'POST /shows' do
-    before { post '/shows' }
+    let!(:show) { create(:show) }
+    post '/shows' 
  
     it 'is successful' do
       expect(last_response.status).to eq 200
     end
 
     it 'lists all shows' do
-      expect(last_response.body).to eq
+      expect(last_response.body).to eq :show
     end
-
   end
-
 end
 
 

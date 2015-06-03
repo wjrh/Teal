@@ -68,6 +68,6 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  url: <%= ENV['HEROKU_POSTGRESQL_TEAL_URL'] %>
+  url: <%= ENV['DATABASE_URL'] %>
   adapter: postgresql
   encoding: unicode

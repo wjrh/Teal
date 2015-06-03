@@ -7,6 +7,7 @@ gem 'puma' # our web server
 gem 'dotenv' # for environment variables
 gem 'foreman'
 gem 'json'
+
 gem "activerecord" # db
 gem "sinatra-activerecord" # db
 gem "pg" # db
@@ -23,4 +24,5 @@ group :test do
   gem 'rack-test'
   gem 'factory_girl'
   gem 'test-unit'
+  gem 'database_cleaner'
 end
