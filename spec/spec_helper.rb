@@ -3,12 +3,13 @@ ENV['RACK_ENV'] = 'test'
 
 require 'factory_girl'
 require 'database_cleaner'
+require 'multi_json'
 
 
 # require the app itself
 require_relative File.join('..', 'app/app')
 
-# require the factory girl config
+# require the factorygirl config
 require 'factories'
  
 RSpec.configure do |config|

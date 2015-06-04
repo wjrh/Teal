@@ -1,75 +1,106 @@
+# Factories are the way we're using to mock data for tests.
+# Here, we're defining the barebones needed to create an object
+# Read up on FactoryGirl for more info
+
 FactoryGirl.define do
-  # create show factory
-  factory :show, class: Show do
-    title "Mango RRadio Show"
-    description  "this is a description for our show"
-
-    transient do
-        djs_count 5
-        episodes_count 32
-    end
-
-    # add djs to shows
-    # add shows to djs
-    after(:build) do |show, evaluator|
-        create_list(:dj, evaluator.djs_count, show: show)
-        create_list(:episode, evaluator.episodes_count, show: show)
-    end
-  end
-
 
   # create dj factory
-  factory :dj, class: Dj do
-  	net_id "jamesd"
-  	email "jamesd@lafayette.edu"
-  	dj_name "DEEJAY coconut"
-  	real_name "James Davadasa"
-  	description "I'm a bad DJ"
+  factory :dj do
+    net_id "jamesd"
+    email "jamesd@lafayette.edu"
+    dj_name "DEEJAY coconut"
+    real_name "James Davadasa"
+    description "I'm a bad DJ"
 
-  	factory :dj_with_shows do
-	  	transient do
-	  		shows_count 2
-	  	end
-
-	  	#associate shows with djs
-	  	after(:create) do |show, evaluator|
-	  		create_list(:show, evaluator.shows_count, dj: dj)
-	  	end
-	  end
+    # factory for djs with shows
+    factory :dj_with_shows do
+      #associate shows with djs
+      after(:build) do |dj, evaluator|
+        2.times do
+          dj.shows << build(:show)
+        end
+      end
+    end
   end
 
+
+  # create show factory
+  factory :show do
+    title "Mango Radio Show"
+    description  "this is a description for our show"
+
+    # all shows need djs. This creates two more
+    after(:build) do |show, evaluator|
+      2.times do
+        show.djs << build(:dj)
+      end
+    end
+
+    # add sub-factory for shows with episodes
+    factory :show_with_episodes do
+
+      # add episodes for shows
+      after(:build) do |show, evaluator|
+        10.times do
+          show.episodes << build(:episode)
+        end
+      end
+    end
+  end
+
+
+
+
   # create episode factory
-  factory :episode, class: Episode do
+  factory :episode do
   	name "wonderful episode"
   	recording_url "http://localhost"
   	downloadable true
   	online_listens 1000
   	description "wonderful episode here"
-  	show
-  	djs
+  	show # all episodes need a show 
 
-  	# create episdode with songs
-  	transient do
-  		songs_count 23
-  		airings_count 2
-  	end
+    # all episodes need djs
+    after(:build) do |episode, evaluator|
+      2.times do
+        episode.djs << build(:dj)
+      end
+    end
 
-  	#create songs for episode
-  	after(:create) do |show, evaluator|
-  		create_list(:song, evaluator.songs_count, episode: episode)
-  		create_list(:airing, evaluator.airings_count, episode: episode)
-  	end
+    factory :episode_with_songs_and_airings do
+    	#create songs and airings for episode
+    	after(:build) do |episode, evaluator|
+    		30.times do
+          episode.songs << build(:song)
+        end
+        5.times do
+          episode.airings << build(:airing)
+        end
+    	end
+
+      factory :episode_with_songs_and_airings_and_shows do
+        after(:build) do |episode, evaluator|
+          episode.show = build(:show)
+        end
+      end
+
+    end
   end
 
+
+
+
   # create airings factory
-  factory :airing, class: Airing do
+  factory :airing do
   	start_time Time.now
   	end_time Time.now + 1.hour
   	listens 1000
   end
 
+
+
   # create songs factory
-  factory :song, class: Song do
+  factory :song do
   	artist "James Dunn"
   	title "A Beaut Song"
   	ISRC "3432423234"

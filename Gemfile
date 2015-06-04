@@ -7,6 +7,7 @@ gem 'puma' # our web server
 gem 'dotenv' # for environment variables
 gem 'foreman'
 gem 'json'
+gem 'multi_json'
 
 gem "activerecord" # db
 gem "sinatra-activerecord" # db

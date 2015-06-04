@@ -25,7 +25,6 @@ require_relative 'api_show'
 module Teal
   class App < Sinatra::Base
   	register Sinatra::ActiveRecordExtension
-  	set :database_file, "db/database.yml"
 
   	# root route
     get '/' do
