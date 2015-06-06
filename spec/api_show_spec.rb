@@ -22,6 +22,12 @@ describe 'Show API' do
       show.title = "this is a title"
       show.save
     end
+
+    it 'can have a description' do
+      show = Show.new
+      show.description = "this is a desc"
+      show.save
+    end
   end
 
   # post show with dj details
