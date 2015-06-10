@@ -16,3 +16,5 @@ Teal also provides an API endpoint for mobile applications and external data con
 4. Run Teal on your local machine
  
         foreman start
+
+5. Visit teal at [localhost:9000](http://localhost:9000)
