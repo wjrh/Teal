@@ -18,76 +18,76 @@ describe 'Dj API' do
 
   describe 'Dj' do
     it 'gets created with a email' do
-      show = Dj.new
-      show.email = "jamesd@lafayette.edu"
-      show.save
+      dj = Dj.new
+      dj.email = "jamesd@lafayette.edu"
+      dj.save
     end
 
     it 'can have a description' do
-      show = Dj.new
-      show.description = "I'm a bad DJ"
-      show.save
+      dj = Dj.new
+      dj.description = "I'm a bad DJ"
+      dj.save
     end
   end
 
-  # post show with dj details
-  describe 'POST /shows' do
-    let(:body) { { :title => "title is this" }.to_json }
+  # post dj
+  describe 'POST /djs' do
+    let(:body) { { :email => "coconutututu@mango.edu" }.to_json }
     before do
-      post '/shows', body, { "CONTENT_TYPE" => "application/json" }
+      post '/djs', body, { "CONTENT_TYPE" => "application/json" }
     end
 
     it 'is successful' do
       expect(last_response.status).to eq 200
     end
 
-    it 'has one show' do
-      expect(Show.count).to eq 1
+    it 'has one dj' do
+      expect(Djs.count).to eq 1
     end
 
-    it 'responds with 404 if title not included' do
-      post '/shows', {:foo => "bar"}.to_json, { "CONTENT_TYPE" => "application/json" }
+    it 'responds with 404 if email not included' do
+      post '/djs', {:foo => "bar"}.to_json, { "CONTENT_TYPE" => "application/json" }
       expect(last_response.status).to eq 400
     end
   end
 
-  # get show details
-  describe 'GET /shows/:id' do
-    let(:check) {Show.second.id}
+  # get dj details
+  describe 'GET /djs/:id' do
+    let(:check) {Djs.second.id}
     before do
-      create(:show)
-      second_show = create(:show)
+      create(:dj)
+      second_dj = create(:dj)
       100.times do
-        create(:show)
+        create(:dj)
       end
-      get "/shows/#{check}"
+      get "/djs/#{check}"
     end
 
     it 'is successful' do
       expect(last_response.status).to eq 200
     end
 
-    it 'returns 1 show' do
+    it 'returns 1 dj' do
       response = MultiJson.load(last_response.body)
       expect(response.size).to eq 3 #id, title and description
     end
 
-      it "fails if show doesn't exist" do
-        get('/shows/23232322')
-        expect(last_response.status).to eq 404
-      end
+    it "fails if dj doesn't exist" do
+      get('/djs/23232322')
+      expect(last_response.status).to eq 404
     end
+  end
 
 
-  # update show
-  describe 'PUT /shows/:id' do
-    let(:body) { attributes_for(:show, title: "updated title").to_json }
-    let(:check) {Show.second.id}
+  # update dj
+  describe 'PUT /djs/:id' do
+    let(:body) { attributes_for(:dj, email: "updatedtitle@gogo.xxx").to_json }
+    let(:check) {Dj.second.id}
     before do
       100.times do
-        create(:show)
+        create(:dj)
       end
-      put("/shows/#{check}", body)
+      put("/dj/#{check}", body)
     end
 
     it 'is successful' do
@@ -95,35 +95,35 @@ describe 'Dj API' do
     end
 
     it "is updated" do
-      @show = Show.find(check)
-      expect(@show.title).to eq "updated title"
+      @dj = Dj.find(check)
+      expect(@dj.title).to eq "updated title"
     end
 
-    it "fails if show doesn't exist" do
-      put('/shows/23232322', body)
+    it "fails if dj doesn't exist" do
+      put('/djs/23232322', body)
       expect(last_response.status).to eq 404
     end
   end
 
-  # delete show
-  describe 'DELETE /shows/:id' do
+  # delete dj
+  describe 'DELETE /djs/:id' do
     before do
       100.times do
-        create(:show)
+        create(:dj)
       end
 
     end
 
     it 'is successful' do
-      check = Show.second.id
-      delete "/shows/#{check}"
+      check = Dj.second.id
+      delete "/djs/#{check}"
       expect(last_response.status).to eq 200
     end
 
     it 'does not respond the second time' do
-      check = Show.second.id
-      delete "/shows/#{check}"
-      delete "/shows/#{check}"
+      check = Dj.second.id
+      delete "/djs/#{check}"
+      delete "/djs/#{check}"
       expect(last_response.status).to eq 404
     end
   end
