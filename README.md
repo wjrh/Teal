@@ -4,12 +4,12 @@ Teal is [WJRH](http://wjrh.org)'s DJ-Show-Episode management app, complementing 
 Teal also provides an API endpoint for mobile applications and external data consumption.
 
 ## Getting Started
-1.  Install ruby [here](https://www.ruby-lang.org/en/documentation/installation/)
-2. Install bundler if you haven't yet.
+1.  Install Ruby [here](https://www.ruby-lang.org/en/documentation/installation/)
+2. Install Bundler if you haven't yet.
 
         gem install bundler
 
-3. Install dependencies using bundler
+3. Install dependencies using Bundler
 
         bundle install
 
