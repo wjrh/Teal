@@ -6,8 +6,8 @@ Teal also provides an API endpoint for mobile applications and external data con
 ## Getting Started
 1.  Install ruby [here](https://www.ruby-lang.org/en/documentation/installation/)
 2. Install bundler if you haven't yet.
-        gem install bundler
+            gem install bundler
 3. Install dependencies using bundler
-        bundle install
+            bundle install
 4. Run Teal on your local machine
-        foreman start
+            foreman start
