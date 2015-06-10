@@ -12,10 +12,7 @@ module Teal
   	post "/shows" do
   		request.body.rewind  # in case someone already read it
   		data = JSON.parse request.body.read
-  		show = Show.new(
-        :title => data["title"],
-        :description => data["description"]
-        )
+  		show = Show.new(show_params(data))
 
   		if show.save
   			status 200
@@ -25,7 +22,7 @@ module Teal
   		end
   	end
 
-    # get info about a specific show id
+    # get info about a specific show, this in the future will provide specific links
   	get "/shows/:id" do
   		content_type :json
   		show = Show.find_by_id(params['id'])
@@ -33,7 +30,7 @@ module Teal
   		show.to_json(:only => [ :id, :title, :description ])
   	end
 
-    # get info about a specific show, this in the future will provide specific links
+    # update show
   	put "/shows/:id" do
   		request.body.rewind
   		data = JSON.parse request.body.read
@@ -41,10 +38,7 @@ module Teal
 
   		halt 404 if show.nil? #halt if show doesn't exist
 
-  		update = {
-        :title => data["title"],
-        :description => data["description"]
-      }
+  		update = show_params(data)
 
   		if show.update(update)
   			status 200
@@ -65,5 +59,17 @@ module Teal
         halt 400, 'This show could not be deleted.'
       end
     end
+
+    # helper method for parameters
+    def show_params(data)
+      hash = {
+        :title => data["title"],
+        :description => data["description"]
+      }
+      return hash
+    end
+
+
+
   end
 end

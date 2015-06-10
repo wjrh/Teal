@@ -42,7 +42,7 @@ describe 'Dj API' do
     end
 
     it 'has one dj' do
-      expect(Djs.count).to eq 1
+      expect(Dj.count).to eq 1
     end
 
     it 'responds with 404 if email not included' do
@@ -53,7 +53,7 @@ describe 'Dj API' do
 
   # get dj details
   describe 'GET /djs/:id' do
-    let(:check) {Djs.second.id}
+    let(:check) {Dj.second.id}
     before do
       create(:dj)
       second_dj = create(:dj)
@@ -87,7 +87,7 @@ describe 'Dj API' do
       100.times do
         create(:dj)
       end
-      put("/dj/#{check}", body)
+      put("/djs/#{check}", body)
     end
 
     it 'is successful' do
@@ -96,7 +96,7 @@ describe 'Dj API' do
 
     it "is updated" do
       @dj = Dj.find(check)
-      expect(@dj.title).to eq "updated title"
+      expect(@dj.email).to eq "updatedtitle@gogo.xxx"
     end
 
     it "fails if dj doesn't exist" do
