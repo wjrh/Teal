@@ -127,6 +127,10 @@ describe 'Dj API' do
       expect(last_response.status).to eq 404
     end
   end
+
+
+
+  describe 'add shows to djs'
 end
 
 

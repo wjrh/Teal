@@ -64,7 +64,8 @@ module Teal
     def show_params(data)
       hash = {
         :title => data["title"],
-        :description => data["description"]
+        :description => data["description"],
+        :dj_ids => data["djs"].to_a #match dj ids with djs
       }
       return hash
     end

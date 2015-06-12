@@ -49,6 +49,16 @@ describe 'Show API' do
       post '/shows', {:foo => "bar"}.to_json, { "CONTENT_TYPE" => "application/json" }
       expect(last_response.status).to eq 400
     end
+
+    it 'can send with dj information' do
+      50.times do
+        create(:dj)
+      end
+      sample_dj_ids = [Dj.second.id, Dj.forty_two.id]
+      post '/shows', {:djs => sample_dj_ids, :title => "title123"}.to_json
+      expect(last_response.status).to eq 200
+      expect(Show.find_by(:title => "title123").djs.first.id).to eq sample_dj_ids.first
+    end
   end
 
   # get show details

@@ -63,7 +63,7 @@ module Teal
   	# get dj/shows - list all shows of the dj
   	# get dj/episodes - list latest episodes of the dj
 
-    def dj_params (data)
+    def dj_params(data)
       hash = {
         :net_id => data["net_id"],
         :email => data["email"],
