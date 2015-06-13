@@ -51,6 +51,7 @@ You can hit the links
 
 ### Airings
 Airings are instances of when an episode airs on the radio stream.
+
 | Method | URL | Description | Notes |
 |--------|------------|-----------------|--------------------------|
 | POST | /episodes/:id/airings | create a new airing |  |
