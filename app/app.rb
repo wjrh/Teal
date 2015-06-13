@@ -29,7 +29,13 @@ module Teal
   	# root route responds with a cool string
     get '/' do
     	content_type :json
-    	"teal is the best color ever".to_json
+    	info = {
+    		"about" => "Teal is WJRH's DJ-Show-Episode management API",
+    		"documentation" => "github.com/wjrh/Teal",
+    		"contact" => "wjrh@lafayette.edu",
+    		"authors" => ["Renan Dincer"]
+    	}
+    	JSON.pretty_generate(info)
     end 
   end
 end
