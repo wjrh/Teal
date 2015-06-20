@@ -26,6 +26,11 @@ module Teal
   class App < Sinatra::Base
   	register Sinatra::ActiveRecordExtension
 
+    # make everything be a json response (callback to every route)
+    before do
+      content_type 'application/json'
+    end
+
   	# root route responds with a cool string
     get '/' do
     	content_type :json

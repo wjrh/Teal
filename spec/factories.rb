@@ -35,17 +35,6 @@ FactoryGirl.define do
         show.djs << build(:dj)
       end
     end
-
-    # add sub-factory for shows with episodes
-    factory :show_with_episodes do
-
-      # add episodes for shows
-      after(:build) do |show, evaluator|
-        10.times do
-          show.episodes << build(:episode)
-        end
-      end
-    end
   end
 
 
