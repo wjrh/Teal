@@ -55,35 +55,6 @@ FactoryGirl.define do
         episode.djs << build(:dj)
       end
     end
-
-    factory :episode_with_songs_and_airings do
-    	#create songs and airings for episode
-    	after(:build) do |episode, evaluator|
-    		30.times do
-          episode.songs << build(:song)
-        end
-        5.times do
-          episode.airings << build(:airing)
-        end
-    	end
-
-      factory :episode_with_songs_and_airings_and_shows do
-        after(:build) do |episode, evaluator|
-          episode.show = build(:show)
-        end
-      end
-
-    end
-  end
-
-
-
-
-  # create airings factory
-  factory :airing do
-  	start_time Time.now
-  	end_time Time.now + 1.hour
-  	listens 1000
   end
 
 
