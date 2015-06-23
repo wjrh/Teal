@@ -45,7 +45,7 @@ describe 'Show API' do
       expect(Show.count).to eq 1
     end
 
-    it 'responds with 404 if title not included' do
+    it 'responds with 400 if title not included' do
       post '/shows', {:foo => "bar"}.to_json, { "CONTENT_TYPE" => "application/json" }
       expect(last_response.status).to eq 400
     end
@@ -110,7 +110,7 @@ describe 'Show API' do
     end
 
     it "fails if show doesn't exist" do
-      put('/shows/23232322', body)
+      put('/shows/2323232634563456342', body)
       expect(last_response.status).to eq 404
     end
   end
