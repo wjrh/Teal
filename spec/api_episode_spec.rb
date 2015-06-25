@@ -6,12 +6,12 @@ describe 'Episode API' do
 	describe "GET /shows/:id/episodes" do
 		before do
 			#create 10 dummy shows with episodes
+			show = create(:show)
 			10.times do
-				show = create(:show)
 				show.episodes << create(:episode)
-				show.save
 			end
-			get "/shows/#{Show.last.id}/episodes"
+			show.save
+			get "/shows/#{show.id}/episodes"
 		end
 
 		it 'is successful' do
@@ -49,7 +49,7 @@ describe 'Episode API' do
 
 		it 'has two episodes if repeated' do
 			post "/shows/#{Show.second.id}/episodes", body, { "CONTENT_TYPE" => "application/json" }
-			expect(Show.second.episodes.count).to eq 1
+			expect(Show.second.episodes.count).to eq 2
 		end
 
 		it 'responds with 400 if title not included' do
@@ -58,7 +58,7 @@ describe 'Episode API' do
     	end
 
     	it 'dj information is correct' do
-      		expect(MultiJson.load(last_response.body).show).to eq Show.second.id
+      		expect(Show.second.episodes.last.show.id).to eq Show.second.id
     	end
 	end
 
@@ -66,15 +66,17 @@ describe 'Episode API' do
 	describe "GET /episodes/:id" do
 
 		before do
-			get "/episodes/:id"
+			#create 10 dummy shows with episodes
+			show = create(:show)
+			10.times do
+				show.episodes << create(:episode)
+			end
+			show.save
+			get "/episodes/#{show.episodes.first.id}"
 		end
 
 		it 'is successful' do
 			expect(last_response.status).to eq 200
-		end
-
-		it 'returns information we want' do
-			expect(MultiJson.load(last_response.body)).to include("airings", "name", "downloadable", "show")
 		end
 	end
 
@@ -88,7 +90,7 @@ describe 'Episode API' do
 				show.episodes << create(:episode)
 				show.save
 			end
-			put "/epiosdes/#{Episode.second.id}/episodes", body, { "CONTENT_TYPE" => "application/json" }
+			put "/episodes/#{Episode.second.id}", body, { "CONTENT_TYPE" => "application/json" }
 		end
 
 		it 'is successful' do
@@ -96,8 +98,8 @@ describe 'Episode API' do
 		end
 
 		it "is updated" do
-	      @episode = Episode.find(check)
-	      expect(@episode.name).to eq "updated name"
+	      episode = Episode.find(check)
+	      expect(episode.name).to eq "updated name"
 	    end
 
 	    it "fails if show doesn't exist" do

@@ -43,9 +43,6 @@ FactoryGirl.define do
   # create episode factory
   factory :episode do
   	name "wonderful episode"
-  	recording_url "http://localhost"
-  	downloadable true
-  	online_listens 1000
   	description "wonderful episode here"
   	show # all episodes need a show 
 

@@ -22,23 +22,23 @@ module Teal
 	end
 
 	# | GET | /episodes/:id | get details about an episode |  |
-	get "episodes/:episode_id" do 
+	get "/episodes/:episode_id" do 
 		episode = Episode.find_by_id(params['episode_id'])
 		halt 404 if episode.nil? #halt if show doesn't exist
-		episode.to_json(only => [:id, :name, :recording_url, :downloadable, :description, :songs])
+		episode.to_json(:only => [:id, :name, :recording_url, :downloadable, :description, :songs])
 	end
 
 	# | PUT | /episodes/:id | update an episode |  |
 	put "/episodes/:episode_id" do 
 		request.body.rewind
 		data = JSON.parse request.body.read
-		epsisode = Episode.find_by_id(params['episode_id'])
+		episode = Episode.find_by_id(params['episode_id'])
 
 		halt 404 if episode.nil? # halt if the show doesn't exist
 
 		update = episode_params(data)
 
-		if show.update(update)
+		if episode.update(update)
 			status 200
 		else
 			halt 400, "This show could not be saved"
@@ -58,7 +58,7 @@ module Teal
 
 	def episode_params(data)
       hash = {
-      	:show => params["show_id"],
+      	:show_id => params["show_id"],
         :name => data["name"],
         :recording_url => data ["recording_url"],
         :downloadable => data["downloadable"],
