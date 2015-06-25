@@ -49,18 +49,6 @@ You can hit the links
 | PUT | /episodes/:id | update an episode |  |
 | DELETE | /episodes/:id | delete an episode |  |
 
-<<<<<<< HEAD
-=======
-### Airings
-Airings are instances of when an episode airs on the radio stream.
-
-| Method | URL | Description | Notes |
-|--------|------------|-----------------|--------------------------|
-| POST | /episodes/:id/airings | create a new airing |  |
-| PUT | /airings/:id | update an airing |  |
-| DELETE | /airings/:id | delete an airing |  |
-
->>>>>>> cf4ece3503c0ee033d6f361290e8b296deebab2e
 ### Songs
 | Method | URL | Description | Notes |
 |--------|------------|-----------------|--------------------------|
