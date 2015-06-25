@@ -50,7 +50,7 @@ module Teal
 
     # delete a show with id
     delete "/shows/:id" do
-      show = Show.where(id: params['id']).first
+      show = Show.find_by_id(params['id'])
       halt 404 if show.nil? #halt if show doesn't exist
       if show.destroy
         status 200
