@@ -65,7 +65,7 @@ module Teal
       hash = {
         :title => data["title"],
         :description => data["description"],
-        :dj_ids => data["djs"].to_a #match dj ids with djs
+        :creator_ids => data["creators"].to_a #match creator ids with creators
       }
       return hash
     end

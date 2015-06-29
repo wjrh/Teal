@@ -30,7 +30,7 @@ describe 'Show API' do
     end
   end
 
-  # post show with dj details
+  # post show with creator details
   describe 'POST /shows' do
     let(:body) { { :title => "title is this" }.to_json }
     before do
@@ -50,14 +50,14 @@ describe 'Show API' do
       expect(last_response.status).to eq 400
     end
 
-    it 'can send with dj information' do
+    it 'can send with creator information' do
       50.times do
-        create(:dj)
+        create(:creator)
       end
-      sample_dj_ids = [Dj.second.id, Dj.forty_two.id]
-      post '/shows', {:djs => sample_dj_ids, :title => "title123"}.to_json
+      sample_creator_ids = [Creator.second.id, Creator.forty_two.id]
+      post '/shows', {:creators => sample_creator_ids, :title => "title123"}.to_json
       expect(last_response.status).to eq 200
-      expect(Show.find_by(:title => "title123").djs.first.id).to eq sample_dj_ids.first
+      expect(Show.find_by(:title => "title123").creators.first.id).to eq sample_creator_ids.first
     end
   end
 

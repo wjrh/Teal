@@ -16,42 +16,31 @@ ActiveRecord::Schema.define(version: 20150412152637) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "airings", force: :cascade do |t|
-    t.datetime "start_time"
-    t.datetime "end_time"
-    t.integer  "listens"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "episode_id"
-  end
-
-  add_index "airings", ["episode_id"], name: "index_airings_on_episode_id", using: :btree
-
-  create_table "djs", force: :cascade do |t|
+  create_table "creators", force: :cascade do |t|
     t.string   "net_id"
     t.string   "email"
-    t.string   "dj_name"
+    t.string   "creator_name"
     t.string   "real_name"
     t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
-  create_table "djs_episodes", id: false, force: :cascade do |t|
-    t.integer "dj_id",      null: false
+  create_table "creators_episodes", id: false, force: :cascade do |t|
+    t.integer "creator_id", null: false
     t.integer "episode_id", null: false
   end
 
-  add_index "djs_episodes", ["dj_id", "episode_id"], name: "index_djs_episodes_on_dj_id_and_episode_id", using: :btree
-  add_index "djs_episodes", ["episode_id", "dj_id"], name: "index_djs_episodes_on_episode_id_and_dj_id", using: :btree
+  add_index "creators_episodes", ["creator_id", "episode_id"], name: "index_creators_episodes_on_creator_id_and_episode_id", using: :btree
+  add_index "creators_episodes", ["episode_id", "creator_id"], name: "index_creators_episodes_on_episode_id_and_creator_id", using: :btree
 
-  create_table "djs_shows", id: false, force: :cascade do |t|
-    t.integer "dj_id",   null: false
-    t.integer "show_id", null: false
+  create_table "creators_shows", id: false, force: :cascade do |t|
+    t.integer "creator_id", null: false
+    t.integer "show_id",    null: false
   end
 
-  add_index "djs_shows", ["dj_id", "show_id"], name: "index_djs_shows_on_dj_id_and_show_id", using: :btree
-  add_index "djs_shows", ["show_id", "dj_id"], name: "index_djs_shows_on_show_id_and_dj_id", using: :btree
+  add_index "creators_shows", ["creator_id", "show_id"], name: "index_creators_shows_on_creator_id_and_show_id", using: :btree
+  add_index "creators_shows", ["show_id", "creator_id"], name: "index_creators_shows_on_show_id_and_creator_id", using: :btree
 
   create_table "episodes", force: :cascade do |t|
     t.string   "name"
@@ -90,6 +79,5 @@ ActiveRecord::Schema.define(version: 20150412152637) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "airings", "episodes"
   add_foreign_key "episodes", "shows"
 end

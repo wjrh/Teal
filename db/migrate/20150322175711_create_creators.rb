@@ -1,9 +1,9 @@
-class CreateDjs < ActiveRecord::Migration
+class CreateCreators < ActiveRecord::Migration
   def change
-    create_table :djs do |t|
+    create_table :creators do |t|
       t.string :net_id
       t.string :email
-      t.string :dj_name
+      t.string :creator_name
       t.string :real_name
       t.text :description
 

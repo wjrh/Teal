@@ -57,7 +57,7 @@ describe 'Episode API' do
       		expect(last_response.status).to eq 400
     	end
 
-    	it 'dj information is correct' do
+    	it 'creator information is correct' do
       		expect(Show.second.episodes.last.show.id).to eq Show.second.id
     	end
 	end

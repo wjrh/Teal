@@ -10,12 +10,12 @@ require 'sinatra/base'
 require 'sinatra/activerecord'
 Dotenv.load
 
-require_relative 'models/dj'
+require_relative 'models/creator'
 require_relative 'models/episode'
 require_relative 'models/show'
 require_relative 'models/song'
 
-require_relative 'api_dj'
+require_relative 'api_creator'
 require_relative 'api_episode'
 require_relative 'api_show'
 

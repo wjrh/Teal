@@ -4,20 +4,20 @@
 
 FactoryGirl.define do
 
-  # create dj factory
-  factory :dj do
+  # create creator factory
+  factory :creator do
     net_id "jamesd"
     email "jamesd@lafayette.edu"
-    dj_name "DEEJAY coconut"
+    creator_name "DEEJAY coconut"
     real_name "James Davadasa"
     description "I'm a bad DJ"
 
-    # factory for djs with shows
-    factory :dj_with_shows do
-      #associate shows with djs
-      after(:build) do |dj, evaluator|
+    # factory for creators with shows
+    factory :creator_with_shows do
+      #associate shows with creators
+      after(:build) do |creator, evaluator|
         2.times do
-          dj.shows << build(:show)
+          creator.shows << build(:show)
         end
       end
     end
@@ -29,10 +29,10 @@ FactoryGirl.define do
     title "Mango Radio Show"
     description  "this is a description for our show"
 
-    # all shows need djs. This creates two more
+    # all shows need creators. This creates two more
     after(:build) do |show, evaluator|
       2.times do
-        show.djs << build(:dj)
+        show.creators << build(:creator)
       end
     end
   end
@@ -46,10 +46,10 @@ FactoryGirl.define do
   	description "wonderful episode here"
   	show # all episodes need a show 
 
-    # all episodes need djs
+    # all episodes need creators
     after(:build) do |episode, evaluator|
       2.times do
-        episode.djs << build(:dj)
+        episode.creators << build(:creator)
       end
     end
   end
