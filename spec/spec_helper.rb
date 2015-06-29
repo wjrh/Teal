@@ -30,7 +30,7 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 
-  
+  config.color = true
 
   def app
     Teal::App
