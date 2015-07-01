@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150412152637) do
+ActiveRecord::Schema.define(version: 20150701020321) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,13 +34,13 @@ ActiveRecord::Schema.define(version: 20150412152637) do
   add_index "creators_episodes", ["creator_id", "episode_id"], name: "index_creators_episodes_on_creator_id_and_episode_id", using: :btree
   add_index "creators_episodes", ["episode_id", "creator_id"], name: "index_creators_episodes_on_episode_id_and_creator_id", using: :btree
 
-  create_table "creators_shows", id: false, force: :cascade do |t|
+  create_table "creators_programs", id: false, force: :cascade do |t|
     t.integer "creator_id", null: false
-    t.integer "show_id",    null: false
+    t.integer "program_id", null: false
   end
 
-  add_index "creators_shows", ["creator_id", "show_id"], name: "index_creators_shows_on_creator_id_and_show_id", using: :btree
-  add_index "creators_shows", ["show_id", "creator_id"], name: "index_creators_shows_on_show_id_and_creator_id", using: :btree
+  add_index "creators_programs", ["creator_id", "program_id"], name: "index_creators_programs_on_creator_id_and_program_id", using: :btree
+  add_index "creators_programs", ["program_id", "creator_id"], name: "index_creators_programs_on_program_id_and_creator_id", using: :btree
 
   create_table "episodes", force: :cascade do |t|
     t.string   "name"
@@ -49,11 +49,11 @@ ActiveRecord::Schema.define(version: 20150412152637) do
     t.integer  "online_listens"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
-    t.integer  "show_id"
+    t.integer  "program_id"
     t.text     "description"
   end
 
-  add_index "episodes", ["show_id"], name: "index_episodes_on_show_id", using: :btree
+  add_index "episodes", ["program_id"], name: "index_episodes_on_program_id", using: :btree
 
   create_table "episodes_songs", id: false, force: :cascade do |t|
     t.integer "song_id",            null: false
@@ -64,7 +64,16 @@ ActiveRecord::Schema.define(version: 20150412152637) do
   add_index "episodes_songs", ["episode_id", "song_id"], name: "index_episodes_songs_on_episode_id_and_song_id", using: :btree
   add_index "episodes_songs", ["song_id", "episode_id"], name: "index_episodes_songs_on_song_id_and_episode_id", using: :btree
 
-  create_table "shows", force: :cascade do |t|
+  create_table "playouts", force: :cascade do |t|
+    t.integer  "episode_id"
+    t.integer  "song_id"
+    t.integer  "live_listeners"
+    t.integer  "soundexchange_reporting", default: 1
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+  end
+
+  create_table "programs", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
     t.datetime "created_at",  null: false
@@ -79,5 +88,7 @@ ActiveRecord::Schema.define(version: 20150412152637) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "episodes", "shows"
+  add_foreign_key "episodes", "programs"
+  add_foreign_key "playouts", "episodes"
+  add_foreign_key "playouts", "songs"
 end

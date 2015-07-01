@@ -1,6 +1,6 @@
 ![](http://wjrh.org/teal-logo.png)
 
-Teal is [WJRH](http://wjrh.org)'s creator-Show-Episode management service.
+Teal is [WJRH](http://wjrh.org)'s creator-Program-Episode management service.
 
 ## Getting Started
 1.  Install Ruby [here](https://www.ruby-lang.org/en/documentation/installation/)
@@ -20,15 +20,15 @@ Teal is [WJRH](http://wjrh.org)'s creator-Show-Episode management service.
 
 ## Usage
 
-### Shows
-Shows represent a recurring time block in the radio. Shows have creators that are responsible of creating, editing and deleting contents of the show. Shows are blueprints for episodes.
+### Programs
+Programs represent a recurring time block in the radio. Programs have creators that are responsible of creating, editing and deleting contents of the program. Programs are blueprints for episodes.
 
-#### Creating a new show
-| GET | /shows | lists all shows |  |
-| POST | /shows | add a new show | at least 1 creator id required |
-| GET | /shows/:id | get detail info about show |  |
-| PUT | /shows/:id | update a show |  |
-| DELETE | /shows/:id | delete a show |  |
+#### Creating a new program
+| GET | /programs | lists all programs |  |
+| POST | /programs | add a new program | at least 1 creator id required |
+| GET | /programs/:id | get detail info about program |  |
+| PUT | /programs/:id | update a program |  |
+| DELETE | /programs/:id | delete a program |  |
 
 ### creators
 creators represent past and present creators at the radio station.
@@ -42,12 +42,12 @@ creators represent past and present creators at the radio station.
 | DELETE | /creators/:id | delete a creator |  |
 
 ### Episodes
-Episodes are instances of shows that have a start wh
+Episodes are instances of programs that have a start wh
 
 | Method | URL | Description | Notes |
 |--------|------------|-----------------|--------------------------|
-| GET | /shows/:id/episodes | list all episodes of a show |  |
-| POST | /shows/:id/episodes | create a new episode |  |
+| GET | /programs/:id/episodes | list all episodes of a program |  |
+| POST | /programs/:id/episodes | create a new episode |  |
 | GET | /episodes/:id | get details about an episode |  |
 | PUT | /episodes/:id | update an episode |  |
 | DELETE | /episodes/:id | delete an episode |  |
@@ -62,5 +62,5 @@ DELETE /episodes/:id/songs/:log_id
 - episode start stop times
 - episode lifecycle, creation and date time etc.
 - active/non-active creators
-- being able to assign times to shows
+- being able to assign times to programs
 - concept of seasons?

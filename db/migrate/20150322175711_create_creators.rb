@@ -1,9 +1,9 @@
 class CreateCreators < ActiveRecord::Migration
   def change
     create_table :creators do |t|
-      t.string :net_id
+      t.string :lafayetteid
       t.string :email
-      t.string :creator_name
+      t.string :name
       t.string :real_name
       t.text :description
 

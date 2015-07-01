@@ -1,3 +1,4 @@
 class Song < ActiveRecord::Base
-	has_and_belongs_to_many :episodes
+	has_many :playouts
+	has_many :episodes, through: :playouts
 end

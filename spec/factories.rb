@@ -12,27 +12,27 @@ FactoryGirl.define do
     real_name "James Davadasa"
     description "I'm a bad DJ"
 
-    # factory for creators with shows
-    factory :creator_with_shows do
-      #associate shows with creators
+    # factory for creators with programs
+    factory :creator_with_programs do
+      #associate programs with creators
       after(:build) do |creator, evaluator|
         2.times do
-          creator.shows << build(:show)
+          creator.programs << build(:program)
         end
       end
     end
   end
 
 
-  # create show factory
-  factory :show do
-    title "Mango Radio Show"
-    description  "this is a description for our show"
+  # create program factory
+  factory :program do
+    title "Mango Radio Program"
+    description  "this is a description for our program"
 
-    # all shows need creators. This creates two more
-    after(:build) do |show, evaluator|
+    # all programs need creators. This creates two more
+    after(:build) do |program, evaluator|
       2.times do
-        show.creators << build(:creator)
+        program.creators << build(:creator)
       end
     end
   end
@@ -44,7 +44,7 @@ FactoryGirl.define do
   factory :episode do
   	name "wonderful episode"
   	description "wonderful episode here"
-  	show # all episodes need a show 
+  	program # all episodes need a program 
 
     # all episodes need creators
     after(:build) do |episode, evaluator|

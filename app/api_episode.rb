@@ -1,15 +1,15 @@
 module Teal
   class App < Sinatra::Base
 
-  	# | GET | /shows/:id/episodes | list all episodes of a show |  |
-  	get "/shows/:show_id/episodes" do 
-  		show = Show.find_by_id(params['show_id'])
-  		episodes = show.episodes
+  	# | GET | /programs/:id/episodes | list all episodes of a program |  |
+  	get "/programs/:program_id/episodes" do 
+  		program = Program.find_by_id(params['program_id'])
+  		episodes = program.episodes
   		return episodes.to_json(:only => [:id, :name, :recording_url, :downloadable, :description])
   	end
 
-	# | POST | /shows/:id/episodes | create a new episode |  |
-	post "/shows/:show_id/episodes" do 
+	# | POST | /programs/:id/episodes | create a new episode |  |
+	post "/programs/:program_id/episodes" do 
 		request.body.rewind
 		data = JSON.parse request.body.read
 		episode = Episode.new(episode_params(data))
@@ -17,14 +17,14 @@ module Teal
 		if episode.save
 			status 200
 		else
-			halt 400, 'This show could not be saved. Please fill all recessary fields'
+			halt 400, 'This program could not be saved. Please fill all recessary fields'
 		end
 	end
 
 	# | GET | /episodes/:id | get details about an episode |  |
 	get "/episodes/:episode_id" do 
 		episode = Episode.find_by_id(params['episode_id'])
-		halt 404 if episode.nil? #halt if show doesn't exist
+		halt 404 if episode.nil? #halt if program doesn't exist
 		episode.to_json(:only => [:id, :name, :recording_url, :downloadable, :description, :songs])
 	end
 
@@ -34,14 +34,14 @@ module Teal
 		data = JSON.parse request.body.read
 		episode = Episode.find_by_id(params['episode_id'])
 
-		halt 404 if episode.nil? # halt if the show doesn't exist
+		halt 404 if episode.nil? # halt if the program doesn't exist
 
 		update = episode_params(data)
 
 		if episode.update(update)
 			status 200
 		else
-			halt 400, "This show could not be saved"
+			halt 400, "This program could not be saved"
 		end
 	end
 
@@ -52,13 +52,13 @@ module Teal
 		if episode.destroy
 			status 200
 		else
-			halt 400, 'This show could not be deleted.'
+			halt 400, 'This program could not be deleted.'
 		end
 	end
 
 	def episode_params(data)
       hash = {
-      	:show_id => params["show_id"],
+      	:program_id => params["program_id"],
         :name => data["name"],
         :recording_url => data ["recording_url"],
         :downloadable => data["downloadable"],

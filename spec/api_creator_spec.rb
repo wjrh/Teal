@@ -130,7 +130,7 @@ describe 'Creator API' do
 
 
 
-  describe 'add shows to creators'
+  describe 'add programs to creators'
 end
 
 

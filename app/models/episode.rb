@@ -1,5 +1,7 @@
 class Episode < ActiveRecord::Base
-	belongs_to :show
-	has_and_belongs_to_many :songs
+	belongs_to :program
 	has_and_belongs_to_many :creators
+	has_many :playouts
+	has_many :songs, through: :playouts
+
 end

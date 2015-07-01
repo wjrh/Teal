@@ -2,16 +2,16 @@ require_relative 'spec_helper'
 
 describe 'Episode API' do
 
-	#list all episodes of a show
-	describe "GET /shows/:id/episodes" do
+	#list all episodes of a program
+	describe "GET /programs/:id/episodes" do
 		before do
-			#create 10 dummy shows with episodes
-			show = create(:show)
+			#create 10 dummy programs with episodes
+			program = create(:program)
 			10.times do
-				show.episodes << create(:episode)
+				program.episodes << create(:episode)
 			end
-			show.save
-			get "/shows/#{show.id}/episodes"
+			program.save
+			get "/programs/#{program.id}/episodes"
 		end
 
 		it 'is successful' do
@@ -25,7 +25,7 @@ describe 'Episode API' do
 	end
 
 	#create a new episode
-	describe "POST /shows/:id/episodes" do
+	describe "POST /programs/:id/episodes" do
 
 		let(:body){ {
 			:name => "good episode", 	# episode name
@@ -34,9 +34,9 @@ describe 'Episode API' do
 
 		before do
 			8.times do
-				create(:show)
+				create(:program)
 			end
-			post "/shows/#{Show.second.id}/episodes", body, { "CONTENT_TYPE" => "application/json" }
+			post "/programs/#{Program.second.id}/episodes", body, { "CONTENT_TYPE" => "application/json" }
 		end
 
 		it "is successful" do
@@ -44,21 +44,21 @@ describe 'Episode API' do
 		end
 
 		it 'has one episode' do
-			expect(Show.second.episodes.count).to eq 1
+			expect(Program.second.episodes.count).to eq 1
 		end
 
 		it 'has two episodes if repeated' do
-			post "/shows/#{Show.second.id}/episodes", body, { "CONTENT_TYPE" => "application/json" }
-			expect(Show.second.episodes.count).to eq 2
+			post "/programs/#{Program.second.id}/episodes", body, { "CONTENT_TYPE" => "application/json" }
+			expect(Program.second.episodes.count).to eq 2
 		end
 
 		it 'responds with 400 if title not included' do
-      		post '/shows', {:foo => "bar"}.to_json, { "CONTENT_TYPE" => "application/json" }
+      		post '/programs', {:foo => "bar"}.to_json, { "CONTENT_TYPE" => "application/json" }
       		expect(last_response.status).to eq 400
     	end
 
     	it 'creator information is correct' do
-      		expect(Show.second.episodes.last.show.id).to eq Show.second.id
+      		expect(Program.second.episodes.last.program.id).to eq Program.second.id
     	end
 	end
 
@@ -66,13 +66,13 @@ describe 'Episode API' do
 	describe "GET /episodes/:id" do
 
 		before do
-			#create 10 dummy shows with episodes
-			show = create(:show)
+			#create 10 dummy programs with episodes
+			program = create(:program)
 			10.times do
-				show.episodes << create(:episode)
+				program.episodes << create(:episode)
 			end
-			show.save
-			get "/episodes/#{show.episodes.first.id}"
+			program.save
+			get "/episodes/#{program.episodes.first.id}"
 		end
 
 		it 'is successful' do
@@ -86,9 +86,9 @@ describe 'Episode API' do
 		let(:check) {Episode.second.id}
 		before do
 			8.times do
-				show = create(:show)
-				show.episodes << create(:episode)
-				show.save
+				program = create(:program)
+				program.episodes << create(:episode)
+				program.save
 			end
 			put "/episodes/#{Episode.second.id}", body, { "CONTENT_TYPE" => "application/json" }
 		end
@@ -102,7 +102,7 @@ describe 'Episode API' do
 	      expect(episode.name).to eq "updated name"
 	    end
 
-	    it "fails if show doesn't exist" do
+	    it "fails if program doesn't exist" do
 	      put('/episodes/23345346435634563456232322', body)
 	      expect(last_response.status).to eq 404
 	    end
@@ -112,9 +112,9 @@ describe 'Episode API' do
 	describe 'DELETE /episodes/:id' do
 	    before do
 	      20.times do
-	        show = create(:show)
-			show.episodes << create(:episode)
-			show.save
+	        program = create(:program)
+			program.episodes << create(:episode)
+			program.save
 	      end
 	  end
 

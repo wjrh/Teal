@@ -12,12 +12,12 @@ Dotenv.load
 
 require_relative 'models/creator'
 require_relative 'models/episode'
-require_relative 'models/show'
+require_relative 'models/program'
 require_relative 'models/song'
 
 require_relative 'api_creator'
 require_relative 'api_episode'
-require_relative 'api_show'
+require_relative 'api_program'
 
 
 module Teal
@@ -33,7 +33,7 @@ module Teal
     get '/' do
     	content_type :json
     	info = {
-    		"about" => "Teal is WJRH's DJ-Show-Episode management API",
+    		"about" => "Teal is WJRH's DJ-Program-Episode management API",
     		"documentation" => "github.com/wjrh/Teal",
     		"contact" => "wjrh@lafayette.edu",
     		"authors" => ["Renan Dincer"] #add your name here if you're contributing.

@@ -36,7 +36,7 @@ module Teal
       data = JSON.parse request.body.read
       creator = Creator.find_by_id(params['id'])
 
-      halt 404 if creator.nil? #halt if show doesn't exist
+      halt 404 if creator.nil? #halt if program doesn't exist
 
       update = creator_params(data)
 
@@ -44,23 +44,23 @@ module Teal
         status 200
       else
         content_type :json
-        halt 400, 'This show could not be saved.'
+        halt 400, 'This program could not be saved.'
       end
     end
 
   	# delete :id - delete creator
     delete "/creators/:id" do
       creator = Creator.where(id: params['id']).first
-      halt 404 if creator.nil? #halt if show doesn't exist
+      halt 404 if creator.nil? #halt if program doesn't exist
       if creator.destroy
         status 200
       else
         content_type :json
-        halt 400, 'This show could not be deleted.'
+        halt 400, 'This program could not be deleted.'
       end
     end
 
-  	# get creator/shows - list all shows of the creator
+  	# get creator/programs - list all programs of the creator
   	# get creator/episodes - list latest episodes of the creator
 
     def creator_params(data)
