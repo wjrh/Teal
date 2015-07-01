@@ -5,7 +5,7 @@ module Teal
   	get "/programs/:program_id/episodes" do 
   		program = Program.find_by_id(params['program_id'])
   		episodes = program.episodes
-  		return episodes.to_json(:only => [:id, :name, :recording_url, :downloadable, :description])
+  		return episodes.to_json(:only => [:id, :title, :recording_url, :downloadable, :description])
   	end
 
 	# | POST | /programs/:id/episodes | create a new episode |  |
@@ -25,7 +25,7 @@ module Teal
 	get "/episodes/:episode_id" do 
 		episode = Episode.find_by_id(params['episode_id'])
 		halt 404 if episode.nil? #halt if program doesn't exist
-		episode.to_json(:only => [:id, :name, :recording_url, :downloadable, :description, :songs])
+		episode.to_json(:only => [:id, :title, :recording_url, :downloadable, :description, :songs])
 	end
 
 	# | PUT | /episodes/:id | update an episode |  |
@@ -59,7 +59,7 @@ module Teal
 	def episode_params(data)
       hash = {
       	:program_id => params["program_id"],
-        :name => data["name"],
+        :title => data["title"],
         :recording_url => data ["recording_url"],
         :downloadable => data["downloadable"],
         :description => data["description"],

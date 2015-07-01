@@ -6,9 +6,9 @@ FactoryGirl.define do
 
   # create creator factory
   factory :creator do
-    net_id "jamesd"
+    lafayetteid "jamesd"
     email "jamesd@lafayette.edu"
-    creator_name "DEEJAY coconut"
+    name "DEEJAY coconut"
     real_name "James Davadasa"
     description "I'm a bad DJ"
 
@@ -42,7 +42,7 @@ FactoryGirl.define do
 
   # create episode factory
   factory :episode do
-  	name "wonderful episode"
+  	title "wonderful episode"
   	description "wonderful episode here"
   	program # all episodes need a program 
 

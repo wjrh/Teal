@@ -5,7 +5,7 @@ module Teal
     get '/creators' do
     	content_type :json
       halt 404 if Creator.count == 0 #halt if any creator doesn't exist
-      Creator.select(:id, :creator_name, :description).all.to_json
+      Creator.select(:id, :name, :description).all.to_json
     end
   	
     # post a new Creator
@@ -27,7 +27,7 @@ module Teal
       content_type :json
       creator = Creator.find_by_id(params['id'])
       halt 404 if creator.nil? #halt if creator doesn't exist
-      creator.to_json(:only => [ :id, :creator_name, :description ])
+      creator.to_json(:only => [ :id, :name, :description ])
     end
 
     # update info for an existing creator
@@ -65,9 +65,9 @@ module Teal
 
     def creator_params(data)
       hash = {
-        :net_id => data["net_id"],
+        :lafayetteid => data["lafayetteid"],
         :email => data["email"],
-        :creator_name => data["creator_name"],
+        :name => data["name"],
         :real_name => data["real_name"],
         :description => data["description"]
       }

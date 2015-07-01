@@ -17,13 +17,13 @@ ActiveRecord::Schema.define(version: 20150701020321) do
   enable_extension "plpgsql"
 
   create_table "creators", force: :cascade do |t|
-    t.string   "net_id"
+    t.string   "lafayetteid"
     t.string   "email"
-    t.string   "creator_name"
+    t.string   "name"
     t.string   "real_name"
     t.text     "description"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "creators_episodes", id: false, force: :cascade do |t|
@@ -43,26 +43,17 @@ ActiveRecord::Schema.define(version: 20150701020321) do
   add_index "creators_programs", ["program_id", "creator_id"], name: "index_creators_programs_on_program_id_and_creator_id", using: :btree
 
   create_table "episodes", force: :cascade do |t|
-    t.string   "name"
+    t.string   "title"
+    t.text     "description"
     t.string   "recording_url"
     t.boolean  "downloadable"
     t.integer  "online_listens"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.integer  "program_id"
-    t.text     "description"
   end
 
   add_index "episodes", ["program_id"], name: "index_episodes_on_program_id", using: :btree
-
-  create_table "episodes_songs", id: false, force: :cascade do |t|
-    t.integer "song_id",            null: false
-    t.integer "episode_id",         null: false
-    t.integer "seconds_from_start"
-  end
-
-  add_index "episodes_songs", ["episode_id", "song_id"], name: "index_episodes_songs_on_episode_id_and_song_id", using: :btree
-  add_index "episodes_songs", ["song_id", "episode_id"], name: "index_episodes_songs_on_song_id_and_episode_id", using: :btree
 
   create_table "playouts", force: :cascade do |t|
     t.integer  "episode_id"
@@ -76,6 +67,7 @@ ActiveRecord::Schema.define(version: 20150701020321) do
   create_table "programs", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
+    t.string   "image"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
@@ -84,6 +76,8 @@ ActiveRecord::Schema.define(version: 20150701020321) do
     t.string   "artist"
     t.string   "title"
     t.string   "ISRC"
+    t.string   "album"
+    t.string   "label"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

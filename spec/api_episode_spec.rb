@@ -82,7 +82,7 @@ describe 'Episode API' do
 
 	#update an episode
 	describe 'PUT /episodes/:id' do
-		let(:body) { attributes_for(:episode, name: "updated name").to_json }
+		let(:body) { attributes_for(:episode, title: "updated name").to_json }
 		let(:check) {Episode.second.id}
 		before do
 			8.times do
@@ -99,7 +99,7 @@ describe 'Episode API' do
 
 		it "is updated" do
 	      episode = Episode.find(check)
-	      expect(episode.name).to eq "updated name"
+	      expect(episode.title).to eq "updated name"
 	    end
 
 	    it "fails if program doesn't exist" do
