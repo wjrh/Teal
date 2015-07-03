@@ -20,21 +20,10 @@ Teal is [WJRH](http://wjrh.org)'s creator-Program-Episode management service.
 
 ## Usage
 
-### Programs
-Programs represent a recurring time block in the radio. Programs have creators that are responsible of creating, editing and deleting contents of the program. Programs are blueprints for episodes.
-this will return 
-
-#### Creating a new program
-| GET | /programs | lists all programs |  |
-| POST | /programs | add a new program | at least 1 creator id required |
-| GET | /programs/:id | get detail info about program |  |
-| PUT | /programs/:id | update a program |  |
-| DELETE | /programs/:id | delete a program |  |
-
 ### Creators
 Creators represent past and present people contritbuing to the station.
 
-add a creator by sending a POST request with the creator data to `/creators`:
+Add a creator by sending a POST request with the creator data to `/creators`:
 
     {
       "lafayetteid": "renand",
@@ -42,7 +31,7 @@ add a creator by sending a POST request with the creator data to `/creators`:
       "name": "DJ RENren",
       "real_name": "Renan Dincer",
       "description": "Whatever I want to put here",
-      "image_url": "http://renanimage.com/image.png"
+      "image_url": "http://wjrh.org/image.png"
     }
 
 on successful request, this will return all the information along with a unique id
@@ -99,6 +88,15 @@ sending a GET request to `/creators/1` will return more detailed information abo
 
 a creator can be updated with a PUT request to `/creators/:id` and can be deleted with a DELETE request to the same URL
 
+### Programs
+Programs represent a recurring time block in the radio. Programs have creators that are responsible of creating, editing and deleting contents of the program. Programs are blueprints for episodes.
+
+### Episodes
+Episodes are instances of programs that have a start wh
+
+### Logging a song
+
+## API Reference
 | Method | URL | Description | Notes |
 |--------|------------|-----------------|--------------------------|
 | GET | /creators | list all creators |  |
@@ -106,22 +104,19 @@ a creator can be updated with a PUT request to `/creators/:id` and can be delete
 | GET | /creators/:id | get detail info about creator |  |
 | PUT | /creators/:id | update a creator |  |
 | DELETE | /creators/:id | delete a creator |  |
-
-### Episodes
-Episodes are instances of programs that have a start wh
-
-| Method | URL | Description | Notes |
-|--------|------------|-----------------|--------------------------|
+| GET | /programs | lists all programs |  |
+| POST | /programs | add a new program | at least 1 creator id required |
+| GET | /programs/:id | get detail info about program |  |
+| PUT | /programs/:id | update a program |  |
+| DELETE | /programs/:id | delete a program |  |
 | GET | /programs/:id/episodes | list all episodes of a program |  |
 | POST | /programs/:id/episodes | create a new episode |  |
 | GET | /episodes/:id | get details about an episode |  |
 | PUT | /episodes/:id | update an episode |  |
 | DELETE | /episodes/:id | delete an episode |  |
-
-### Logging a song
-POST /episodes/:id/songs
-DELETE /episodes/:id/songs/:log_id
-
+| POST | /episodes/:id/songs |  |  |
+| PUT | /episodes/:id/songs/:log_id |  |  |
+| DELETE | /episodes/:id/songs/:log_id |  |  |
 
 #TODO
 

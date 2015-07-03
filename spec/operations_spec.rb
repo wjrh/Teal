@@ -42,7 +42,7 @@ describe 'General API tests' do
 			program1 = {
 				:title => "a super duper show",
 				:description => "an awesome show",
-				:image => "http://placehold.it/300x300",
+				:image_url => "http://placehold.it/300x300",
 				:creators => [Creator.first.id, Creator.third.id]
 			}.to_json
 
@@ -54,7 +54,7 @@ describe 'General API tests' do
 			invalidprogram = {
 				:title => "a super duper show",
 				:description => "an awesome show",
-				:image => "http://placehold.it/300x300",
+				:image_url => "http://placehold.it/300x300",
 				:creators => [188411234, Creator.first.id]
 			}.to_json
 
@@ -81,8 +81,8 @@ describe 'General API tests' do
 			# this creator has two programs
 			expect(JSON.parse(last_response.body)["programs"].count).to eq 2
 
-			#NOW THAT WE HAVE TWO PROGRAMS, WE CAN START ADDING SONGS!
-			
+			#NOW THAT WE HAVE TWO PROGRAMS, WE CAN START ADDING EPISODES!
+
 
 		end						
 	end
