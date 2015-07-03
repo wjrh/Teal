@@ -3,4 +3,5 @@ class Program < ActiveRecord::Base
 	has_many :episodes
 	
 	validates :title, presence: true
+	# validates :creators, presence: true
 end

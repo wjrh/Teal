@@ -32,7 +32,7 @@ describe 'Creator API' do
 
   # post creator
   describe 'POST /creators' do
-    let(:body) { { :email => "coconutututu@mango.edu" }.to_json }
+    let(:body) { attributes_for(:creator).to_json }
     before do
       post '/creators', body, { "CONTENT_TYPE" => "application/json" }
     end
@@ -69,7 +69,7 @@ describe 'Creator API' do
 
     it 'returns 1 creator' do
       response = MultiJson.load(last_response.body)
-      expect(response.size).to eq 3 #id, title and description
+      expect(response.size).to eq 4 #id, title, description, programs
     end
 
     it "fails if creator doesn't exist" do

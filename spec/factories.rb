@@ -11,30 +11,15 @@ FactoryGirl.define do
     name "DEEJAY coconut"
     real_name "James Davadasa"
     description "I'm a bad DJ"
-
-    # factory for creators with programs
-    factory :creator_with_programs do
-      #associate programs with creators
-      after(:build) do |creator, evaluator|
-        2.times do
-          creator.programs << build(:program)
-        end
-      end
-    end
   end
 
 
   # create program factory
   factory :program do
     title "Mango Radio Program"
+    image "http://lorempixel.com/400/200/"
     description  "this is a description for our program"
-
-    # all programs need creators. This creates two more
-    after(:build) do |program, evaluator|
-      2.times do
-        program.creators << build(:creator)
-      end
-    end
+    creators {[create(:creator)]}
   end
 
 

@@ -32,9 +32,9 @@ describe 'Program API' do
 
   # post program with creator details
   describe 'POST /programs' do
-    let(:body) { { :title => "title is this" }.to_json }
+    let(:body) { build(:program).to_json }
     before do
-      post '/programs', body, { "CONTENT_TYPE" => "application/json" }
+      post '/programs', body
     end
 
     it 'is successful' do
@@ -91,7 +91,7 @@ describe 'Program API' do
 
   # update program
   describe 'PUT /programs/:id' do
-    let(:body) { attributes_for(:program, title: "updated title").to_json }
+    let(:body) { create(:program, title: "updated title").to_json }
     let(:check) {Program.second.id}
     before do
       100.times do
@@ -105,12 +105,12 @@ describe 'Program API' do
     end
 
     it "is updated" do
-      @program = Program.find(check)
-      expect(@program.title).to eq "updated title"
+      program = Program.find(check)
+      expect(program.title).to eq "updated title"
     end
 
     it "fails if program doesn't exist" do
-      put('/programs/2323232634563456342', body)
+      put('/programs/188411234', body)
       expect(last_response.status).to eq 404
     end
   end

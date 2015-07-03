@@ -4,4 +4,7 @@ class Creator < ActiveRecord::Base
 
 	# validations
 	validates :email, presence: true
+	validates :name, presence: true
+	validates :real_name, presence: true
+	validates :lafayetteid, presence: true
 end

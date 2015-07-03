@@ -27,7 +27,12 @@ module Teal
       content_type :json
       creator = Creator.find_by_id(params['id'])
       halt 404 if creator.nil? #halt if creator doesn't exist
-      creator.to_json(:only => [ :id, :name, :description ])
+      return {
+        :id => creator.id,
+        :name => creator.name,
+        :description => creator.description,
+        :programs => creator.programs.select(:id, :title)
+      }.to_json
     end
 
     # update info for an existing creator
