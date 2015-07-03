@@ -17,7 +17,7 @@ FactoryGirl.define do
   # create program factory
   factory :program do
     title "Mango Radio Program"
-    image "http://lorempixel.com/400/200/"
+    image_url "http://lorempixel.com/400/200/"
     description  "this is a description for our program"
     creators {[create(:creator)]}
   end

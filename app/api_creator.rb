@@ -5,7 +5,7 @@ module Teal
     get '/creators' do
     	content_type :json
       halt 404 if Creator.count == 0 #halt if any creator doesn't exist
-      Creator.select(:id, :name, :description).all.to_json
+      Creator.select(:id, :name, :image_url).all.to_json
     end
   	
     # post a new Creator
@@ -15,9 +15,8 @@ module Teal
       creator = Creator.new(creator_params(data))
 
       if creator.save
-        status 200
+        return creator.to_json
       else
-        content_type :json
         halt 400, 'This DJ could not be saved. Please fill all necessary fields.'
       end
     end
@@ -46,7 +45,7 @@ module Teal
       update = creator_params(data)
 
       if creator.update(update)
-        status 200
+        return creator.to_json
       else
         content_type :json
         halt 400, 'This program could not be saved.'
@@ -74,6 +73,7 @@ module Teal
         :email => data["email"],
         :name => data["name"],
         :real_name => data["real_name"],
+        :image_url => data["image_url"],
         :description => data["description"]
       }
       return hash

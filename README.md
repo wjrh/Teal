@@ -22,6 +22,7 @@ Teal is [WJRH](http://wjrh.org)'s creator-Program-Episode management service.
 
 ### Programs
 Programs represent a recurring time block in the radio. Programs have creators that are responsible of creating, editing and deleting contents of the program. Programs are blueprints for episodes.
+this will return 
 
 #### Creating a new program
 | GET | /programs | lists all programs |  |
@@ -30,8 +31,73 @@ Programs represent a recurring time block in the radio. Programs have creators t
 | PUT | /programs/:id | update a program |  |
 | DELETE | /programs/:id | delete a program |  |
 
-### creators
-creators represent past and present creators at the radio station.
+### Creators
+Creators represent past and present people contritbuing to the station.
+
+add a creator by sending a POST request with the creator data to `/creators`:
+
+    {
+      "lafayetteid": "renand",
+      "email": "renand@lafayette.edu",
+      "name": "DJ RENren",
+      "real_name": "Renan Dincer",
+      "description": "Whatever I want to put here",
+      "image_url": "http://renanimage.com/image.png"
+    }
+
+on successful request, this will return all the information along with a unique id
+
+    {
+      "id": 1,
+      "lafayetteid": "renand",
+      "email": "renand@lafayette.edu",
+      "name": "DJ RENren",
+      "real_name": "Renan Dincer",
+      "description": "Whatever I want to put here",
+      "created_at": "2015-07-03T01:56:17.160Z",
+      "updated_at": "2015-07-03T01:56:17.160Z",
+      "image_url": "http://wjrh.org/image.png"
+    }
+
+you can view all creators by sending a GET request to `/creators` 
+
+    [
+      {
+        "id": 1,
+        "name": "DJ RENren",
+        "image_url": "http://wjrh.org/image.png"
+      },
+      {
+        "id": 2,
+        "name": "Hopeless Women",
+        "image_url": "http://wjrh.org/women.png"
+      },
+      {
+        "id": 3,
+        "name": "Flying Elephant",
+        "image_url": "http://wjrh.org/elephant.png"
+      }
+    ]
+
+sending a GET request to `/creators/1` will return more detailed information about the creator with the id 1
+
+    {
+      "id": 1,
+      "name": "DJ RENren",
+      "description": "Whatever I want to put here",
+      "programs": [
+        {
+          "id": 1,
+          "title": "Super Awesome Shhow"
+        },
+        {
+          "id": 2,
+          "title": "Other Awesome Program"
+        }
+      ]
+    }
+
+a creator can be updated with a PUT request to `/creators/:id` and can be deleted with a DELETE request to the same URL
 
 | Method | URL | Description | Notes |
 |--------|------------|-----------------|--------------------------|

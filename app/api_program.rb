@@ -25,9 +25,8 @@ module Teal
   		program = Program.new(program_params(data))
 
   		if program.save
-  			status 200
+  			return program.to_json
   		else
-  			content_type :json
   			halt 400, 'This program could not be saved. Please fill all necessary fields.'
   		end
   	end
@@ -80,7 +79,7 @@ module Teal
       hash = {
         :title => data["title"],
         :description => data["description"],
-        :image => data["image"],
+        :image_url => data["image_url"],
         :creator_ids => data["creators"].to_a #match creator ids with creators
       }
       return hash

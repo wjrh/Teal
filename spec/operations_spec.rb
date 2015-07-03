@@ -11,6 +11,7 @@ describe 'General API tests' do
 				:email => "renand@lafayette.edu",
 				:name => "dj renren",
 				:real_name => "Renan Dincer",
+				:image_url => "url",
 				:description => "a great guy"
 				}.to_json
 
@@ -28,7 +29,7 @@ describe 'General API tests' do
 			expect(last_response.body).to eq [{
 				:id => Creator.first.id,
 				:name => "dj renren",
-				:description => "a great guy"
+				:image_url => "url"
 				}].to_json
 
 			#create more creators
@@ -65,7 +66,7 @@ describe 'General API tests' do
 			program2 = {
 				:title => "a super duper show",
 				:description => "an awesome show",
-				:image => "http://placehold.it/300x300",
+				:image_url => "http://placehold.it/300x300",
 				:creators => [Creator.first.id, Creator.second.id]
 			}.to_json
 
@@ -79,6 +80,9 @@ describe 'General API tests' do
 
 			# this creator has two programs
 			expect(JSON.parse(last_response.body)["programs"].count).to eq 2
+
+			#NOW THAT WE HAVE TWO PROGRAMS, WE CAN START ADDING SONGS!
+			
 
 		end						
 	end
