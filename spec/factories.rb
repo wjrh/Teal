@@ -10,6 +10,8 @@ FactoryGirl.define do
     email "jamesd@lafayette.edu"
     name "DEEJAY coconut"
     real_name "James Davadasa"
+    image_url "http://lorempixel.com/400/200/"
+
     description "I'm a bad DJ"
   end
 

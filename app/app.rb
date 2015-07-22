@@ -14,10 +14,13 @@ require_relative 'models/creator'
 require_relative 'models/episode'
 require_relative 'models/program'
 require_relative 'models/song'
+require_relative 'models/playout'
+
 
 require_relative 'api_creator'
 require_relative 'api_episode'
 require_relative 'api_program'
+require_relative 'api_song'
 
 
 module Teal

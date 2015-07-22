@@ -3,7 +3,7 @@ require_relative 'spec_helper'
 describe 'Episode API' do
 
 	#list all episodes of a program
-	describe "GET /programs/:id/episodes" do
+	describe "GET /programs/:program_id/episodes" do
 		before do
 			#create 10 dummy programs with episodes
 			program = create(:program)
@@ -25,10 +25,10 @@ describe 'Episode API' do
 	end
 
 	#create a new episode
-	describe "POST /programs/:id/episodes" do
+	describe "POST /programs/:program_id/episodes" do
 
 		let(:body){ {
-			:name => "good episode", 	# episode name
+			:title => "good episode", 	# episode name
 			:description => "lalala",	# episode description
  			}.to_json }
 
@@ -36,7 +36,7 @@ describe 'Episode API' do
 			8.times do
 				create(:program)
 			end
-			post "/programs/#{Program.second.id}/episodes", body, { "CONTENT_TYPE" => "application/json" }
+			post "/programs/#{Program.second.id}/episodes", body
 		end
 
 		it "is successful" do

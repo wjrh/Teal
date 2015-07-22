@@ -115,8 +115,8 @@ Episodes are instances of programs that have a start wh
 | PUT | /episodes/:id | update an episode |  |
 | DELETE | /episodes/:id | delete an episode |  |
 | POST | /episodes/:id/songs |  |  |
-| PUT | /episodes/:id/songs/:log_id |  |  |
-| DELETE | /episodes/:id/songs/:log_id |  |  |
+| PUT | /episodes/:id/songs/:playout_id |  |  |
+| DELETE | /episodes/:id/songs/:playout_id |  |  |
 
 #TODO
 

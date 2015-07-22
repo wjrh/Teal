@@ -4,4 +4,5 @@ class Episode < ActiveRecord::Base
 	has_many :playouts
 	has_many :songs, through: :playouts
 
+	validates :title, presence: true
 end

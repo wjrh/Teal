@@ -82,6 +82,27 @@ describe 'General API tests' do
 			expect(JSON.parse(last_response.body)["programs"].count).to eq 2
 
 			#NOW THAT WE HAVE TWO PROGRAMS, WE CAN START ADDING EPISODES!
+			episode1 = {
+				:title => "An episode",
+				:image_url => "http://image",
+				:downloadable => true,
+				:description => "this is a super duper episode"
+			}.to_json
+
+			#posting this episode to the 
+			post "/programs/#{Program.first.id}/episodes", episode1
+
+			expect(last_response.status).to eq 200
+
+			expect(JSON.parse(last_response.body)['id']).to eq Episode.first.id
+
+			episode1id = JSON.parse(last_response.body)['id']
+
+			get "/episodes/#{episode1id}"
+
+			expect(last_response.status).to eq 200
+			expect(JSON.parse(last_response.body)['songs'].count).to eq 0
+
 
 
 		end						

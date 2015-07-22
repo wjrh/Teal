@@ -79,7 +79,7 @@ describe 'Program API' do
 
     it 'returns 1 program' do
       response = MultiJson.load(last_response.body)
-      expect(response.size).to eq 3 #id, title and description
+      expect(response.size).to eq 5 #id, title and description, creators, episode
     end
 
       it "fails if program doesn't exist" do
