@@ -103,8 +103,34 @@ describe 'General API tests' do
 			expect(last_response.status).to eq 200
 			expect(JSON.parse(last_response.body)['songs'].count).to eq 0
 
+			song1 = {
+				:artist => "U2",
+				:uuid => "428734652987346523874782365",
+        		:title => "James Songtgeg",
+        		:label => "Columbia"
+			}.to_json
 
+			wrong_song = {
+				:artist => "someguy"
+			}.to_json
 
+			post "/episodes/#{episode1id}/songs", wrong_song
+
+			expect(last_response.status).to eq 400
+
+			post "/episodes/#{episode1id}/songs", song1
+
+			expect(last_response.status).to eq 200
+
+			expect(Song.count).to eq 1
+			expect(Playout.count).to eq 1
+
+			post "/episodes/#{episode1id}/songs", song1
+
+			expect(last_response.status).to eq 200
+
+			expect(Song.count).to eq 1
+			expect(Playout.count).to eq 2
 		end						
 	end
 end

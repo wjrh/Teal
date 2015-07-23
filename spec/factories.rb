@@ -47,6 +47,6 @@ FactoryGirl.define do
   factory :song do
   	artist "James Dunn"
   	title "A Beaut Song"
-  	ISRC "3432423234"
+  	uuid "3432423234"
   end
 end

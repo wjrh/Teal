@@ -12,12 +12,14 @@ module Teal
   		# if id exists use that
   		if !data['id'].nil?
   			song = Song.find_by(:id => data['id'])
-  		# if isrc exists, use that
-  		elsif !data['isrc'].nil?
-  			song = Song.find_or_initialize_by(:isrc => data['isrc'])
+  		# if uuid exists, use that
+  		elsif !data['uuid'].nil?
+  			song = Song.find_or_initialize_by(:uuid => data['uuid'])
   		# else we initialize a new song
   		elsif !data['title'].nil? &&
-  				  !data['artist'].nil?
+  				  !data['artist'].nil? &&
+            !data['album'].nil? &&
+            !data['label'].nil?
   			song = Song.new
   		else
   			halt 400, "not enough information to log a song"
@@ -35,14 +37,14 @@ module Teal
       playout.song_id = song.id
 
       #TODO(renandincer): add live listener calculation per playout here (maybe something async)
+      #TODO(renandincer): solve the edge case when the client sends only a uuid and no album name
 
       if playout.save
-      	return song
+      	return playout
       else
 				halt 400, 'This playout could not be saved.'
 			end
 		end
-
 
 
 	# | PUT | /episodes/:id/songs/:playout_id |  |  |
