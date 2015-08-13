@@ -131,6 +131,11 @@ describe 'General API tests' do
 
 			expect(Song.count).to eq 1
 			expect(Playout.count).to eq 2
+
+			get "/episodes/#{episode1id}"
+
+			expect(last_response.status).to eq 200
+			expect(JSON.parse(last_response.body)['songs'].count).to eq 2
 		end						
 	end
 end
