@@ -7,7 +7,7 @@ gem 'foreman' # manager for procfile based applications
 
 gem 'json' # our friend jason
 
-gem 'mongo' # mongodb official ruby driver
+gem 'mongo_mapper' # mongodb official ruby driver
 gem 'bson_ext' # improves performance when communicating with mongo
 
 gem 'rubocop', require: false # code styling

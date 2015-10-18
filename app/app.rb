@@ -2,18 +2,20 @@ require 'rubygems'
 require 'bundler'
 Bundler.require :default, ENV['RACK_ENV'].to_sym
 
-require 'sinatra/base'
-require 'mongo'
-include Mongo
+require 'mongo_mapper'
 
 # require models
-# require_relative 'models/episode'
-require_relative 'models/base'
 require_relative 'models/program'
 require_relative 'api_program'
 
 module Teal
   class App < Sinatra::Base
+
+    configure do
+      MongoMapper.connection = Mongo::Connection.new('localhost', 27017)
+      MongoMapper.database = "teal_db"
+    end
+
     # make everything be a json response (callback to every route)
     before do
       content_type 'application/json'

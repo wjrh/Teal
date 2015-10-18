@@ -1,28 +1,18 @@
-module Teal
-	class Program < Base
+class Program
+	include MongoMapper::Document
 
-		def listAll #list all programs
-			programs.find.to_a
-			output = programs.find(:fields => ["title", "shortname", "description", "image", "subtitle", "categories"]).to_a
-			(output || {}) #return output or empty set
-		end
+		key :name,					String
+		key :shortname,			String
+		key :description,		String
+		key :image,					String
+		key :subtitle,			String
+		key :categories,		Array
+		key :episodes,			Array # foreign key
+		key :creators,			Array # foreign key
+	  timestamps!
 
-		def add(params)
-		  #check for the existance of essential information
-  		if [:title, :description, :subtitle].all? {|s| params.key? s}
-  			return false
-  		else
-  			# extract information and disregard extra keys one might have included
-  			acceptedInformation = ["title", "shortname", "description", "image", "subtitle", "episodes", "creators"]
-  			document = params.select {|k,v| acceptedInformation.include?(k) }
-  			return programs.insert(document)
-      end
-		end
+	  attr_accessible 	:name, :shortname, :description, :image, :subtitle, :categories
 
-		def find(shortname)
-			return programs.find("shortname" => shortname).to_a.first
-		end
-
-		
-	end
+	  validates_presence_of :name
+	  validates_presence_of :shortname
 end
