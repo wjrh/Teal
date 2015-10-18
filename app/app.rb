@@ -14,6 +14,7 @@ module Teal
     configure do
       MongoMapper.connection = Mongo::Connection.new('localhost', 27017)
       MongoMapper.database = "teal_db"
+      Program.ensure_index(:shortname)
     end
 
     # make everything be a json response (callback to every route)

@@ -2,7 +2,7 @@ class Program
 	include MongoMapper::Document
 
 		key :name,					String
-		key :shortname,			String
+		key :shortname,			String, :unique => true
 		key :description,		String
 		key :image,					String
 		key :subtitle,			String
