@@ -13,6 +13,7 @@ gem 'bson_ext' # improves performance when communicating with mongo
 gem 'rubocop', require: false # code styling
 
 group :development, :test do
+  gem 'rake'
 end
 
 group :test do
