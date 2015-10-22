@@ -11,7 +11,7 @@ module Teal
 		# get info about an episode
 		get "/episodes/:id/?" do
 			episode = Episode.find(params['id'])
-			return episode.to_json(:only => [:id, :name, :description, :image])
+			return episode.to_json(:except => [:created_at, :episode_id, :updated_at])
 		end
 
 		# post a new episode
