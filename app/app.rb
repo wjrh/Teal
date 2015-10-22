@@ -6,7 +6,9 @@ require 'mongo_mapper'
 
 # require models
 require_relative 'models/program'
+require_relative 'models/episode'
 require_relative 'api_program'
+require_relative 'api_episode'
 
 module Teal
   class App < Sinatra::Base

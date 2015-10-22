@@ -11,7 +11,20 @@ module Teal
 		# get list of all programs
 		get "/programs/?" do
 			allPrograms = Program.all
-			return allPrograms.to_json(:only => [:name, :shortname, :times, :description, :image, :subtitle])
+			return allPrograms.to_json(:only => [:name, :shortname, :times, :image, :subtitle])
+		end
+
+
+		# get info about a specific program
+		# TODO(renandincer): list episodes
+		# TODO(renandincer): list media
+		get "/programs/:shortname/?" do
+			program = Program.first(:shortname => params['shortname'])
+			halt 404 if program == nil
+			return program.to_json(
+								:except => [:created_at, :program_id, :updated_at],
+								:include => [:episodes]
+								)
 		end
 
 		# post a new program
@@ -32,7 +45,7 @@ module Teal
 		end
 
 		# Update if PUT with an existing URI creates if PUT with a new URI,
-		put "/programs/?:shortname/?" do
+		put "/programs/:shortname/?" do
 			request.body.rewind  # in case someone already read it
 			body =  request.body.read # data here will contain a JSON document with necessary details
 			data = JSON.parse body
@@ -46,13 +59,6 @@ module Teal
 		# get list of all programs
 		delete "/programs/:shortname/?" do
 			return Program.destroy_all(:shortname => params['shortname'])
-		end
-
-		# get info about a specific program, this in the future will provide specific links
-		get "/programs/:shortname/?" do
-			program = Program.first(:shortname => params['shortname'])
-			halt 404 if program == nil
-			return program.to_json
 		end
 
 	end
