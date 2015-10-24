@@ -11,7 +11,10 @@ module Teal
 		# get list of all programs
 		get "/programs/?" do
 			allPrograms = Program.all
-			return allPrograms.to_json(:only => [:name, :shortname, :times, :image, :subtitle])
+			if allPrograms.empty?
+				return [].to_json
+			end
+			return allPrograms.to_json(:only => [:name, :shortname, :times, :image, :subtitle, :categories, :creators])
 		end
 
 
@@ -22,7 +25,7 @@ module Teal
 			program = Program.first(:shortname => params['shortname'])
 			halt 404 if program == nil
 			return program.to_json(
-								:except => [:created_at, :program_id, :updated_at],
+								:except => [:program_id],
 								:include => [:episodes]
 								)
 		end

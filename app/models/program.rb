@@ -7,14 +7,15 @@ class Program
 		key :image,					String
 		key :times,					String
 		key :subtitle,			String
+		key :language,			String
 		key :categories,		Array
-		key :episodes,			Array # foreign key
-		key :creators,			Array # foreign key
-	  timestamps!
+		key :creators,			Array
 
 		many :episodes
+	  timestamps!
 
-	  attr_accessible 	:name, :shortname, :description, :image, :subtitle, :categories
+
+	  attr_accessible 	:name, :shortname, :description, :image, :subtitle, :categories, :creators
 
 	  validates_presence_of :name
 	  validates_presence_of :shortname

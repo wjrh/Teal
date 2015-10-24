@@ -8,12 +8,6 @@
 module Teal
 	class App < Sinatra::Base
 
-		# get info about an episode
-		get "/episodes/:id/?" do
-			episode = Episode.find(params['id'])
-			return episode.to_json(:except => [:created_at, :episode_id, :updated_at])
-		end
-
 		# post a new episode
 		post "/programs/:shortname/episodes/?" do
 			request.body.rewind  # in case someone already read it
@@ -30,6 +24,7 @@ module Teal
 			return newepisode.to_json
 		end
 
+
 		# Update if PUT with an existing URI creates if PUT with a new URI,
 		put "/episodes/:id/?" do
 			request.body.rewind  # in case someone already read it
@@ -40,6 +35,7 @@ module Teal
 			program.update_attributes(data)
 			return program.to_json
 		end
+
 
 		delete "/episodes/:id/?" do
 			Episode.destroy(params['id'])

@@ -4,4 +4,6 @@ class Media
   key :url, String
   key :length, String
   key :type, String
+  timestamps!
+  
 end
