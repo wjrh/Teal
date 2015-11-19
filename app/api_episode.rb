@@ -8,6 +8,14 @@
 module Teal
 	class App < Sinatra::Base
 
+		get "/episodes/:id/?" do
+			episode = Episode.find(params['id'])
+			halt 404 if episode == nil
+			return episode.to_json(
+								:except => [:program_id, :created_at, :updated_at, :guid],
+								)
+		end
+
 		# post a new episode
 		post "/programs/:shortname/episodes/?" do
 			request.body.rewind  # in case someone already read it
