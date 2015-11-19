@@ -23,6 +23,9 @@ module Teal
     # make everything be a json response (callback to every route)
     before do
       content_type 'application/json'
+
+      headers 'Access-Control-Allow-Origin' => '*',
+            'Access-Control-Allow-Methods' => ['OPTIONS', 'GET', 'POST']
     end
 
   	# root route responds with a cool string
