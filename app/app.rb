@@ -46,7 +46,7 @@ module Teal
       # Needed for AngularJS
       response.headers["Access-Control-Allow-Headers"] = "X-Requested-With, X-HTTP-Method-Override, Content-Type, Cache-Control, Accept"
 
-      halt HTTP_STATUS_OK
+      halt 200
     end
 
 
