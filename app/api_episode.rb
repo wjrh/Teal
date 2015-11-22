@@ -11,9 +11,10 @@ module Teal
 		get "/episodes/:id/?" do
 			episode = Episode.find(params['id'])
 			halt 404 if episode == nil
+			episode["program"] = episode.program.shortname
 			return episode.to_json(
-								:except => [:program_id, :created_at, :updated_at, :guid],
-								)
+								:except => [:program_id, :created_at, :updated_at, :guid]
+								)								
 		end
 
 		# post a new episode
