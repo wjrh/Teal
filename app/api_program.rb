@@ -37,26 +37,26 @@ module Teal
 			data = JSON.parse body
 
 			# if the shortname is not provded, provide one
-			if !data["shortname"]
+			if !data["shortname"] or data["shortname"].eql?("")
 				shortname = data["name"].downcase.gsub(/[^0-9A-Za-z]/, '-')
 				data.merge!(shortname: shortname)
 			end
-
-			newprogram = Program.new(data)
-			newprogram.save
-			return newprogram.to_json
-		end
-
-		# Update if PUT with an existing URI creates if PUT with a new URI,
-		put "/programs/:shortname/?" do
-			request.body.rewind  # in case someone already read it
-			body =  request.body.read # data here will contain a JSON document with necessary details
-			data = JSON.parse body
 
 			program = Program.find_or_initialize_by_shortname(params['shortname'])
 			program.update_attributes(data)
 			return program.to_json
 		end
+
+		# Update if PUT with an existing URI creates if PUT with a new URI,
+		# put "/programs/:shortname/?" do
+		# 	request.body.rewind  # in case someone already read it
+		# 	body =  request.body.read # data here will contain a JSON document with necessary details
+		# 	data = JSON.parse body
+
+		# 	program = Program.find_or_initialize_by_shortname(params['shortname'])
+		# 	program.update_attributes(data)
+		# 	return program.to_json
+		# end
 
 
 		# get list of all programs

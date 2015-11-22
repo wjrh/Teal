@@ -17,6 +17,7 @@ module Teal
 								)								
 		end
 
+		# TODO: add put functionality into post
 		# post a new episode
 		post "/programs/:shortname/episodes/?" do
 			request.body.rewind  # in case someone already read it
@@ -34,16 +35,17 @@ module Teal
 		end
 
 
-		# Update if PUT with an existing URI creates if PUT with a new URI,
-		put "/episodes/:id/?" do
-			request.body.rewind  # in case someone already read it
-			body =  request.body.read # data here will contain a JSON document with necessary details
-			data = JSON.parse body
 
-			episode = Episode.find(params['id'])
-			program.update_attributes(data)
-			return program.to_json
-		end
+		# Update if PUT with an existing URI creates if PUT with a new URI,
+		# put "/episodes/:id/?" do
+		# 	request.body.rewind  # in case someone already read it
+		# 	body =  request.body.read # data here will contain a JSON document with necessary details
+		# 	data = JSON.parse body
+
+		# 	episode = Episode.find(params['id'])
+		# 	program.update_attributes(data)
+		# 	return program.to_json
+		# end
 
 
 		delete "/episodes/:id/?" do
