@@ -14,7 +14,7 @@ module Teal
 			if allPrograms.empty?
 				return [].to_json
 			end
-			return allPrograms.to_json(:only => [:name, :shortname, :times, :image, :subtitle, :categories, :creators])
+			return allPrograms.to_json(:only => [:name, :shortname, :times, :image, :description, :subtitle, :categories, :creators])
 		end
 
 
