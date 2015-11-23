@@ -31,7 +31,7 @@ module Teal
 		end
 
 		# post a new program
-		post "/programs/?" do
+		post "/programs/:shortname?/?" do
 			request.body.rewind  # in case someone already read it
 			body =  request.body.read # data here will contain a JSON document with necessary details
 			data = JSON.parse body
