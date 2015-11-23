@@ -23,7 +23,7 @@ module Teal
 		# TODO(renandincer): list media
 		get "/programs/:shortname/?" do
 			program = Program.first(:shortname => params['shortname'])
-			halt 404 if program == nil
+			halt 404 if program.nil?
 			return program.to_json(
 								:except => [:program_id],
 								:include => [:episodes]
@@ -35,6 +35,8 @@ module Teal
 			request.body.rewind  # in case someone already read it
 			body =  request.body.read # data here will contain a JSON document with necessary details
 			data = JSON.parse body
+
+			halt 400 if data['name'].nil?
 
 			# if the shortname is not provded, provide one
 			if !data["shortname"] or data["shortname"].eql?("")

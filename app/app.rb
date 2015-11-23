@@ -25,7 +25,7 @@ module Teal
       content_type 'application/json'
 
       headers 'Access-Control-Allow-Origin' => '*',
-            'Access-Control-Allow-Methods' => ['OPTIONS', 'GET', 'POST']
+            'Access-Control-Allow-Methods' => ['OPTIONS', 'GET', 'POST', 'DELETE']
     end
 
   	# root route responds with a cool string
