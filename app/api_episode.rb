@@ -51,6 +51,26 @@ module Teal
 								)
 		end
 
+		# post a new episode (the shortname is defined in the url)
+		post "/episodes/?" do #GET /episodes?shortname=vbb
+			request.body.rewind  # in case someone already read it
+			body =  request.body.read # data here will contain a JSON document with necessary details
+			data = JSON.parse body
+
+			halt 400 if !params['shortname'] or params['shortname'].eql?("")
+
+			newepisode = Episode.new(data)
+			newepisode.save
+
+			program = Program.first(:shortname => params['shortname'])
+			program.episodes << newepisode
+			program.save
+
+			return newepisode.to_json(
+								:except => [:program_id, :created_at, :updated_at, :guid]
+								)
+		end
+
 
 
 		# Update if PUT with an existing URI creates if PUT with a new URI,
