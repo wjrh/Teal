@@ -12,12 +12,27 @@ module Teal
 			episode = Episode.find(params['id'])
 			halt 404 if episode == nil
 			episode["program_shortname"] = episode.program.shortname
+			episode["program_name"] = episode.program.name
 			return episode.to_json(
 								:except => [:program_id, :created_at, :updated_at, :guid]
 								)								
 		end
 
-		# TODO: add put functionality into post
+		post "/episodes/:id/?" do
+			request.body.rewind  # in case someone already read it
+			body =  request.body.read # data here will contain a JSON document with necessary details
+			data = JSON.parse body
+
+			episode = Episode.find(params['id'])
+			halt 404 if episode == nil
+
+			episode.update_attributes(data)
+
+			return episode.to_json(
+								:except => [:program_id, :created_at, :updated_at, :guid]
+								)
+		end
+
 		# post a new episode
 		post "/programs/:shortname/episodes/?" do
 			request.body.rewind  # in case someone already read it
@@ -31,7 +46,9 @@ module Teal
 			program.episodes << newepisode
 			program.save
 
-			return newepisode.to_json
+			return newepisode.to_json(
+								:except => [:program_id, :created_at, :updated_at, :guid]
+								)
 		end
 
 
