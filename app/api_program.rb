@@ -24,6 +24,7 @@ module Teal
 		get "/programs/:shortname/?" do
 			program = Program.first(:shortname => params['shortname'])
 			halt 404 if program.nil?
+			program.episodes.sort! { |a,b| a.pubdate <=> b.pubdate }
 			return program.to_json(
 								:except => [:program_id],
 								:include => [:episodes]
