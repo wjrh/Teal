@@ -1,15 +1,19 @@
 class Program
 	include MongoMapper::Document
 
-	key :name,				String
+	key :name,			String
 	key :shortname,			String, :unique => true
 	key :description,		String
-	key :image,				String
-	key :times,				String
+	key :image,			String
+	key :times,			String
 	key :subtitle,			String
 	key :language,			String
 	key :categories,		Array
 	key :creators,			Array
+	
+ 	#itunes required data for podcasts	
+	key :copyright, 		String #copyright notice
+
 	timestamps!
 
 	many :episodes
