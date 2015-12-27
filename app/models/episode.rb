@@ -11,7 +11,7 @@ class Episode
 	timestamps!
 
 	belongs_to 	:program
-	one		:media
+	many		:medias
 
 	attr_accessible 	:name, :description, :image, :pubdate, :guid, :medias
 

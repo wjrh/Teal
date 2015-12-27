@@ -11,15 +11,14 @@ class Program
 	key :categories,		Array
 	key :creators,			Array
 	
- 	#itunes required data for podcasts	
-	key :copyright, 		String #copyright notice
+	key :copyright, 		String  #copyright notice
 
 	timestamps!
 
 	many :episodes
 	
 
-	attr_accessible 	:name, :shortname, :description, :image, :subtitle, :categories, :creators
+	attr_accessible 	:name, :shortname, :description, :image, :subtitle, :categories, :creators, :copyright
 
 	validates_presence_of :name
 	validates_presence_of :shortname
