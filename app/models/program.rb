@@ -10,7 +10,8 @@ class Program
 	key :language,			String
 	key :categories,		Array
 	key :creators,			Array
-	
+	key :coverimage,	String
+
 	key :copyright, 		String  #copyright notice
 
 	timestamps!
