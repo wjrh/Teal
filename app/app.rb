@@ -4,10 +4,15 @@ Bundler.require :default, ENV['RACK_ENV'].to_sym
 
 require 'mongo_mapper'
 
+# load up the config
+require_relative 'config'
+
 # require models
 require_relative 'models/program'
 require_relative 'models/episode'
 require_relative 'models/media'
+
+#require other files for the class
 require_relative 'api_program'
 require_relative 'api_episode'
 
