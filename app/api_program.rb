@@ -37,7 +37,7 @@ module Teal
 			body =  request.body.read # data here will contain a JSON document with necessary details
 			data = JSON.parse body
 
-			halt 400 if data['name'].nil?
+			halt 400 if data['shortname'].nil?
 
 			# if the shortname is not provded, provide one
 			if !data["shortname"] or data["shortname"].eql?("")

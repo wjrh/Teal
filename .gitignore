@@ -15,4 +15,6 @@ capybara-*.html
 .powenv
 .env
 
+config/teal.yml
+
 .DS_Store

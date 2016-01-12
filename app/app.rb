@@ -1,10 +1,12 @@
 require 'rubygems'
 require 'bundler'
 Bundler.require :default, ENV['RACK_ENV'].to_sym
-
 require 'mongo_mapper'
 
 # load up the config
+# this reads our configuration file
+# which has necessary variables to run this program
+# these variables are accessed through Teal.config hash
 require_relative 'config'
 
 # require models
@@ -15,15 +17,39 @@ require_relative 'models/media'
 #require other files for the class
 require_relative 'api_program'
 require_relative 'api_episode'
+require_relative 'api_login'
+require_relative 'xml_feed'
 
 module Teal
   class App < Sinatra::Base
 
     configure do
-      MongoMapper.connection = Mongo::Connection.new('localhost', 27017)
+			#configure our MongoDB connection
+			dbconn = Mongo::Connection.new(
+		  Teal.config.mongo_url,
+		  Teal.config.mongo_port)
+			
+			#mongomapper configuration
+      MongoMapper.connection = dbconn
       MongoMapper.database = "teal_db"
+			
+			# build an index on the shortnames of programs
+			# this allows faster access on shortnames of programs
       Program.ensure_index(:shortname)
     end
+
+		# enable sessions by placing cookie 
+		use Rack::Session::Cookie, 	:key => 'teal.session',
+			                         	:domain => Teal.config.domain,
+																:path => '/',
+																:expire_after => 2592000,
+																:secret => Teal.config.cookie_secret,
+																#uncomment this when running over https
+																#:secure => true
+																:old_secret => Teal.config.old_cookie_secret,
+																:http_only => true,
+																:sidbits => 256
+
 
     # make everything be a json response (callback to every route)
     before do
@@ -34,7 +60,7 @@ module Teal
     end
 
   	# root route responds with a cool string
-    get '/' do
+		get '/' do
     	content_type :json
     	info = {
     		"about" => "Teal is WJRH's DJ-Program-Episode management API",
