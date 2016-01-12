@@ -11,7 +11,7 @@ class Program
 	key :categories,		Array
 	key :creators,			Array
 	key :coverimage,	String
-
+  key :owners, 			Array
 	key :copyright, 		String  #copyright notice
 
 	timestamps!
@@ -19,7 +19,7 @@ class Program
 	many :episodes
 	
 
-	attr_accessible 	:name, :shortname, :description, :image, :subtitle, :categories, :creators, :copyright
+	attr_accessible 	:name, :shortname, :description, :image, :subtitle, :categories, :creators, :copyright, :owners
 
 	validates_presence_of :name
 	validates_presence_of :shortname
