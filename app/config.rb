@@ -10,10 +10,13 @@ module Teal
 			:cookie_secret			 	=> yaml['cookie_secret'],
 			:old_cookie_secret		=> yaml['old_cookie_secret'],
 			:domain 				=> yaml['domain'],
+			:front_end_subdomain => yaml['front_end_subdomain'],
+			:api_subdomain => yaml['api_subdomain'],
 			:mongo_url 			=> yaml['mongo_url'],
-			:mongo_port 		=> yaml['mongo_port'],
+			:redis_url			=> yaml['redis_url'],
 			:smtp_user			=> yaml['smtp_user'],
-			:smtp_password	=> yaml['smtp_password']
+			:smtp_password	=> yaml['smtp_password'],
+			:login_source_email => yaml['login_source_email']
   end
 
 

@@ -12,6 +12,8 @@ gem 'bson_ext' # improves performance when communicating with mongo
 gem 'nokogiri'
 gem 'tilt'
 gem 'redcarpet'
+gem 'pony'
+gem 'redis'
 
 gem 'rubocop', require: false # code styling
 

@@ -16,5 +16,5 @@ capybara-*.html
 .env
 
 config/teal.yml
-
+*.rdb
 .DS_Store

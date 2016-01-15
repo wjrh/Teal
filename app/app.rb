@@ -2,6 +2,7 @@ require 'rubygems'
 require 'bundler'
 Bundler.require :default, ENV['RACK_ENV'].to_sym
 require 'mongo_mapper'
+require 'redis'
 
 # load up the config
 # this reads our configuration file
@@ -25,9 +26,7 @@ module Teal
 
     configure do
 			#configure our MongoDB connection
-			dbconn = Mongo::Connection.new(
-		  Teal.config.mongo_url,
-		  Teal.config.mongo_port)
+			dbconn = Mongo::Connection.new(Teal.config.mongo_url)
 			
 			#mongomapper configuration
       MongoMapper.connection = dbconn
@@ -36,10 +35,11 @@ module Teal
 			# build an index on the shortnames of programs
 			# this allows faster access on shortnames of programs
       Program.ensure_index(:shortname)
-    end
 
-		# enable sessions by placing cookie 
-		use Rack::Session::Cookie, 	:key => 'teal.session',
+			$redis = Redis.new(:url => Teal.config.redis_url)
+
+			# enable sessions by placing cookie 
+			use Rack::Session::Cookie,:key => 'teal.session',
 			                         	:domain => Teal.config.domain,
 																:path => '/',
 																:expire_after => 2592000,
@@ -49,14 +49,16 @@ module Teal
 																:old_secret => Teal.config.old_cookie_secret,
 																:http_only => true,
 																:sidbits => 256
+    end
 
-
+	
     # make everything be a json response (callback to every route)
     before do
       content_type 'application/json'
 
-      headers 'Access-Control-Allow-Origin' => '*',
-            'Access-Control-Allow-Methods' => ['OPTIONS', 'GET', 'POST', 'DELETE']
+      headers 'Access-Control-Allow-Origin' => "http://#{Teal.config.front_end_subdomain}",
+            'Access-Control-Allow-Methods' => ['OPTIONS', 'GET', 'POST', 'DELETE'],
+						'Access-Control-Allow-Credentials' => true
     end
 
   	# root route responds with a cool string
