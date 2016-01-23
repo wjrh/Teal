@@ -14,7 +14,7 @@ module Teal
 			episode["program_shortname"] = episode.program.shortname
 			episode["program_name"] = episode.program.name
 			return episode.to_json(
-								:except => [:program_id, :created_at, :updated_at, :guid]
+								:except => [:owners, :program_id, :created_at, :updated_at, :guid]
 								)								
 		end
 

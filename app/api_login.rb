@@ -8,6 +8,9 @@ module Teal
 
 		EMAIL_WAIT_TIMER = 480
 		
+		get "/me/?" do
+			return current_user.to_s
+		end
 		#login a user
 		post "/login/?" do
 			#halt if its not a valid email or empty
@@ -17,7 +20,6 @@ module Teal
 			
 			#if the user has sent a valid cookie redirect or send login link
 			if has_valid_cookie?
-				p "session[:email] => #{session[:email]}"
 				redirect Teal.config.front_end_subdomain
 			else
 				check_if_repeated_login_attempt

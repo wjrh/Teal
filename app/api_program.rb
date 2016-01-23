@@ -10,32 +10,27 @@ module Teal
 
 		# get list of all programs
 		get "/programs/?" do
-			allPrograms = Program.all
-			if allPrograms.empty?
-				return [].to_json
-			end
-			return allPrograms.to_json(:only => [:name, :shortname, :times, :image, :description, :subtitle, :categories, :creators])
+			return Program.get_all.to_json
 		end
 
 
 		# get info about a specific program
-		# TODO(renandincer): list episodes
-		# TODO(renandincer): list media
 		get "/programs/:shortname/?" do
 			program = Program.first(:shortname => params['shortname'])
 			halt 404 if program.nil?
+
+			#sort by pubdate
 			program.episodes.sort! { |a,b| a.pubdate <=> b.pubdate }
-			return program.to_json(
-								:except => [:program_id],
-								:include => [:episodes]
-								)
+			return program.to_json_with_episodes
 		end
 
 		# post a new program
 		post "/programs/:shortname?/?" do
 			request.body.rewind  # in case someone already read it
-			body =  request.body.read # data here will contain a JSON document with necessary details
+			body =  request.body.read # data here will contain a JSON document
 			data = JSON.parse body
+
+			#TODO(renandincer): check if the sent document is of type program
 
 			halt 400 if data['shortname'].nil?
 
@@ -44,27 +39,31 @@ module Teal
 				shortname = data["name"].downcase.gsub(/[^0-9A-Za-z]/, '-')
 				data.merge!(shortname: shortname)
 			end
-
-			program = Program.find_or_initialize_by_shortname(params['shortname'])
-			program.update_attributes(data)
-			return program.to_json
+			
+			program = Program.first(:shortname => params["shortname"])
+			
+			#if the program doesn't exist, create it and make the user an owner
+			if program.nil?
+				program = Program.initialize_by_shortname(params['shortname'])
+				program.owners.insert(current_user)
+				program.update_attributes(data)
+				return program.to_json
+			#else the program exists, check for owner before going forward
+			elsif not owner?(program)
+					halt 401, "not allowed to perform such action"
+			else
+					program.update_attributes(data)
+					return program.to_json
+			end
 		end
 
-		# Update if PUT with an existing URI creates if PUT with a new URI,
-		# put "/programs/:shortname/?" do
-		# 	request.body.rewind  # in case someone already read it
-		# 	body =  request.body.read # data here will contain a JSON document with necessary details
-		# 	data = JSON.parse body
-
-		# 	program = Program.find_or_initialize_by_shortname(params['shortname'])
-		# 	program.update_attributes(data)
-		# 	return program.to_json
-		# end
-
-
-		# get list of all programs
 		delete "/programs/:shortname/?" do
-			return Program.destroy_all(:shortname => params['shortname'])
+			program = Program.first(:shortname => params['shortname'])
+			if owner?(program)
+				return program.destroy
+			else
+				halt 401, "not allowed to perform such action"
+			end
 		end
 
 	end

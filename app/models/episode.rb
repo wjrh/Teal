@@ -16,4 +16,10 @@ class Episode
 	attr_accessible 	:name, :description, :image, :pubdate, :guid, :medias
 
 	validates_presence_of :name
+
+	
+
+
+
+
 end
