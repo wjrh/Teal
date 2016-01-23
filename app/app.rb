@@ -27,21 +27,22 @@ module Teal
     configure do
 			#configure our MongoDB connection
 
-			#dbconn = Mongo::Connection.new(Teal.config.mongo_url)
+			dbconn = Mongo::Connection.new(Teal.config.mongo_url)
 			
 			#mongomapper configuration
-      #MongoMapper.connection = dbconn
-      #MongoMapper.database = "teal_db"#
+      MongoMapper.connection = dbconn
+      MongoMapper.database = "teal_db"
+			
 			#parse heroku style urls
-			regex_match = /.*:\/\/(.*):(.*)@(.*):(.*)\//.match(ENV['MONGO_URI'])
-			host = regex_match[3]
-			port = regex_match[4]
-			db_name = regex_match[1]
-			pw = regex_match[2]
+			#regex_match = /.*:\/\/(.*):(.*)@(.*):(.*)\//.match(ENV['MONGO_URI'])
+			#host = regex_match[3]
+			#port = regex_match[4]
+			#db_name = regex_match[1]
+			#pw = regex_match[2]
 
-			MongoMapper.connection = Mongo::Connection.new(host, port)
-			MongoMapper.database = db_name
-			MongoMapper.database.authenticate(db_name, pw)
+			#MongoMapper.connection = Mongo::Connection.new(host, port)
+			#MongoMapper.database = db_name
+			#MongoMapper.database.authenticate(db_name, pw)
 			
 			# build an index on the shortnames of programs
 			# this allows faster access on shortnames of programs
