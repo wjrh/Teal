@@ -1,0 +1,33 @@
+#docker compose file for teal
+redis:
+ container_name: redis
+ image: redis
+
+mongo:
+ container_name: mongo
+ image: mongo
+ volumes: 
+  # match the default location for mongodb in the host
+  - /data/db:/data/db
+
+teal:
+ environment:
+  - RACK_ENV=production
+ volumes:
+  - /data/teal-media:/data/teal-media
+ build: .
+ links:
+  - mongo
+  - redis
+
+nginx:
+ container_name: nginx
+ image: nginx
+ #get the nginx config file from the config folder
+ volumes: 
+  - ./config/nginx.conf:/etc/nginx/nginx.conf:ro
+ ports:
+  - "80:80"
+  - "443:443"
+ links:
+  - teal
