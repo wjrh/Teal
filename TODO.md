@@ -22,8 +22,6 @@
 	- [x] method to send login link
 	- [x] enpoint to take login link with token
 	- [x] return key and place cookie and redirect
-  - [ ] authenticate using keys
-	- [ ] implement pgp encrypted emails through public key copy pase
 	- [x] implement a way to check if the person is properly authenticated and who they are
 	- [x] rack cookies(?)
 	- [x] implement this whole cookie checking process into as a rack middlemant 
@@ -31,6 +29,8 @@
 - [ ] login improvements
 	- [ ] move email verified people mongo for key and cookie tracking
 	- [ ] expire cookies using timestamp checks from mongo
+	- [ ] implement pgp encrypted emails through public key copy pase
+  - [ ] authenticate using keys
 	- [C] move cookies to a redis based setup -- this eliminates key rotation or never expiring cookie problem
 - [ ] find out if deleting a program deletes all episodes or the episodes just stay or what (testing)
 - [ ] make fancy web page with one login/sign up page 
