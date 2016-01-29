@@ -1,5 +1,5 @@
 class Episode
-	require "SecureRandom"
+	require "securerandom"
 	include Mongoid::Document
 	include Mongoid::Timestamps
 	
