@@ -20,6 +20,7 @@ class Episode
 	field :length,				type: String
 	field :type,					type: String
 	field :processed,			type: Boolean, default: false
+	field :audio_url,			type: String
 
 	# Index guid and check for uniqueness
 	index({ shortname:1 }, { unique: true })
@@ -48,17 +49,6 @@ class Episode
 		return attrs
 	end
 
-	# Method that returns the url
-	# Assumes that the final processed audio file
-	# is named GUID.mp3 where GUID is the globally unique id of this episode
-	# returns an empty string if the url is not ready yet
-	def self.audio_url
-		if self.processed
-			return "https://#{Teal.config.api_subdomain}/audio/#{self.guid}.mp3"
-		else 
-			return ""
-		end
-	end
 
 	# Method returns if the episode is ready for processing
 	# Episode is ready for processing if there is a raw file and it is not processed
