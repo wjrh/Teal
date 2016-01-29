@@ -13,8 +13,6 @@ mongo:
 teal:
  environment:
   - RACK_ENV=production
- volumes:
-  - /data/teal-media:/data/teal-media
  build: .
  links:
   - mongo

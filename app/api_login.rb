@@ -50,6 +50,21 @@ module Teal
 			key = SecureRandom.urlsafe_base64(256,false)
 		end
 
+		#returns if the current user is authenticated
+		def authenticated?
+			!!current_user
+		end
+
+		#returns the email of the current user, alias to authenticate
+		def current_user
+			authenticate
+		end
+
+		#returns if the current user is the owner of the program
+		def owner?(program)
+			return program.owners.include?(current_user)
+		end
+
 
 		private
 
@@ -104,19 +119,7 @@ module Teal
 			end
 		end
 
-		#returns the email of the current user, alias to authenticate
-		def current_user
-			authenticate
-		end
 
-		#returns if the current user is the owner of the program
-		def owner?(program)
-			return program.owners.include?(current_user)
-		end
-
-		def authenticated?
-			!!current_user
-		end
 		
 		#TODO: make this regex more robust
 		def valid_email?(email)

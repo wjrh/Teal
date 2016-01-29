@@ -7,13 +7,13 @@ gem 'foreman' # manager for procfile based applications
 
 gem 'json' # our friend jason
 
-gem 'mongo_mapper' # mongodb official ruby driver
+gem 'mongoid', '~> 5.0.0' #mongo ODM
 gem 'bson_ext' # improves performance when communicating with mongo
-gem 'nokogiri'
-gem 'tilt'
-gem 'redcarpet'
-gem 'pony'
-gem 'redis'
+gem 'nokogiri' #generating xml
+gem 'tilt' #templating engines
+gem 'redcarpet' #template
+gem 'pony' #email sender
+gem 'redis' #redis!
 
 gem 'rubocop', require: false # code styling
 

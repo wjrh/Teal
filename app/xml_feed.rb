@@ -6,7 +6,7 @@ module Teal
 	class App < Sinatra::Base
 
    	get "/programs/:shortname/feed/?" do
-			program = Program.first(:shortname => params['shortname'])
+			program = Program.where(shortname: params['shortname']).first
 			halt 404 if program.nil?
 			program.episodes.sort! { |a,b| a.pubdate <=> b.pubdate }
 			return generatefeed(program)
