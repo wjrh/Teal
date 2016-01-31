@@ -65,6 +65,15 @@ module Teal
 			return program.owners.include?(current_user)
 		end
 
+		def owner?
+			if self.class.name.eql("Program")
+				return owner?(self)
+			else if self.class.name.eql("Episode")
+				return owner?(self.program)
+			else
+				raise Exception.new("Can only call owner? on Episode or Program")
+			end
+		end
 
 		private
 

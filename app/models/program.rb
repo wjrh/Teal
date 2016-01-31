@@ -21,6 +21,7 @@ class Program
 	field :tags,								type: Array
 	field :active,							type: Boolean, default: true
 	field :redirect_url					type: String
+	field :organization					type: String
 
 	# Index shortname and check for uniqueness
 	index({ shortname: 1 }, { unique: true })

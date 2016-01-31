@@ -6,7 +6,7 @@ module Teal
 		# TODO: might want to find a more elegant solution to adding shortname and program name
 		get "/episodes/:id/?" do
 			episode = Episode.find(params['id'])
-			halt 404 if episode == nil
+			halt 404 if episode == nil or not episode.public?
 			episode["program_shortname"] = episode.program.shortname
 			episode["program_name"] = episode.program.name
 			return episode.to_json(:only => [:program_shortname, :program_name])

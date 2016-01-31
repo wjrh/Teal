@@ -47,10 +47,14 @@ class Episode
 		return attrs
 	end
 
+	def public?
+		return true if episode.owner?
+		return if Time.parse(self.pubdate).past?
+	end
 
 	# Method returns if the episode is ready for processing
 	# Episode is ready for processing if there is a raw file and it is not processed
-	def self.ready_for_processing
+	def ready_for_processing
 		not self.processed
 	end
 
