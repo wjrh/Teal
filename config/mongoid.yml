@@ -4,3 +4,12 @@ development:
       database: tealmongoid
       hosts:
         - localhost:27017
+
+production:
+  clients:
+    default:
+      database: tealmongoid
+      hosts:
+        - mongo:27017
+
+

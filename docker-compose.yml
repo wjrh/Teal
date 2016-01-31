@@ -11,6 +11,7 @@ mongo:
   - /data/db:/data/db
 
 teal:
+ container_name: teal
  environment:
   - RACK_ENV=production
  build: .
