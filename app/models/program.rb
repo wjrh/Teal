@@ -14,12 +14,14 @@ class Program
 	field :scheduled_time,			type: String
 	field :subtitle,						type: String
 	field :language,						type: String
-	field :itunes_category,			type: String
+	field :itunes_categories,		type: Array
 	field :creators,						type: String
 	field :cover_image,					type: String
   field :owners, 							type: Array
 	field :tags,								type: Array
-	
+	field :active,							type: Boolean, default: true
+	field :redirect_url					type: String
+
 	# Index shortname and check for uniqueness
 	index({ shortname: 1 }, { unique: true })
 	

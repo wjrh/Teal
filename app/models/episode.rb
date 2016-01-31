@@ -16,7 +16,6 @@ class Episode
 	field :guid, 					type: String
 
 	# media related fields length is either in hh:mm:ss or mm:ss format
-	field :raw_file,			type: String
 	field :length,				type: String
 	field :type,					type: String
 	field :processed,			type: Boolean, default: false
@@ -42,8 +41,7 @@ class Episode
 	# rewrite the _id field with a plain old id field.
 	def to_json(options = {})
 		opts = options.merge(:only => [:name, :description, :image, :pubdate, :start_time, :end_time, 
-												 :guid, :length, :type, :processed],
-												:methods => [:audio_url])
+												 :guid, :length, :type, :processed, :audio_url])
 		attrs = super(opts)
 		attrs["id"] = attrs["_id"]
 		return attrs
@@ -53,7 +51,7 @@ class Episode
 	# Method returns if the episode is ready for processing
 	# Episode is ready for processing if there is a raw file and it is not processed
 	def self.ready_for_processing
-		true if self.rawfile and not self.processed
+		not self.processed
 	end
 
 end

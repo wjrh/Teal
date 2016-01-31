@@ -11,6 +11,7 @@
 - [2] write documentation on how to contribute
 - [2] write tests
 - [~] go over all json objects and remove everything that is not needed
+- [2] redirect people if the redirect url is set
 - [x] implement login system
 	- [x] figure out how to send emails, 
 	- [x] endpoint and method to send email with login link -- this should first check if one is logged in
