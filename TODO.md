@@ -32,21 +32,22 @@
 - [x] find out if deleting a program deletes all episodes or the episodes just stay or what (testing)
 - [ ] make fancy web page with one login/sign up page 
 - [ ] move frontend to the repo
-- [ ] make support for cover image and other attributes
-- [ ] dont display non-pubdate passed episodes
-- [ ] only display non-pubdate passed episodes to logged in people
-- [ ] use secure random to generate uuids - but save vbbs guids.
+- [x] make support for cover image and other attributes
+- [x] dont display non-pubdate passed episodes
+- [x] only display non-pubdate passed episodes to logged in people
+- [x] use secure random to generate uuids - but save vbbs guids.
 - [2] enforce itunes podcast spec character limits
 - [2] add hyperlinks in models (i.e. provide links with further information on objects)
-- [ ] implement the language etc extra features feature (as well as category)
+- [x] implement the language etc extra features feature (as well as category)
 
-AUDIO UPLOADS
-- [ ] use GridFS
-- [ ] upload into GridFS
-- [ ] uploaded file goes directly to the episode
-- [ ] the uploaded file is marked raw and unprocessed
-- [ ] outside process processes the takes the file, processes it, places the processed tab and metadata in the episode
-- [ ] outside process markes raw file processed
+AUDIO UPLOADS and SERVING
+- [ ] upload happens
+- [ ] file is placed in the raw folder in the media folder with the filename:episode id
+- [ ] file is placed in the processed folder with the filename: episode id.mp3
+- [ ] when a new upload is complete, the id is added to the queue for processing
+- [ ] resque worker processes the upload and when complete, puts the url of where it can be found (predictable as it is by id)
+- [ ] there is a url like api.teal.cool/media.mp3?id=234523234 which returns the file (for now --  will see if its a perf problem)
+- [ ] this url also records all accesses to the file with their range requests (need to figure out what to log)
 
 MISC MEDIA UPLOADS
 - [ ] make cover image uploadable
@@ -58,14 +59,6 @@ MISC MEDIA UPLOADS
 
 AUDIO UPLOAD:
 - [ ] upload audio file to a main endpoint/shortname
-- [ ] have the audio place itself as the first media in that episode
-- [ ] figure out where the unencoded audio goes
-- [ ] figure out how to trigger encoding of audio (redis?)
-- [ ] figure out where to put the unencoded audio
-- [ ] deal with orphaned media(?)
-
-MEDIA SERVING:
-- [ ] record download stats into mongodb which can be made downloadable later
 
 DEPLOYMENT:
 - [ ] serve pure angualar app from teal.cool which is also the fancy login page.

@@ -18,7 +18,6 @@ class Episode
 	# media related fields length is either in hh:mm:ss or mm:ss format
 	field :length,				type: String
 	field :type,					type: String
-	field :processed,			type: Boolean, default: false
 	field :audio_url,			type: String
 
 	# Index guid and check for uniqueness
