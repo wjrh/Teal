@@ -15,13 +15,13 @@ class Program
 	field :subtitle,						type: String
 	field :language,						type: String
 	field :itunes_categories,		type: Array
-	field :creators,						type: String
+	field :author,							type: String
 	field :cover_image,					type: String
   field :owners, 							type: Array
 	field :tags,								type: Array
 	field :active,							type: Boolean, default: true
 	field :redirect_url					type: String
-	field :organization					type: String
+	field :organizations				type: Array
 
 	# Index shortname and check for uniqueness
 	index({ shortname: 1 }, { unique: true })
@@ -40,7 +40,7 @@ class Program
 	# Will include the list of owners	if the person owns the program
  	def to_json(options = {})
 		opts = options.merge(:only => [:name, :shortname, :description, :image, :times,
- 											:subtitle, :language, :tags, :creators, :cover_image, :copyright])
+ 											:subtitle, :language, :tags, :author, :cover_image, :copyright])
 		opts = opts.merge(:only => [:owner]) if owner?(self)
  		super(opts)
  	end

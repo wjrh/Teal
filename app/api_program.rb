@@ -41,6 +41,7 @@ module Teal
 			
 			#if the program doesn't exist make the user an owner
 			if program.new_record?
+				halt 400, "you need log in to enter a new program"
 				program.owners.insert(current_user)
 				program.update_attributes(data)
 				program.save
