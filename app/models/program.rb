@@ -22,6 +22,7 @@ class Program
 	field :active,							type: Boolean, default: true
 	field :redirect_url					type: String
 	field :organizations				type: Array
+	field :stream								type: String
 
 	# Index shortname and check for uniqueness
 	index({ shortname: 1 }, { unique: true })

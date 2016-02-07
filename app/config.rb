@@ -17,6 +17,7 @@ module Teal
 			:smtp_user					=> ENV['SMTP_USER'] ||= yaml['smtp_user'],
 			:smtp_password			=> ENV['SMTP_PASSWORD'] ||= yaml['smtp_password'],
 			:login_source_email => ENV['LOGIN_SOURCE_EMAIL'] ||= yaml['login_source_email']
+			:media_path				  => ENV['MEDIA_PATH'] ||= yaml['media_path']
   end
 
 

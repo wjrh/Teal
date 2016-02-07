@@ -14,7 +14,7 @@ gem 'tilt' #templating engines
 gem 'redcarpet' #template
 gem 'pony' #email sender
 gem 'redis' #redis!
-
+gem 'taglib-ruby'
 gem 'rubocop', require: false # code styling
 
 group :development, :test do

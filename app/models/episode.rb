@@ -1,5 +1,5 @@
 class Episode
-	require "securerandom"
+	require"securerandom"
 	include Mongoid::Document
 	include Mongoid::Timestamps
 	
@@ -17,8 +17,8 @@ class Episode
 
 	# media related fields length is either in hh:mm:ss or mm:ss format
 	field :length,				type: String
-	field :type,					type: String
-	field :audio_url,			type: String
+	field :type,					type: String, default: "audio/mpeg"
+	field :custom_audio_url,type: String
 
 	# Index guid and check for uniqueness
 	index({ shortname:1 }, { unique: true })
@@ -35,15 +35,28 @@ class Episode
 		document.guid = SecureRandom.uuid if not document.guid
 	end
 
+	audio_url
+
 	# Override to_json to limit the information shared
 	# add the full audio url in the returned document
 	# rewrite the _id field with a plain old id field.
 	def to_json(options = {})
 		opts = options.merge(:only => [:name, :description, :image, :pubdate, :start_time, :end_time, 
-												 :guid, :length, :type, :processed, :audio_url])
+												 :guid, :length, :type, :processed])
+		if audio_url
+			opts = opts.merge(:include => [:audio_url])
+		end
+
 		attrs = super(opts)
 		attrs["id"] = attrs["_id"]
 		return attrs
+	end
+
+	#return the audio url
+	def audio_url do
+		return custom_audio_url if custom_audio_url =~ URI::regexp
+		return "" if not File.exist?(File.join(Teal.config.media_path,"processed", "#{episode_id}.mp3"))
+		return Teal.config.api_subdomain + "/episodes/#{id}.mp3"
 	end
 
 	def public?

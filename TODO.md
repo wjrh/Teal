@@ -41,12 +41,12 @@
 - [x] implement the language etc extra features feature (as well as category)
 
 AUDIO UPLOADS and SERVING
-- [ ] upload happens
-- [ ] file is placed in the raw folder in the media folder with the filename:episode id
-- [ ] file is placed in the processed folder with the filename: episode id.mp3
-- [ ] when a new upload is complete, the id is added to the queue for processing
-- [ ] resque worker processes the upload and when complete, puts the url of where it can be found (predictable as it is by id)
-- [ ] there is a url like api.teal.cool/media.mp3?id=234523234 which returns the file (for now --  will see if its a perf problem)
+- [x] upload happens
+- [x] file is placed in the raw folder in the media folder with the filename:episode id
+- [x] file is placed in the processed folder with the filename: episode id.mp3
+- [x] when a new upload is complete, the id is added to the queue for processing
+- [x] resque worker processes the upload and when complete, puts the url of where it can be found (predictable as it is by id)
+- [x] there is a url like api.teal.cool/episodes/23232323.mp3 which returns the file (for now --  will see if its a perf problem)
 - [ ] this url also records all accesses to the file with their range requests (need to figure out what to log)
 
 MISC MEDIA UPLOADS

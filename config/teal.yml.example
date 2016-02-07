@@ -2,11 +2,12 @@
 smtp_server:
 cookie_secret:
 old_cookie_secret:
-domain:
-front_end_subdomain:
-api_subdomain:
+domain: "teal.cool"
+front_end_subdomain: "teal.cool"
+api_subdomain: "api.teal.cool"
 mongo_url:
 redis_url:
 smtp_user:
 smtp_password:
 login_source_email:
+media_path: "/data/teal-media/"

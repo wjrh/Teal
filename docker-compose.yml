@@ -18,7 +18,20 @@ teal:
  links:
   - mongo
   - redis
+ volumes:
+  - /data/teal_media:/data/teal_media
+ command: bundle exec puma -p 9000 -w 4 --preload
 
+worker:
+ build: .
+ command: bundle exec rake environment resque:work QUEUE=*
+ volumes:
+  - /data/teal_media:/data/teal_media
+ links:
+  - redis
+ environment:
+  - REDIS_URL=redis
+ 
 nginx:
  container_name: nginx
  image: nginx
