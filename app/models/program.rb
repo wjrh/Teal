@@ -20,9 +20,9 @@ class Program
   field :owners, 							type: Array
 	field :tags,								type: Array
 	field :active,							type: Boolean, default: true
-	field :redirect_url					type: String
-	field :organizations				type: Array
-	field :stream								type: String
+	field :redirect_url,				type: String
+	field :organizations,				type: Array
+	field :stream,							type: String
 
 	# Index shortname and check for uniqueness
 	index({ shortname: 1 }, { unique: true })

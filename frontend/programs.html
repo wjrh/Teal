@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+
+  	<ol class="breadcrumb">
+          <li class="active">All Programs</li>
+     </ol>	
+
+    <div class="list-group">
+    	<h3>All programs
+      <br>
+      <small><ng-pluralize count="programs.length"
+                 when="{'0': 'No programs',
+                     'one': 'One program',
+                     'other': '{} programs'}">
+      </ng-pluralize></small>
+    </h3>
+
+    <p ngHide="programs.count"> You have no programs. <p>
+		<a ng-repeat="program in programs | orderBy:'name'"  href="/programs/{{program.shortname}}" class="list-group-item">
+			<span class="badge" ng-repeat="category in program.categories">{{category}}</span>
+			{{program.name}}
+		</a>
+    </div>
+
+    <button type="button" class="btn btn-default pull-right" ng-click="newProgram()">new</button>
+
+  </div>
+</div>

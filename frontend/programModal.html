@@ -1,0 +1,35 @@
+<div class="modal-header">
+	<h3 class="modal-title">Editing {{ program.name || "new program"}}</h3>
+</div>
+
+
+<div class="modal-body">
+	<div class="row">
+		<div class="col-xs-12">
+			Name: <input class="form-control" type="text" ng-model="program.name">
+			Copyright Notice: <input class="form-control" type="text" ng-model="program.copyright">
+			Shortname: <input class="form-control" type="text" ng-model="program.shortname">	
+			Description: <textarea style="height:10em" class="form-control" ng-model="program.description"></textarea>
+			Image Link: <input class="form-control" type="text" ng-model="program.image">
+			Scheduled Time: <input class="form-control" type="text" ng-model="program.scheduled_time">
+			Subtitle: <input class="form-control" type="text" ng-model="program.subtitle">
+			Language: <input class="form-control" type="text" ng-model="program.language">
+			iTunes Categories: {{ program.itunes_categories }} <input class="form-control" ng-list ng-model="program.itunes_categories">
+			Author(s): <input class="form-control" type="text"  ng-model="program.author">
+			Cover Image (480x960): <input class="form-control" type="text" ng-model="program.cover_image">
+			Owner Emails: {{ program.owners }} <input class="form-control" ng-list ng-model="program.owners">
+			Tags: {{ program.tags }} <input class="form-control" ng-list ng-model="program.tags">
+			Author(s): <input class="form-control" type="text"  ng-model="program.author">
+			Redirect URL: <input class="form-control" ng-model="program.redirect_url">
+			Organizations: {{ program.organizations }} <input class="form-control" ng-list ng-model="program.organizations">
+			Stream: <input class="form-control" type="text"  ng-model="program.stream">
+		</div>
+	</div>
+</div>
+
+	
+<div class="modal-footer">
+	<button class="btn btn-primary" type="button" ng-click="save()">Save</button>
+	<button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+	<button class="btn btn-danger pull-left" type="button" ng-click="delete()">Delete</button>
+</div>

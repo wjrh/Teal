@@ -8,9 +8,10 @@ module Teal
 
 		EMAIL_WAIT_TIMER = 480
 		
-		get "/me/?" do
+		get "/whoami/?" do
 			return current_user.to_s
 		end
+
 		#login a user
 		post "/login/?" do
 			#halt if its not a valid email or empty
@@ -62,7 +63,7 @@ module Teal
 
 		#returns if the current user is the owner of the program
 		def owner?(program)
-			return program.owners.include?(current_user)
+			program.owners.include?(current_user)
 		end
 
 		def owner?
@@ -134,7 +135,6 @@ module Teal
 		def valid_email?(email)
 			return /@/.match(email)
 		end
-
 	end
 end
-
+end

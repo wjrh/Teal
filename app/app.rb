@@ -3,6 +3,7 @@ require 'bundler'
 Bundler.require :default, ENV['RACK_ENV'].to_sym
 require 'redis'
 require 'mongoid'
+require 'resque'
 
 # load up the config
 # this reads our configuration file
@@ -19,6 +20,9 @@ require_relative 'api_program'
 require_relative 'api_episode'
 require_relative 'api_login'
 require_relative 'xml_feed'
+require_relative 'encode'
+require_relative 'api_upload'
+require_relative 'api_download'
 
 module Teal
   class App < Sinatra::Base
@@ -29,6 +33,7 @@ module Teal
 			Mongoid.load!("config/mongoid.yml")	
 			
 			$redis = Redis.new(:url => Teal.config.redis_url)
+			Resque.redis = $redis
 
 			# enable sessions by placing cookie 
 			use Rack::Session::Cookie,:key => 'teal.session',

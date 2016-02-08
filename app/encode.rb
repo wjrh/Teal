@@ -1,5 +1,5 @@
 require 'taglib'
-
+require 'resque'
 module Teal
 	class Encode
 		@queue = :encode
@@ -48,5 +48,5 @@ module Teal
 			end
 
 		end
-
 	end
+end

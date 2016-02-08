@@ -9,7 +9,7 @@ module Teal
 		post "/episodes/:id/upload/?" do
 			halt 400, "this episode does not exist" if not Episode.find(params["id"]).exists?
 			file_extension = File.extname( params["file"]["filename"] )
-			halt 400 if file_extension.length => 10 
+			halt 400 if file_extension.length > 10 
 			filename = params["id"] + file_extension
 			path_to_file = File.join(Teal.config.media_path , "raw", filename)
 			File.open(path_to_file, "w") do |f|
@@ -18,3 +18,5 @@ module Teal
 			p "New file uploaded to raw: #{filename} from ip: #{request.ip}"
 			Resque.enqueue(Encode, filename)
 		end
+	end
+end

@@ -16,7 +16,7 @@ gem 'pony' #email sender
 gem 'redis' #redis!
 gem 'taglib-ruby'
 gem 'rubocop', require: false # code styling
-
+gem 'resque'
 group :development, :test do
   gem 'rake'
 end

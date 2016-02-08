@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+
+  	<ol class="breadcrumb">
+          <li><a href="/programs/">All Programs</a></li>
+          <li class="active">{{ program.name }}</li>
+    </ol>	
+
+  	<h3>
+  		{{ program.name }}
+  		<button type="button" class="btn btn-default btn-xs" ng-click="editProgram(program)">edit</button>
+  		<br>
+  		<small ng-repeat="creator in program.creators">{{creator}}{{$last ? '' : ($index==program.creators.length-2) ? ' and ' : ', '}}</small>
+      <small>∙ <ng-pluralize count="program.episodes.length"
+                 when="{'0': 'no episodes',
+                     'one': 'one episode',
+                     'other': '{} episodes'}">
+      </ng-pluralize></small>
+  	</h3>
+	
+    <div class="list-group">
+      <a ng-repeat="episode in program.episodes | orderBy:'-pubdate'" href="/episodes/{{episode.id}}" class="list-group-item">
+        {{episode.name}}<small class="pull-right">{{episode.pubdate | date : mediumDate}}</small>
+      </a>
+    </div>
+
+    <button type="button" class="btn btn-default pull-right" ng-click="newEpisode()">new</button>
+
+  </div>
+</div>

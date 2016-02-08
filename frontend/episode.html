@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+  	 <ol class="breadcrumb">
+          <li><a href="/programs/">All Programs</a></li>
+          <li><a href="/programs/{{ episode.program_shortname }}">{{ episode.program_name }}</a></li>
+          <li class="active">{{ episode.name }}</li>
+     </ol>	
+    <h3>{{ episode.name }}
+    	<button type="button" class="btn btn-default btn-xs" ng-click="editEpisode(episode)">edit</button>
+    	<br>
+    	<small>{{ episode.program_name }}</small>
+    </h3>
+    
+		<uib-tabset>
+
+			<uib-tab heading="Episode Info">
+				<br>
+				<p><strong>Name:</strong> {{ episode.name }}</p>
+ 				<p><strong>Description:</strong> {{ episode.description }}</p>
+		    <p><strong>Image:</strong> <img style="max-height: 100px" ng-src="{{ episode.image }}"></p>
+  	    <p><strong>Publish after</strong> {{episode.pubdate |  date : 'EEEE, MMMM dd, yyyy h:mm a'}}</p>
+        <p><strong>Custom Audio Link:</strong> {{episode.custom_audio_url}}
+        <p><strong>Audio Length:</strong> {{episode.length}}
+        <p><strong>Audio Type:</strong> {{episode.type}}
+			</uib-tab>
+
+
+			<uib-tab heading="Log">
+				Nothing to see here!
+			</uib-tab>
+
+
+		</uib-tabset>
+  </div>
+</div>

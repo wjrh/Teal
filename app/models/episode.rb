@@ -35,7 +35,6 @@ class Episode
 		document.guid = SecureRandom.uuid if not document.guid
 	end
 
-	audio_url
 
 	# Override to_json to limit the information shared
 	# add the full audio url in the returned document
@@ -53,7 +52,7 @@ class Episode
 	end
 
 	#return the audio url
-	def audio_url do
+	def audio_url
 		return custom_audio_url if custom_audio_url =~ URI::regexp
 		return "" if not File.exist?(File.join(Teal.config.media_path,"processed", "#{episode_id}.mp3"))
 		return Teal.config.api_subdomain + "/episodes/#{id}.mp3"
