@@ -10,8 +10,7 @@
   		{{ program.name }}
   		<button type="button" class="btn btn-default btn-xs" ng-click="editProgram(program)">edit</button>
   		<br>
-  		<small ng-repeat="creator in program.creators">{{creator}}{{$last ? '' : ($index==program.creators.length-2) ? ' and ' : ', '}}</small>
-      <small>∙ <ng-pluralize count="program.episodes.length"
+    <small><ng-pluralize count="program.episodes.length"
                  when="{'0': 'no episodes',
                      'one': 'one episode',
                      'other': '{} episodes'}">

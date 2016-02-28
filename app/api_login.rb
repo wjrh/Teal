@@ -14,26 +14,27 @@ module Teal
 
 		#login a user
 		post "/login/?" do
+			request.body.rewind
+			body =  request.body.read
+			data = JSON.parse body
+			params["email"] = data["email"] if data["email"]
 			#halt if its not a valid email or empty
 			if not valid_email?(params["email"])
-				halt 400, "invalid email"
-			end	
-			
-			#if the user has sent a valid cookie redirect or send login link
-			if has_valid_cookie?
+				halt 400, "invalid email".to_json
+			elsif has_valid_cookie?
 				redirect Teal.config.front_end_subdomain
 			else
 				check_if_repeated_login_attempt
 				send_login_link
 			end
-			halt 200, "please check your email to continue"
+			halt 200, "please check your email to continue".to_json
 		end
 
-		get "/auth/?" do
+		get "/auth/?" do 
 			email = $redis.get(params["key"])
 			#kick them out if they don't have a valid key
 			if not email
-				halt 400, "link has expired or invalid link"
+				halt 400, "link has expired or invalid link".to_json
 			end
 			#expire their email timer
 			#invalidate key and assign cookies
@@ -62,19 +63,18 @@ module Teal
 		end
 
 		#returns if the current user is the owner of the program
-		def owner?(program)
-			program.owners.include?(current_user)
-		end
+		
 
-		def owner?
-			if self.class.name.eql("Program")
-				return owner?(self)
-			else if self.class.name.eql("Episode")
-				return owner?(self.program)
-			else
-				raise Exception.new("Can only call owner? on Episode or Program")
-			end
-		end
+		# def owner?
+		# 	if self.class.name.eql("Program")
+		# 		return owner?(self)
+		# 	elsif self.class.name.eql("Episode")
+		# 		return owner?(self.program)
+		# 	else
+		# 		raise Exception.new("Can only call owner? on Episode or Program")
+		# 	end
+		# end
+
 
 		private
 
@@ -117,7 +117,7 @@ module Teal
 					:password => Teal.config.smtp_password,
 					:authentication => :login
 				}
-			})
+				})
 		end
 		
 		#returns the email of the current user
@@ -136,5 +136,4 @@ module Teal
 			return /@/.match(email)
 		end
 	end
-end
 end

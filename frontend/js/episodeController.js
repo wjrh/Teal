@@ -22,7 +22,7 @@ yellow.controller('episodeController', function (teal, $scope, $location, $resou
 
 
     modalInstance.result.then(function () {
-      $scope.episode = Episode.get({id: $route.current.params.id})
+      $scope.episode = Episode.get({id: $route.current.params.id}) 
     }, function () {
       $log.info('Episode Modal dismissed at: ' + new Date());
     })
@@ -30,4 +30,13 @@ yellow.controller('episodeController', function (teal, $scope, $location, $resou
   };
 
 
+  $scope.submit = function($files, $event, $flow){
+    $flow.opts.target = teal + "/episodes/" + $route.current.params.id + "/upload";
+		$flow.opts.withCredentials = true;
+		$flow.upload()
+	};
+
+
 });
+
+

@@ -1,7 +1,7 @@
 // script.js
 
 // create the module and name it yellow
-var yellow = angular.module('yellow', ['ngRoute','ngResource','ui.bootstrap'])
+var yellow = angular.module('yellow', ['ngRoute','ngResource','ui.bootstrap','flow'])
 .config(['$routeProvider', '$locationProvider',
   function($routeProvider, $locationProvider) {
     $routeProvider
@@ -17,7 +17,11 @@ var yellow = angular.module('yellow', ['ngRoute','ngResource','ui.bootstrap'])
         templateUrl: 'programs.html',
         controller: 'programsController'
 
-      }).otherwise({redirectTo: '/programs'});;
+      }).when('/login',{
+        templateUrl: 'login.html',
+        controller: 'loginController'
+
+      }).otherwise({redirectTo: '/login'});
 
     $locationProvider.html5Mode(true);
 }]);
@@ -30,4 +34,44 @@ yellow.config(['$resourceProvider', function ($resourceProvider) {
   $resourceProvider.defaults.stripTrailingSlashes = false;
 }]);
 
-yellow.constant('teal', 'http://renans-macbook-pro.local:9000');
+yellow.constant('teal', 'http://api.teal.cool');
+
+
+yellow.directive('fileModel', ['$parse', function ($parse) {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            var model = $parse(attrs.fileModel);
+            var modelSetter = model.assign;
+            
+            element.bind('change', function(){
+                scope.$apply(function(){
+                    modelSetter(scope, element[0].files[0]);
+                });
+            });
+        }
+    };
+}]);
+
+yellow.service('fileUpload', ['$http', function ($http) {
+    this.uploadFileToUrl = function(file, uploadUrl){
+        var fd = new FormData();
+        fd.append('file', file);
+        $http.post(uploadUrl, fd, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+        })
+        .success(function(){
+        })
+        .error(function(){
+        });
+    }
+}]);
+
+
+// yellow.config(['flowFactoryProvider', function (flowFactoryProvider) {
+//     flowFactoryProvider.defaults = {
+//         target: function(){ return teal + '/episodes/' + $route.current.params.id + '/upload'},
+//         permanentErrors:[404, 500, 501]
+//     };
+// }]);

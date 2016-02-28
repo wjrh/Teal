@@ -2,6 +2,7 @@ class Episode
 	require"securerandom"
 	include Mongoid::Document
 	include Mongoid::Timestamps
+	include ActiveModel::MassAssignmentSecurity
 	
 	# Listing the fileds associated with Programs
 	# Pubdate is the date the epsode is intended to be public
@@ -18,55 +19,37 @@ class Episode
 	# media related fields length is either in hh:mm:ss or mm:ss format
 	field :length,				type: String
 	field :type,					type: String, default: "audio/mpeg"
-	field :custom_audio_url,type: String
+	field :audio_url,     type: String
 
-	# Index guid and check for uniqueness
-	index({ shortname:1 }, { unique: true })
+
+	attr_accessible :name, :description, :image, :pubdate,
+									:start_time, :end_time, :guid, :length,
+									:type, :audio_url
+
 
 	# Episodes belong to programs
-	belongs_to 	:program
+	belongs_to :program
 
 	# Validate the presence of two essential items
 	validates_presence_of :name
 	validates_presence_of :guid
 
 	# Create a globally unique id if none is supplied already
-	before_save do |document|
+	after_initialize do |document|
 		document.guid = SecureRandom.uuid if not document.guid
+		document.pubdate = Time.now if not document.guid
 	end
 
-
-	# Override to_json to limit the information shared
-	# add the full audio url in the returned document
-	# rewrite the _id field with a plain old id field.
-	def to_json(options = {})
-		opts = options.merge(:only => [:name, :description, :image, :pubdate, :start_time, :end_time, 
-												 :guid, :length, :type, :processed])
-		if audio_url
-			opts = opts.merge(:include => [:audio_url])
+	#overrides the json representation of this class.
+	#this is the place where the necessary information is shared with public
+	# TODO(renandincer): dont display past timed episodes
+	def as_json(options={})
+		if options[:detailed]
+			options = options.merge(:except => [:updated_at, :created_at, :program_id, :_id], :methods => [:id, :program])
+		else
+			options = options.merge(:only => [:name, :image, :pubdate, :audio_url])
 		end
-
-		attrs = super(opts)
-		attrs["id"] = attrs["_id"]
-		return attrs
+		super(options)
 	end
-
-	#return the audio url
-	def audio_url
-		return custom_audio_url if custom_audio_url =~ URI::regexp
-		return "" if not File.exist?(File.join(Teal.config.media_path,"processed", "#{episode_id}.mp3"))
-		return Teal.config.api_subdomain + "/episodes/#{id}.mp3"
-	end
-
-	def public?
-		return true if episode.owner?
-		return if Time.parse(self.pubdate).past?
-	end
-
-	# Method returns if the episode is ready for processing
-	# Episode is ready for processing if there is a raw file and it is not processed
-	def ready_for_processing
-		not self.processed
-	end
-
+	
 end

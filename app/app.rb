@@ -4,6 +4,15 @@ Bundler.require :default, ENV['RACK_ENV'].to_sym
 require 'redis'
 require 'mongoid'
 require 'resque'
+require 'fileutils'
+require 'logger'
+
+module BSON
+  class ObjectId
+    alias :to_json :to_s
+    alias :as_json :to_s
+  end
+end
 
 # load up the config
 # this reads our configuration file
@@ -15,12 +24,15 @@ require_relative 'config'
 require_relative 'models/program'
 require_relative 'models/episode'
 
+# require models
+require_relative 'upload/encode'
+require_relative 'upload/flow_controller'
+
 #require other files for the class
 require_relative 'api_program'
 require_relative 'api_episode'
 require_relative 'api_login'
 require_relative 'xml_feed'
-require_relative 'encode'
 require_relative 'api_upload'
 require_relative 'api_download'
 
@@ -53,7 +65,7 @@ module Teal
     before do
       content_type 'application/json'
 
-      headers 'Access-Control-Allow-Origin' => "http://#{Teal.config.front_end_subdomain}",
+      headers 'Access-Control-Allow-Origin' => "#{Teal.config.front_end_subdomain}",
             'Access-Control-Allow-Methods' => ['OPTIONS', 'GET', 'POST', 'DELETE'],
 						'Access-Control-Allow-Credentials' => true
     end
@@ -64,7 +76,7 @@ module Teal
     	info = {
     		"about" => "Teal is WJRH's DJ-Program-Episode management API",
     		"documentation" => "github.com/wjrh/Teal",
-    		"contact" => "wjrh@lafayette.edu",
+    		"contact" => "renandincer+teal@gmail.com",
     		"authors" => ["Renan Dincer"] #add your name here if you're contributing.
     	}
     	JSON.pretty_generate(info)

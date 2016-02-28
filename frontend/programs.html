@@ -15,9 +15,9 @@
       </ng-pluralize></small>
     </h3>
 
-    <p ngHide="programs.count"> You have no programs. <p>
+		<p ng-hide="programs.length > 0"> You have no programs. Click on new to create one.<p>
 		<a ng-repeat="program in programs | orderBy:'name'"  href="/programs/{{program.shortname}}" class="list-group-item">
-			<span class="badge" ng-repeat="category in program.categories">{{category}}</span>
+			<span class="badge" ng-repeat="tag in program.tags">{{tag}}</span>
 			{{program.name}}
 		</a>
     </div>

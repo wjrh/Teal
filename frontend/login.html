@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+
+  	<ol class="breadcrumb">
+          <li class="active">Login</li>
+    </ol>	
+
+    <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+
+  	<h3>
+  		Login
+  		<br>
+      <small>Enter your email to login.</small>
+  	</h3>
+	
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-xs-12">
+          Email: <input class="form-control" type="text" ng-model="email">
+        </div>
+      </div>
+    </div>
+
+    <button type="button" class="btn btn-default pull-right" ng-click="login(email)">Login</button>
+
+  </div>
+</div>

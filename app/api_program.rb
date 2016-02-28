@@ -4,7 +4,7 @@ module Teal
 		# Return the list of all programs
 		# TODO(renandincer): this will in the future return only the programs owned
 		get "/programs/?" do
-			return Program.get_all.to_json
+			Program.get_all.to_json
 		end
 
 		# get info about a specific program
@@ -12,13 +12,9 @@ module Teal
 		# if program is found returns episodes in a sorted manner
 		# TODO: we might be paying some performance penalty when sorting. Look into that.
 		get "/programs/:shortname/?" do
-			program = Program.first(:shortname => params['shortname'])
+			program = Program.where(:shortname => params['shortname']).first
 			halt 404 if program.nil?
-		
-		#TODO: more elegant solution to only returning published episodes	
-			program.episodes.select{ |episode| episode.public?}
-			program.episodes.sort! { |a,b| a.pubdate <=> pubdate }
-			return program.to_json(:include => [:episodes])
+			program.to_json(:detailed => true)
 		end
 
 		# method to post a new program
@@ -29,7 +25,6 @@ module Teal
 			request.body.rewind
 			body =  request.body.read
 			data = JSON.parse body
-
 			halt 400 if data['name'].nil? or data['name'].eql?("")
 			
 			# if the shortname is not provded, provide one
@@ -38,19 +33,20 @@ module Teal
 				data.merge!(shortname: shortname)
 			end
 			
+			#get the program
 			program = Program.where(shortname: data["shortname"]).first_or_initialize
 			
-			#if the program doesn't exist make the user an owner
+			#if the program doesn't exist make the user an owner and save
 			if program.new_record?
-				halt 400, "you need log in to enter a new program"
-				program.owners.insert(current_user)
+				halt 400, "you need log in to enter a new program".to_json if not authenticated?
+				program.push(owners: current_user)
 				program.update_attributes(data)
 				program.save
-				return program.to_json
-			elsif owner?(program)
+				program.to_json
+			elsif program.owner?(current_user)
 				program.update_attributes(data)
 				program.save
-				return program.to_json
+				program.to_json
 			else
 				halt 401, "not allowed to perform such action"
 			end
@@ -63,12 +59,14 @@ module Teal
 		# TODO: mongo will return an error when deleting a program with episodes, handle that
 		delete "/programs/:shortname/?" do
 			program = Program.where(shortname: params['shortname']).first
-			if owner?(program)
-				return program.destroy
+			if program.owner?(current_user)
+				program.destroy
+				program.to_json
 			else
 				halt 401, "not allowed to perform such action"
 			end
 		end
+
 
 	end
 end

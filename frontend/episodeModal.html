@@ -10,9 +10,9 @@
 			Description: <textarea style="height:10em" class="form-control" ng-model="episode.description"></textarea>
 			Image Link: <input class="form-control" type="text" ng-model="episode.image">
 			Pubdate: <input class="form-control" type="text" ng-model="episode.pubdate"><br>
-			(<strong>Publish after</strong> {{episode.pubdate |  date : 'EEEE, MMMM dd, yyyy h:mm a'}}. This time will be used to publish this episode online.)
+			(<strong>Publish date</strong> {{episode.pubdate |  date : 'EEEE, MMMM dd, yyyy h:mm a'}}.)
 			<br>
-			Custom Audio Link: <input class="form-control" type="text" ng-model="episode.custom_audio_url">
+			Audio Link: <input class="form-control" type="text" ng-model="episode.custom_audio_url">
 			Audio Length: <input class="form-control" type="text" ng-model="episode.length">
 			Audio Type: <input class="form-control" type="text" ng-model="episode.type">
 		</div>

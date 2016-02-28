@@ -2,7 +2,7 @@
   <div class="col-md-6 col-md-offset-3">
   	 <ol class="breadcrumb">
           <li><a href="/programs/">All Programs</a></li>
-          <li><a href="/programs/{{ episode.program_shortname }}">{{ episode.program_name }}</a></li>
+          <li><a href="/programs/{{ episode.program.shortname }}">{{ episode.program.name }}</a></li>
           <li class="active">{{ episode.name }}</li>
      </ol>	
     <h3>{{ episode.name }}
@@ -18,15 +18,29 @@
 				<p><strong>Name:</strong> {{ episode.name }}</p>
  				<p><strong>Description:</strong> {{ episode.description }}</p>
 		    <p><strong>Image:</strong> <img style="max-height: 100px" ng-src="{{ episode.image }}"></p>
-  	    <p><strong>Publish after</strong> {{episode.pubdate |  date : 'EEEE, MMMM dd, yyyy h:mm a'}}</p>
-        <p><strong>Custom Audio Link:</strong> {{episode.custom_audio_url}}
-        <p><strong>Audio Length:</strong> {{episode.length}}
-        <p><strong>Audio Type:</strong> {{episode.type}}
+  	    <p><strong>Publish date</strong> {{episode.pubdate |  date : 'EEEE, MMMM dd, yyyy h:mm a'}}</p>
+        <p><strong>Audio Link:</strong> {{episode.custom_audio_url}}</p>
+        <p><strong>Audio Length:</strong> {{episode.length}}</p>
+        <p><strong>Audio Type:</strong> {{episode.type}}</p>
 			</uib-tab>
 
 
-			<uib-tab heading="Log">
-				Nothing to see here!
+			<uib-tab heading="Upload">
+			<div flow-init="{testChunks:false}"
+				flow-files-submitted="submit($file, $event, $flow)"
+					flow-file-success="$file.msg = $message">
+
+          <input type="file" flow-btn/>
+          <span class="btn btn-default btn" flow-btn>Upload File</span>
+
+          <table>
+            <tr ng-repeat="file in $flow.files">
+                <td>{{$index+1}}</td>
+                <td>{{file.name}}</td>
+            </tr>
+          </table>
+
+        </div>
 			</uib-tab>
 
 

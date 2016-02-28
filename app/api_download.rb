@@ -7,7 +7,7 @@ module Teal
 		get /\/episodes\/(([\w])+).mp3/ do
 			episode_id = params['captures'].first
 			halt 404, "episode not found" if not Episode.find(episode_id).exists?
-		
+	
 			path_to_file = File.join(Teal.config.media_path,"processed", "#{episode_id}.mp3")
 			halt 500, "episode not found internally" if not File.exists?(path_to_file)
 

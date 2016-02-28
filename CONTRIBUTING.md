@@ -10,7 +10,11 @@ Fork, then clone the repo:
 git clone git@github.com:/<YOUR-USERNAME>/Teal.git
 ```
 
-and simply start all the services we use with Teal.
+and simply start all the services we use with Teal:
+
+```
+docker-compose up
+```
 
 To find out at which ip address your server is running on, run:
 

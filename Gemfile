@@ -7,6 +7,7 @@ gem 'foreman' # manager for procfile based applications
 
 gem 'json' # our friend jason
 
+gem 'protected_attributes'
 gem 'mongoid', '~> 5.0.0' #mongo ODM
 gem 'bson_ext' # improves performance when communicating with mongo
 gem 'nokogiri' #generating xml
@@ -17,9 +18,8 @@ gem 'redis' #redis!
 gem 'taglib-ruby'
 gem 'rubocop', require: false # code styling
 gem 'resque'
-group :development, :test do
-  gem 'rake'
-end
+gem 'rake'
+
 
 group :test do
 end

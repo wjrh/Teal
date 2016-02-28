@@ -39,6 +39,7 @@
 - [2] enforce itunes podcast spec character limits
 - [2] add hyperlinks in models (i.e. provide links with further information on objects)
 - [x] implement the language etc extra features feature (as well as category)
+- [ ] think about orphan shows
 
 AUDIO UPLOADS and SERVING
 - [x] upload happens
@@ -47,7 +48,7 @@ AUDIO UPLOADS and SERVING
 - [x] when a new upload is complete, the id is added to the queue for processing
 - [x] resque worker processes the upload and when complete, puts the url of where it can be found (predictable as it is by id)
 - [x] there is a url like api.teal.cool/episodes/23232323.mp3 which returns the file (for now --  will see if its a perf problem)
-- [ ] this url also records all accesses to the file with their range requests (need to figure out what to log)
+- [x] this url also records all accesses to the file with their range requests (need to figure out what to log)
 
 MISC MEDIA UPLOADS
 - [ ] make cover image uploadable
