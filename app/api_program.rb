@@ -39,8 +39,8 @@ module Teal
 			#if the program doesn't exist make the user an owner and save
 			if program.new_record?
 				halt 400, "you need log in to enter a new program".to_json if not authenticated?
-				program.push(owners: current_user)
 				program.update_attributes(data)
+				program.push(owners: current_user)
 				program.save
 				program.to_json
 			elsif program.owner?(current_user)
