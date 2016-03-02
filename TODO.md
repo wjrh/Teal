@@ -40,7 +40,7 @@
 - [2] add hyperlinks in models (i.e. provide links with further information on objects)
 - [x] implement the language etc extra features feature (as well as category)
 - [ ] think about orphan shows
-
+- [ ] delete files when the episode gets deleted`
 AUDIO UPLOADS and SERVING
 - [x] upload happens
 - [x] file is placed in the raw folder in the media folder with the filename:episode id
