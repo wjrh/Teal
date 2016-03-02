@@ -1,11 +1,12 @@
 require 'rubygems'
 require 'bundler'
-Bundler.require :default, ENV['RACK_ENV'].to_sym
+Bundler.require
 require 'redis'
 require 'mongoid'
 require 'resque'
 require 'fileutils'
 require 'logger'
+require 'protected_attributes'
 
 module BSON
   class ObjectId

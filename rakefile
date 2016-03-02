@@ -8,8 +8,9 @@ require "resque/tasks"
 
 #task :default => ['specs']
 
-#namespace :db do
+# namespace :db do
 #  task :load_config do
 #    require "./app/app"
 #  end
-#end
+# end
+

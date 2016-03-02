@@ -9,7 +9,7 @@ class Program
 	# Owners are an array of emails that have write access on the program
 	field :name,								type: String
 	field :copyright, 					type: String
-	field :shortname,						type: String #used for urls
+	field :shortname,						type: String
 	field :description,					type: String
 	field :image,								type: String
 	field :scheduled_time,			type: String
@@ -32,6 +32,10 @@ class Program
 
 	# Index shortname and check for uniqueness
 	index({ shortname: 1 }, { unique: true })
+
+	after_create do |document|
+		Program.create_indexes
+	end
 	
 	# Keep track of episodes and raise an error if child
 	# is not empty when the program is called to be destroyed
