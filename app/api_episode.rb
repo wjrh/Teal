@@ -81,7 +81,8 @@ module Teal
 		delete "/episodes/:id/?" do
 			episode = Episode.find(params['id'])
 			if episode.program.owner?(current_user)
-				newepisode.to_json(detailed: true)
+				episode.destroy
+				episode.to_json(sdetailed: true)
 			else
 				halt 401, "not allowed to perform such action"
 			end
