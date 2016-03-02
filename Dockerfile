@@ -1,8 +1,10 @@
 FROM ruby:2.2
 
+
 RUN apt-get update && apt-get install -y \
       autoconf \
-			libtag1-dev\
+      automake \
+      libtag1-dev\
       build-essential \
       imagemagick \
       libbz2-dev \
@@ -26,8 +28,12 @@ RUN apt-get update && apt-get install -y \
       zlib1g-dev \
       bison \
       libgdbm-dev \
+      libav-tools \
       ruby \
       && rm -rf /var/lib/apt/lists/*
+
+#ADD script/build.sh /build.sh
+#RUN ["/bin/bash", "/build.sh"]
 
 # throw errors if Gemfile has been modified since Gemfile.lock
 RUN bundle config --global frozen 1
@@ -41,6 +47,3 @@ RUN bundle install
 
 COPY . /usr/src/app
 EXPOSE 9000
-
-
-

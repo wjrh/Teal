@@ -3,8 +3,8 @@ smtp_server:
 cookie_secret:
 old_cookie_secret:
 domain: "teal.cool"
-front_end_subdomain: "teal.cool"
-api_subdomain: "api.teal.cool"
+front_end_subdomain: "http://teal.cool"
+api_subdomain: "http://api.teal.cool"
 mongo_url:
 redis_url:
 smtp_user:

@@ -5,8 +5,7 @@ gem 'sinatra' # domain specific language to respond to http reqs
 gem 'puma' # web server
 gem 'foreman' # manager for procfile based applications
 
-gem 'json' # our friend jason
-
+gem 'json'
 gem 'protected_attributes'
 gem 'mongoid', '~> 5.0.0' #mongo ODM
 gem 'bson_ext' # improves performance when communicating with mongo

@@ -49,7 +49,7 @@ class Program
 	#overrides the json representation of this class.
 	#this is the place where the necessary information is shared with public
 	def as_json(options={})
-		episodes.sort { |a,b| a.pubdate <=> pubdate }
+		episodes.sort { |a,b| a.pubdate <=> b.pubdate }
 		if options[:detailed]
 			options = options.merge(:except => [:updated_at, :created_at, :_id, :program_id], :methods => [:id, :episodes])
 			

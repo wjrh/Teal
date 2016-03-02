@@ -9,12 +9,12 @@ module Teal
       @params = params
     end
 
-    def post!
+    def post!(current_user)
       save_file!
-      combine_file! if last_chunk?
-      p "New file uploaded to raw: #{final_file_path}"
-      Resque.enqueue(Encode, final_file_path, params['id'])
-      p "New file queued: #{final_file_path}"
+      if last_chunk?
+        combine_file!
+        Resque.enqueue(Encode, final_file_path, params['id'], current_user)
+      end
       200
 #    rescue Exeption => e
 #			p e
@@ -58,7 +58,7 @@ module Teal
       # Ensure required paths exist
       FileUtils.mkpath final_file_directory
       # Open final file in append mode
-      File.open(final_file_path, "a") do |f|
+      File.open(final_file_path, "w+") do |f|
         file_chunks.each do |file_chunk_path|
           # Write each chunk to the permanent file
           f.write File.read(file_chunk_path)
@@ -70,8 +70,8 @@ module Teal
 
     ##
     # /final/resting/place/upload.txt
-    def final_file_path
-      File.join final_file_directory, params[:flowFilename]
+    def final_file_path      
+      File.join final_file_directory, params['id'] + File.extname(params[:flowFilename])
     end
 
     ##

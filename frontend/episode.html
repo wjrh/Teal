@@ -19,7 +19,7 @@
  				<p><strong>Description:</strong> {{ episode.description }}</p>
 		    <p><strong>Image:</strong> <img style="max-height: 100px" ng-src="{{ episode.image }}"></p>
   	    <p><strong>Publish date</strong> {{episode.pubdate |  date : 'EEEE, MMMM dd, yyyy h:mm a'}}</p>
-        <p><strong>Audio Link:</strong> {{episode.custom_audio_url}}</p>
+        <p><strong>Audio Link:</strong> {{episode.audio_url}}</p>
         <p><strong>Audio Length:</strong> {{episode.length}}</p>
         <p><strong>Audio Type:</strong> {{episode.type}}</p>
 			</uib-tab>

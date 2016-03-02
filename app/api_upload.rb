@@ -2,12 +2,27 @@ module Teal
 	class App < Sinatra::Base
 
 		post "/episodes/:id/upload/?" do
-			halt 400, "this episode does not exist" if not Episode.where(id: params["id"]).exists?
-			episode = Episode.find(params['id'])
-			p "====== CURRENT USER ON UPLOAD IS:#{current_user}"
-			halt 401, "not allowed to perform such action" if not episode.program.owner?(current_user)
-	    FlowController.new(params).post!
+			#TODO: we only check the last post so this might be a problem
+			FlowController.new(params).post!(current_user)
 	  end
+
+	  #TODO: enable upload via the api
+	  # post "/episodes/:id/simpleupload/?" do
+			# halt 400, "this episode does not exist" if not Episode.where(id: params["id"]).exists?
+			# episode = Episode.find(params['id'])
+			# halt 401, "not allowed to perform such action" if not episode.program.owner?(current_user)
+
+			# filename = params["id"] + ".tmp"
+			# path_to_file = File.join(Teal.config.media_path , "raw", filename)
+			# directory_name = File.join(Teal.config.media_path , "raw")
+			# FileUtils.mkdir_p(directory_name) unless File.exists?(directory_name)
+			# request.body.rewind
+			# File.open(path_to_file, "w+") do |f|
+			# 	f.write(request.body.read)
+			# end
+			# p "New file uploaded to raw: #{filename} from ip: #{request.ip}"
+	  #   Resque.enqueue(Encode, filepath, params['id'], current_user)
+	  # end
 
 		# upload audio files
 		# checks if the episode exists

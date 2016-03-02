@@ -21,7 +21,7 @@ services:
    - mongo
    - redis
   volumes:
-   - /data/teal_media:/data/teal-media
+   - /data/teal-media:/data/teal-media
   command: bundle exec puma -p 9000 -w 4 --preload
 
  encode_worker:
