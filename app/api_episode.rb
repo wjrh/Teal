@@ -24,6 +24,7 @@ module Teal
 			halt 404 if episode == nil
 
 			#check for ownership
+			halt 400, "you need log in to enter a new program".to_json if not authenticated?
 			halt 401, "not allowed to perform such action" if not episode.program.owner?(current_user)
 
 			episode.update_attributes(data)
@@ -57,6 +58,10 @@ module Teal
 		# /episodes?shortname=xyxyxy is the kind of route being given
 		post "/episodes/?" do 
 			halt 400 if !params['shortname'] or params['shortname'].eql?("")
+			halt 400, "you need log in to enter a new program".to_json if not authenticated?
+
+
+
 			# episode = Episode.find(params['shortname'])
 			# halt 400 if episode == nil
 
@@ -66,13 +71,12 @@ module Teal
 			
 			p "data you've sent looks like this: #{body}"
 			program = Program.where(shortname: params['shortname']).first
+			halt 401, "not allowed to perform such action" if not program.owner?(current_user)
 			
 			newepisode = Episode.new(data)
 			newepisode.save
 			program.episodes << newepisode
 			program.save
-			p "program is like this saved #{program.episodes.to_a.to_json}"
-			p "the number of episodes is #{Episode.count}"
 			newepisode.to_json(detailed: true)
 		end
 

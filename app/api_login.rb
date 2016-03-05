@@ -9,7 +9,11 @@ module Teal
 		EMAIL_WAIT_TIMER = 480
 		
 		get "/whoami/?" do
-			return current_user.to_s
+			if current_user
+				return current_user.to_s
+			else
+				return "nobody"
+			end
 		end
 
 		#login a user
@@ -31,25 +35,38 @@ module Teal
 		end
 
 		get "/auth/?" do 
-			email = $redis.get(params["key"])
+			identity = Identity.where(login_token: params["token"]).first
 			#kick them out if they don't have a valid key
-			if not email
+			if not identity
 				halt 400, "link has expired or invalid link".to_json
 			end
-			#expire their email timer
-			#invalidate key and assign cookies
-			$redis.del(email)
-			$redis.del(params["key"])
-			session[:email] = email
 
-			#redirect to the app
-			redirect Teal.config.front_end_subdomain
+			#invalidate key and assign cookies
+			identity.login_token = nil;
+			identity.cookie = SecureRandom.base64(1024)
+			identity.cookie_gen = Time.now
+			identity.save
+
+			response.set_cookie 'teal', identity.cookie
+			redirect Teal.config.front_end_subdomain, identity.generate_api_key
 		end
 		
 		#TODO: Incomplete method
 		get "/key/?" do
-			halt 401, "you are unauthenticated" 
-			key = SecureRandom.urlsafe_base64(256,false)
+			identity = Identity.where(cookie: request.cookies['teal']).first
+			if identity
+				return identity.generate_api_key
+			else
+				"you are unauthenticated"
+			end
+		end
+
+		get "/logout/?" do
+			identity = Identity.where(cookie: request.cookies['teal']).first
+			halt 401, "you are unauthenticated" if not identity
+			identity.cookie = nil
+			identity.save
+			return 200, "logged out"
 		end
 
 		#returns if the current user is authenticated
@@ -62,45 +79,26 @@ module Teal
 			authenticate
 		end
 
-		#returns if the current user is the owner of the program
-		
-
-		# def owner?
-		# 	if self.class.name.eql("Program")
-		# 		return owner?(self)
-		# 	elsif self.class.name.eql("Episode")
-		# 		return owner?(self.program)
-		# 	else
-		# 		raise Exception.new("Can only call owner? on Episode or Program")
-		# 	end
-		# end
-
-
 		private
 
 		def has_valid_cookie?
-			session[:email].eql?(params["email"])
+			return Identity.where(cookie: request.cookies['teal']).exists?
 		end
 
 		def check_if_repeated_login_attempt
-			last_attempt = $redis.get(params["email"])
-			if last_attempt
-				wait_time = EMAIL_WAIT_TIMER - (Time.now - Time.parse(last_attempt))
+			identity = Identity.where(email: params["email"]).first
+			return if not identity
+			if identity.login_token_gen
+				wait_time = EMAIL_WAIT_TIMER - (Time.now - last_attempt)
 				headers "Retry-After" => wait_time.round.to_s
 				halt 400, "too many attempts made, wait #{wait_time.round} seconds."
 			end
 		end
 
 		def send_login_link
-			#generate email key, commit it into redis and set it to expire
-			key =  SecureRandom.urlsafe_base64(16,false)
-			$redis.set(key,params["email"])
-			$redis.expire(key, EMAIL_WAIT_TIMER)
-			#set key to email as well to keep track of repeated login events	
-			$redis.set(params["email"], Time.now.to_s)
-			$redis.expire(params["email"], EMAIL_WAIT_TIMER)
-
-			link = Teal.config.api_subdomain + "/auth?key=" + key
+			identity = Identity.where(email: params["email"]).first_or_initialize
+			token = identity.generate_login_token
+			link = Teal.config.api_subdomain + "/auth?token=" + token
 			expiry_time = Time.now + EMAIL_WAIT_TIMER
 			message_with_link = "Please follow this link to log in:\n#{link}\n\nThis link will expire at #{expiry_time.utc}."
 
@@ -122,14 +120,13 @@ module Teal
 		
 		#returns the email of the current user
 		def authenticate
-			if session[:email]
-				return session[:email]
+			identity = Identity.where(cookie: request.cookies['teal']).first
+			if identity
+				return identity.email
 			else
 				return nil
 			end
 		end
-
-
 		
 		#TODO: make this regex more robust
 		def valid_email?(email)

@@ -24,6 +24,7 @@ require_relative 'config'
 # require models
 require_relative 'models/program'
 require_relative 'models/episode'
+require_relative 'models/identity'
 
 # require models
 require_relative 'upload/encode'
@@ -42,23 +43,22 @@ module Teal
 
     configure do
 			#configure our MongoDB connection
-
 			Mongoid.load!("config/mongoid.yml")	
 			
 			$redis = Redis.new(:url => Teal.config.redis_url)
 			Resque.redis = $redis
 
 			# enable sessions by placing cookie 
-			use Rack::Session::Cookie,:key => 'teal.session',
-			                         	:domain => Teal.config.domain,
-																:path => '/',
-																:expire_after => 2592000,
-																:secret => Teal.config.cookie_secret,
-																#uncomment this when running over https
-																#:secure => true
-																:old_secret => Teal.config.old_cookie_secret,
-																:http_only => true,
-																:sidbits => 256
+			# use Rack::Session::Cookie,:key => 'teal.session',
+			#                          	:domain => Teal.config.domain,
+			# 													:path => '/',
+			# 													:expire_after => 2592000,
+			# 													:secret => Teal.config.cookie_secret,
+			# 													#uncomment this when running over https
+			# 													#:secure => true
+			# 													:old_secret => Teal.config.old_cookie_secret,
+			# 													:http_only => true,
+			# 													:sidbits => 256
     end
 
 	
