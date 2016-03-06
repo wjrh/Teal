@@ -9,7 +9,7 @@ module Teal
 		EMAIL_WAIT_TIMER = 480
 		
 		get "/whoami/?" do
-			if current_user
+			if authenticated?
 				return current_user.to_s
 			else
 				return "nobody"
@@ -89,9 +89,11 @@ module Teal
 			identity = Identity.where(email: params["email"]).first
 			return if not identity
 			if identity.login_token_gen
-				wait_time = EMAIL_WAIT_TIMER - (Time.now - last_attempt)
-				headers "Retry-After" => wait_time.round.to_s
-				halt 400, "too many attempts made, wait #{wait_time.round} seconds."
+				wait_time = EMAIL_WAIT_TIMER - (Time.now - identity.login_token_gen)
+				if wait_time > 0
+					headers "Retry-After" => wait_time.round.to_s
+					halt 400, "too many attempts made, wait #{wait_time.round} seconds."
+				end
 			end
 		end
 
@@ -120,7 +122,9 @@ module Teal
 		
 		#returns the email of the current user
 		def authenticate
-			identity = Identity.where(cookie: request.cookies['teal']).first
+			p request.env
+			identity = Identity.where(api_key: request.env["HTTP_TEAL_API_KEY"]).first if request.env["HTTP_TEAL_API_KEY"]
+			identity = Identity.where(cookie: request.cookies['teal']).first if request.cookies['teal']
 			if identity
 				return identity.email
 			else

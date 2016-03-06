@@ -34,33 +34,20 @@ module Teal
 
 
 		# post a new episode
-		# to create a new episode, you need to post it to a place with the shortname
-		# post "/programs/:shortname/episodes/?" do
-		# 	request.body.rewind  # in case someone already read it
-		# 	body =  request.body.read # data here will contain a JSON document with necessary details
-		# 	data = JSON.parse body
-
-		# 	program = Program.where(shortname: params['shortname']).first
-		# 	newepisode = Episode.new(data)
-
-		# 	newepisode.save
-		# 	program.episodes.push(newepisode)
-		# 	program.save
-
-		# 	return_epsiode_selectively(newepisode)
-		# end
-
-
-
+		post "/programs/:shortname/episodes/?" do
+			newepisode
+		end
 
 		# post a new episode (the shortname is defined in the url)
 		# this method is alternative to the post in the url way
 		# /episodes?shortname=xyxyxy is the kind of route being given
 		post "/episodes/?" do 
+			newepisode
+		end
+
+		def newepisode
 			halt 400 if !params['shortname'] or params['shortname'].eql?("")
 			halt 400, "you need log in to enter a new program".to_json if not authenticated?
-
-
 
 			# episode = Episode.find(params['shortname'])
 			# halt 400 if episode == nil
@@ -69,7 +56,6 @@ module Teal
 			body =  request.body.read # data here will contain a JSON document with necessary details
 			data = JSON.parse body
 			
-			p "data you've sent looks like this: #{body}"
 			program = Program.where(shortname: params['shortname']).first
 			halt 401, "not allowed to perform such action" if not program.owner?(current_user)
 			
