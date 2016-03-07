@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col-md-12">
+  	 <ol class="breadcrumb" style="background-color: #F9F9F9">
+          <li><a href="/programs/">All Programs</a></li>
+          <li><a href="/programs/{{ episode.program.shortname }}">{{ episode.program.name }}</a></li>
+          <li class="active">{{ episode.name }}</li>
+     </ol>	
+    <h3>{{ episode.name }}
+    	<button type="button" class="btn btn-default btn-xs" ng-click="editEpisode(episode)">edit</button>
+    	<br>
+    	<small>{{ episode.program_name }}</small>
+    </h3>
+    
+		<uib-tabset>
+
+			<uib-tab heading="Episode Info">
+				<br>
+				<p><strong>Name:</strong> {{ episode.name }}</p>
+ 				<p><strong>Description:</strong> {{ episode.description }}</p>
+		    <p><strong>Image:</strong> <img style="max-height: 100px" ng-src="{{ episode.image }}"></p>
+  	    <p><strong>Publish date</strong> {{episode.pubdate |  date : 'EEEE, MMMM dd, yyyy h:mm a'}}</p>
+        <p><strong>Audio Link:</strong> {{episode.audio_url}}</p>
+        <p><strong>Audio Length:</strong> {{episode.length}}</p>
+        <p><strong>Audio Type:</strong> {{episode.type}}</p>
+			</uib-tab>
+
+
+			<uib-tab heading="Upload">
+			<div flow-init="{testChunks:false}"
+				flow-files-submitted="submit($file, $event, $flow)"
+					flow-file-success="$file.msg = $message">
+          <div class="btn btn-default btn" flow-btn>Upload File</div>
+
+          <div ng-repeat="file in $flow.files">
+            <table>
+              <tr>
+                  <td>{{$index+1}}</td>
+                  <td>{{file.name}}</td>
+                  <td>{{file.msg}}</td>
+              </tr>
+            </table>
+
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" style="width: {{file.sizeUploaded() / file.size * 100 | number:10}}%;">
+                {{file.sizeUploaded() / file.size * 100 | number:0}}%
+              </div>
+            </div>
+          </div>
+
+        </div>
+			</uib-tab>
+
+
+		</uib-tabset>
+  </div>
+</div>

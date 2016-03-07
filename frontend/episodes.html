@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-md-12">
+
+  	<ol class="breadcrumb" style="background-color: #F9F9F9">
+          <li><a href="/programs/">All Programs</a></li>
+          <li class="active">{{ program.name }}</li>
+    </ol>	
+
+  	<h3>
+  		{{ program.name }}
+  		<button type="button" class="btn btn-default btn-xs" ng-click="editProgram(program)">edit</button>
+  		<br>
+    <small><ng-pluralize count="program.episodes.length"
+                 when="{'0': 'no episodes',
+                     'one': 'one episode',
+                     'other': '{} episodes'}">
+      </ng-pluralize></small>
+  	</h3>
+	
+    <div class="list-group">
+      <a ng-repeat="episode in program.episodes | orderBy:'-pubdate'" href="/episodes/{{episode.id}}" class="list-group-item">
+        {{episode.name}}<small class="pull-right">{{episode.pubdate | date : mediumDate}}</small>
+      </a>
+    </div>
+
+    <button type="button" class="btn btn-default pull-right" ng-click="newEpisode()">new</button>
+
+  </div>
+</div>

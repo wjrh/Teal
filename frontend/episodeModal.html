@@ -1,0 +1,27 @@
+<div class="modal-header">
+	<h3 class="modal-title">Editing {{ episode.name || "new episode"}}</h3>
+</div>
+
+
+<div class="modal-body">
+	<div class="row">
+		<div class="col-xs-12">
+			Name: <input class="form-control" type="text" ng-model="episode.name">
+			Description: <textarea style="height:10em" class="form-control" ng-model="episode.description"></textarea>
+			Image Link: <input class="form-control" type="text" ng-model="episode.image">
+			Pubdate: <input class="form-control" type="text" ng-model="episode.pubdate"><br>
+			(<strong>Publish date</strong> {{episode.pubdate |  date : 'EEEE, MMMM dd, yyyy h:mm a'}}.)
+			<br>
+			Audio Link: <input class="form-control" type="text" ng-model="episode.audio_url">
+			Audio Length: <input class="form-control" type="text" ng-model="episode.length">
+			Audio Type: <input class="form-control" type="text" ng-model="episode.type">
+		</div>
+	</div>
+</div>
+
+
+<div class="modal-footer">
+	<button class="btn btn-primary" type="button" ng-click="save()">Save</button>
+	<button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+	<button class="btn btn-danger pull-left" type="button" ng-click="delete()">Delete</button>
+</div>

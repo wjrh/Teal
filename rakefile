@@ -1,14 +1,16 @@
 require "./app/app"
-require 'rspec/core/rake_task'
+require "resque/tasks"
+#require 'rspec/core/rake_task'
 
-RSpec::Core::RakeTask.new :specs do |task|
-  task.pattern = Dir['spec/**/*_spec.rb']
-end
+#RSpec::Core::RakeTask.new :specs do |task|
+#  task.pattern = Dir['spec/**/*_spec.rb']
+#end
 
-task :default => ['specs']
+#task :default => ['specs']
 
-namespace :db do
-  task :load_config do
-    require "./app/app"
-  end
-end
+# namespace :db do
+#  task :load_config do
+#    require "./app/app"
+#  end
+# end
+

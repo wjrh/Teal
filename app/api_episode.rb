@@ -1,94 +1,107 @@
-# Create = PUT with a new URI
-#          POST to a base URI returning a newly created URI
-# Read   = GET
-# Update = PUT with an existing URI
-# Delete = DELETE
-
-
 module Teal
 	class App < Sinatra::Base
 
+		# method to handle episodes by id
+		# we attach program shortname and name to the end of the episode
+		# TODO: might want to find a more elegant solution to adding shortname and program name
 		get "/episodes/:id/?" do
+			halt 400, "this episode does not exist" if not Episode.where(id: params["id"]).exists?
 			episode = Episode.find(params['id'])
-			halt 404 if episode == nil
-			episode["program_shortname"] = episode.program.shortname
-			episode["program_name"] = episode.program.name
-			return episode.to_json(
-								:except => [:owners, :program_id, :created_at, :updated_at, :guid]
-								)								
-		end
 
+			episode.to_json(detailed: true)
+		end
+		
+		# route to update episodes
+		# returns 404 if the episode doesn't exist
+		# returns 401 if the program of the episode is not owned by the current user
 		post "/episodes/:id/?" do
 			request.body.rewind  # in case someone already read it
 			body =  request.body.read # data here will contain a JSON document with necessary details
 			data = JSON.parse body
 
+			halt 400, "this episode does not exist" if not Episode.where(id: params["id"]).exists?
 			episode = Episode.find(params['id'])
 			halt 404 if episode == nil
 
-			episode.update_attributes(data)
+			#check for ownership
+			halt 400, "you need log in to enter a new program".to_json if not authenticated?
+			halt 401, "not allowed to perform such action" if not episode.program.owner?(current_user)
 
-			return episode.to_json(
-								:except => [:program_id, :created_at, :updated_at, :guid]
-								)
+			episode.update_attributes(data)
+			episode.to_json(detailed: true)
 		end
+
+
 
 		# post a new episode
 		post "/programs/:shortname/episodes/?" do
-			request.body.rewind  # in case someone already read it
-			body =  request.body.read # data here will contain a JSON document with necessary details
-			data = JSON.parse body
-
-			newepisode = Episode.new(data)
-			newepisode.save
-
-			program = Program.first(:shortname => params['shortname'])
-			program.episodes << newepisode
-			program.save
-
-			return newepisode.to_json(
-								:except => [:program_id, :created_at, :updated_at, :guid]
-								)
+			newepisode
 		end
 
 		# post a new episode (the shortname is defined in the url)
-		post "/episodes/?" do #GET /episodes?shortname=vbb
+		# this method is alternative to the post in the url way
+		# /episodes?shortname=xyxyxy is the kind of route being given
+		post "/episodes/?" do 
+			newepisode
+		end
+
+		def newepisode
+			halt 400 if !params['shortname'] or params['shortname'].eql?("")
+			halt 400, "you need log in to enter a new program".to_json if not authenticated?
+
+			# episode = Episode.find(params['shortname'])
+			# halt 400 if episode == nil
+
 			request.body.rewind  # in case someone already read it
 			body =  request.body.read # data here will contain a JSON document with necessary details
 			data = JSON.parse body
-
-			halt 400 if !params['shortname'] or params['shortname'].eql?("")
-
+			
+			program = Program.where(shortname: params['shortname']).first
+			halt 401, "not allowed to perform such action" if not program.owner?(current_user)
+			
 			newepisode = Episode.new(data)
 			newepisode.save
-
-			program = Program.first(:shortname => params['shortname'])
 			program.episodes << newepisode
 			program.save
-
-			return newepisode.to_json(
-								:except => [:program_id, :created_at, :updated_at, :guid]
-								)
+			newepisode.to_json(detailed: true)
 		end
 
-
-
-		# Update if PUT with an existing URI creates if PUT with a new URI,
-		# put "/episodes/:id/?" do
-		# 	request.body.rewind  # in case someone already read it
-		# 	body =  request.body.read # data here will contain a JSON document with necessary details
-		# 	data = JSON.parse body
-
-		# 	episode = Episode.find(params['id'])
-		# 	program.update_attributes(data)
-		# 	return program.to_json
-		# end
-
-
+		# delete the episode
+		#returns an error if the user is not an owner
 		delete "/episodes/:id/?" do
-			Episode.destroy(params['id'])
-			return 200
+			episode = Episode.find(params['id'])
+			if episode.program.owner?(current_user)
+				episode.destroy
+				episode.to_json(sdetailed: true)
+			else
+				halt 401, "not allowed to perform such action"
+			end
 		end
+
+
+
+		# private
+
+		# # to include the episodes as well, add it to options
+	
+
+	 # 	def return_epsiode_selectively(episode, options = {})
+	 # 		# unless episode.program.owner?(current_user)
+	 # 		#  return {}.to_json if episode.pubdate.past?
+	 # 		# end
+
+ 	# 	 	 filter = {:only => [:name, :description, :image, :pubdate, :start_time,
+ 	# 	 	 									:end_time, :guid, :length, :type, :program_shortname, :program_name],
+ 	#  								:include => []}
+ 	#  		 if episode.audio_url
+		# 			filter[:include].push(:audio_url)
+		# 	 end
+		# 	 episode["program_shortname"] = episode.program.shortname
+		# 	 episode["program_name"] = episode.program.name
+		# 	 episode["id"] = episode.id
+		# 	 options = options.merge(filter)
+ 	# 	   episode.to_json(options)
+ 	# 	end
 
 
 	end

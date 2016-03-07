@@ -1,0 +1,60 @@
+<div style="margin-top: 20px;">
+
+  <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+
+  <h1>Hosting for podcasts, radio programs</h1>
+  <p class="lead">Teal is a audio and feed host with a program-episode relationship. It automatically produces an iTunes feed for podcasting and lets you keeps track of content played. It allows direct uploads or broadcast stream capture.</p>
+</div>
+
+
+<div class="row login">
+  <div class="col-md-5">
+    <form class="input-group" ng-submit="login(email)">
+      <input class="form-control" type="text" ng-model="email" ng-init="checkifloggedin()" placeholder="email"></input>
+      <div class="input-group-btn">
+        <button type="button" class="btn btn-primary pull-right" ng-click="login(email)">Go</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row features">
+  <div class="col-md-6">
+    <h4>iTunes feed creation</h4>
+    <p>For every program, Teal automatically creates an iTunes feed to publish your program as a podcast on iTunes.</p>
+
+    <h4>Passwordless login</h4>
+    <p>Teal sends an email with a special login link for logins. <a href="https://hacks.mozilla.org/2014/10/passwordless-authentication-secure-simple-and-fast-to-deploy/">No passwords</a> = no passwords to forget.</p>
+
+    <h4>API-first</h4>
+    <p>The provided front end uses the same API that is available to you. You can build your own tools to talk to Teal or automate everything. Scroll below for docs.</p>
+
+    <h4>Record from a stream</h4>
+    <p>Teal allows you to record live programs from a remote online stream. This way you can turn your radio station broadcast into neatly cataloged programs and episodes.</p>
+
+    <h4>Show notes/markdown support</h4>
+    <p>Teal shows your show notes correctly on iTunes streams with markdown support.</p>
+  </div>
+
+  <div class="col-md-6">
+    <h4>No lock-in</h4>
+    <p>Teal hosts and helps you manage audio. Online services shoud empower you, not lock you in. Teal allows you to forward requests to your feed somewhere else if you change your mind after publishing.</p>
+
+    <h4>Unlimited programs and episodes</h4>
+    <p>You can create unlimited programs and episodes.</p>
+
+    <h4>You control everything</h4>
+    <p>Teal can host audio files and your iTunes feed. You can also choose to do one of those yourself and create a hybrid solution. Teal gives you the ability to point where your audio file is for your feed.</p>
+
+    <h4>Log songs</h4>
+    <p>Teal allows you to enter songs names to log on your episode. You can also get logs live using a pub/sub model. This is handy if you have a broadcast stream and want to associate tracks with the time it played on the stream.</p>
+
+    <!-- <h4>All the analytics</h4>
+    <p>In addition to simple download counts, Teal gives you access to the complete download logs with times, anonymized ip addresses, request ranges for you to calculate your own numbers.</p> -->
+  </div>
+</div>
+
+
+<!-- <footer class="footer">
+  <p>Teal</p>
+</footer> -->

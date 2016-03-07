@@ -12,11 +12,12 @@ module Teal
 			:domain 						=> ENV['DOMAIN'] ||= yaml['domain'],
 			:front_end_subdomain=> ENV['FRONT_END_SUBDOMAIN'] ||= yaml['front_end_subdomain'],
 			:api_subdomain 			=> ENV['API_SUBDOMAIN'] ||= yaml['api_subdomain'],
-			:mongo_url 			=> ENV['MONGO_URL'] ||= yaml['mongo_url'],
-			:redis_url			=> ENV['REDIS_URL'] ||= yaml['redis_url'],
-			:smtp_user			=> ENV['SMTP_USER'] ||= yaml['smtp_user'],
-			:smtp_password	=> ENV['SMTP_PASSWORD'] ||= yaml['smtp_password'],
-			:login_source_email => ENV['LOGIN_SOURCE_EMAIL'] ||= yaml['login_source_email']
+			:mongo_url 					=> ENV['MONGO_URL'] ||= yaml['mongo_url'],
+			:redis_url					=> ENV['REDIS_URL'] ||= yaml['redis_url'],
+			:smtp_user					=> ENV['SMTP_USER'] ||= yaml['smtp_user'],
+			:smtp_password			=> ENV['SMTP_PASSWORD'] ||= yaml['smtp_password'],
+			:login_source_email => ENV['LOGIN_SOURCE_EMAIL'] ||= yaml['login_source_email'],
+			:media_path				  => ENV['MEDIA_PATH'] ||= yaml['media_path']
   end
 
 

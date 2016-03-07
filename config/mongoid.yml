@@ -1,0 +1,7 @@
+production:
+  clients:
+    default:
+      database: tealmongoid
+      hosts:
+        - mongo:27017
+
