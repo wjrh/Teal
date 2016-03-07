@@ -7,6 +7,9 @@ require 'resque'
 require 'fileutils'
 require 'logger'
 require 'protected_attributes'
+require 'rack/throttle'
+
+use Rack::Throttle::Second,   :max => 5
 
 module BSON
   class ObjectId

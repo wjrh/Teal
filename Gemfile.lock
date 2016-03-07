@@ -46,6 +46,8 @@ GEM
     rack (1.6.4)
     rack-protection (1.5.3)
       rack
+    rack-throttle (0.4.0)
+      rack (>= 1.0.0)
     rainbow (2.1.0)
     rake (10.5.0)
     redcarpet (3.3.4)
@@ -91,6 +93,7 @@ DEPENDENCIES
   pony
   protected_attributes
   puma
+  rack-throttle
   rake
   redcarpet
   redis

@@ -18,6 +18,7 @@ gem 'taglib-ruby'
 gem 'rubocop', require: false # code styling
 gem 'resque'
 gem 'rake'
+gem 'rack-throttle'
 
 
 group :test do
