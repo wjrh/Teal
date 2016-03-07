@@ -47,18 +47,6 @@ module Teal
 			
 			$redis = Redis.new(:url => Teal.config.redis_url)
 			Resque.redis = $redis
-
-			# enable sessions by placing cookie 
-			# use Rack::Session::Cookie,:key => 'teal.session',
-			#                          	:domain => Teal.config.domain,
-			# 													:path => '/',
-			# 													:expire_after => 2592000,
-			# 													:secret => Teal.config.cookie_secret,
-			# 													#uncomment this when running over https
-			# 													#:secure => true
-			# 													:old_secret => Teal.config.old_cookie_secret,
-			# 													:http_only => true,
-			# 													:sidbits => 256
     end
 
 	
@@ -68,7 +56,8 @@ module Teal
 
       headers 'Access-Control-Allow-Origin' => "#{Teal.config.front_end_subdomain}",
             'Access-Control-Allow-Methods' => ['OPTIONS', 'GET', 'POST', 'DELETE'],
-						'Access-Control-Allow-Credentials' => true
+						'Access-Control-Allow-Credentials' => true,
+            'teal-logged-in-as' => current_user
     end
 
   	# root route responds with a cool string

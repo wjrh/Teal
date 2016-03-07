@@ -17,11 +17,14 @@ var yellow = angular.module('yellow', ['ngRoute','ngResource','ui.bootstrap','fl
         templateUrl: 'programs.html',
         controller: 'programsController'
 
-      }).when('/login',{
+      }).when('/',{
         templateUrl: 'login.html',
         controller: 'loginController'
 
-      }).otherwise({redirectTo: '/login'});
+      }).when('/loggedin', {
+        redirectTo: '/programs'
+
+      }).otherwise({redirectTo: '/'});
 
     $locationProvider.html5Mode(true);
 }]);

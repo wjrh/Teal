@@ -2,6 +2,7 @@
 # Login is performed via one time email links.
 require 'pony'
 require 'securerandom'
+require 'uri'
 
 module Teal
 	class App < Sinatra::Base
@@ -9,10 +10,11 @@ module Teal
 		EMAIL_WAIT_TIMER = 480
 		
 		get "/whoami/?" do
-			if authenticated?
-				return current_user.to_s
+			cu = current_user
+			if cu
+				return cu.to_json
 			else
-				return "nobody"
+				halt 404, "nobody".to_json
 			end
 		end
 
@@ -25,8 +27,8 @@ module Teal
 			#halt if its not a valid email or empty
 			if not valid_email?(params["email"])
 				halt 400, "invalid email".to_json
-			elsif has_valid_cookie?
-				redirect Teal.config.front_end_subdomain
+			elsif has_valid_cookie? and current_user === params["email"]
+				halt 200, "Already logged in".to_json
 			else
 				check_if_repeated_login_attempt
 				send_login_link
@@ -48,7 +50,7 @@ module Teal
 			identity.save
 
 			response.set_cookie 'teal', identity.cookie
-			redirect Teal.config.front_end_subdomain, identity.generate_api_key
+			redirect URI::join(Teal.config.front_end_subdomain, 'loggedin') , identity.generate_api_key
 		end
 		
 		#TODO: Incomplete method
@@ -66,7 +68,7 @@ module Teal
 			halt 401, "you are unauthenticated" if not identity
 			identity.cookie = nil
 			identity.save
-			return 200, "logged out"
+			redirect Teal.config.front_end_subdomain
 		end
 
 		#returns if the current user is authenticated
@@ -92,7 +94,7 @@ module Teal
 				wait_time = EMAIL_WAIT_TIMER - (Time.now - identity.login_token_gen)
 				if wait_time > 0
 					headers "Retry-After" => wait_time.round.to_s
-					halt 400, "too many attempts made, wait #{wait_time.round} seconds."
+					halt 400, "too many attempts made, wait #{wait_time.round} seconds.".to_json
 				end
 			end
 		end
@@ -122,7 +124,6 @@ module Teal
 		
 		#returns the email of the current user
 		def authenticate
-			p request.env
 			identity = Identity.where(api_key: request.env["HTTP_TEAL_API_KEY"]).first if request.env["HTTP_TEAL_API_KEY"]
 			identity = Identity.where(cookie: request.cookies['teal']).first if request.cookies['teal']
 			if identity
