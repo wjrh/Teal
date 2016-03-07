@@ -32,6 +32,7 @@ yellow.controller('episodeController', function (teal, $scope, $location, $resou
 
   $scope.submit = function($files, $event, $flow){
     $flow.opts.target = teal + "/episodes/" + $route.current.params.id + "/upload";
+    $flow.opts.chunkSize = 5*1024*1024;
 		$flow.opts.withCredentials = true;
 		$flow.upload()
 	};

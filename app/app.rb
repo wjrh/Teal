@@ -7,9 +7,7 @@ require 'resque'
 require 'fileutils'
 require 'logger'
 require 'protected_attributes'
-require 'rack/throttle'
 
-use Rack::Throttle::Second,   :max => 5
 
 module BSON
   class ObjectId
@@ -44,12 +42,15 @@ require_relative 'api_download'
 module Teal
   class App < Sinatra::Base
 
+    
+
     configure do
 			#configure our MongoDB connection
 			Mongoid.load!("config/mongoid.yml")	
 			
 			$redis = Redis.new(:url => Teal.config.redis_url)
 			Resque.redis = $redis
+
     end
 
 	
