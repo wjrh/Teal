@@ -26,6 +26,7 @@ require_relative 'config'
 require_relative 'models/program'
 require_relative 'models/episode'
 require_relative 'models/identity'
+require_relative 'models/track'
 
 # require models
 require_relative 'upload/encode'
@@ -38,6 +39,7 @@ require_relative 'api_login'
 require_relative 'xml_feed'
 require_relative 'api_upload'
 require_relative 'api_download'
+require_relative 'api_track'
 
 module Teal
   class App < Sinatra::Base

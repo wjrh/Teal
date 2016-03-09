@@ -29,6 +29,8 @@ class Episode
 
 	# Episodes belong to programs
 	belongs_to :program
+	# Episode embeds many tracks
+	embeds_many :tracks
 
 	# Validate the presence of two essential items
 	validates_presence_of :name

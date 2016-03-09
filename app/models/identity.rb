@@ -29,4 +29,12 @@ class Identity
 		return self.api_key
 	end
 
+	def generate_cookie
+		#invalidate key and assign cookies
+		self.login_token = nil;
+		self.cookie = SecureRandom.base64(1024)
+		self.cookie_gen = Time.now
+		self.save
+		return self.cookie
+	end
 end

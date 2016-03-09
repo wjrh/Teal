@@ -5,8 +5,11 @@ module Teal
 		# we attach program shortname and name to the end of the episode
 		# TODO: might want to find a more elegant solution to adding shortname and program name
 		get "/episodes/:id/?" do
-			halt 400, "this episode does not exist" if not Episode.where(id: params["id"]).exists?
-			episode = Episode.find(params['id'])
+			begin
+				episode = Episode.find(params['id'])
+			rescue Mongoid::Errors::DocumentNotFound
+				halt 400, "this episode does not exist"
+			end
 
 			episode.to_json(detailed: true)
 		end

@@ -43,13 +43,9 @@ module Teal
 				halt 400, "link has expired or invalid link".to_json
 			end
 
-			#invalidate key and assign cookies
-			identity.login_token = nil;
-			identity.cookie = SecureRandom.base64(1024)
-			identity.cookie_gen = Time.now
-			identity.save
+			cookie = identity.generate_cookie
 
-			response.set_cookie 'teal', identity.cookie
+			response.set_cookie 'teal', cookie
 			redirect URI::join(Teal.config.front_end_subdomain, 'loggedin') , identity.generate_api_key
 		end
 		
