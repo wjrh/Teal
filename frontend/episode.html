@@ -13,42 +13,68 @@
     
 		<uib-tabset>
 
+
 			<uib-tab heading="Episode Info">
 				<br>
 				<p><strong>Name:</strong> {{ episode.name }}</p>
  				<p><strong>Description:</strong> {{ episode.description }}</p>
 		    <p><strong>Image:</strong> <img style="max-height: 100px" ng-src="{{ episode.image }}"></p>
   	    <p><strong>Publish date</strong> {{episode.pubdate |  date : 'EEEE, MMMM dd, yyyy h:mm a'}}</p>
-        <p><strong>Audio Link:</strong> {{episode.audio_url}}</p>
-        <p><strong>Audio Length:</strong> {{episode.length}}</p>
-        <p><strong>Audio Type:</strong> {{episode.type}}</p>
+        <div ng-show="episode.audio_url.length > 0">
+          <p><strong>Audio Link:</strong> {{episode.audio_url}}</p>
+          <p><strong>Audio Length:</strong> {{episode.length}} seconds</p>
+          <p><strong>Audio Type:</strong> {{episode.type}}</p>
+        </div>
+        <p ng-hide="episode.audio_url.length > 0">You have no audio file linked to this episode.</p>
 			</uib-tab>
 
 
-			<uib-tab heading="Upload">
+
+
+			<uib-tab heading="Manual Upload">
+      <br>
+      <div ng-show="episode.audio_url.length > 0">
+        <p><strong>Audio Link:</strong> {{episode.audio_url}}</p>
+        <p><strong>Audio Length:</strong> {{episode.length}} seconds</p>
+        <p><strong>Audio Type:</strong> {{episode.type}}</p>
+      </div>
+      <p ng-hide="episode.audio_url.length > 0">You have no audio file linked to this episode. You can upload one here.</p>
+      <p ng-show="episode.audio_url.length > 0">Uploading a file will <strong>overwrite</strong> any previosly uploaded files and/or URLs.</p>
 			<div flow-init="{testChunks:false}"
 				flow-files-submitted="submit($file, $event, $flow)"
 					flow-file-success="$file.msg = $message">
-          <div class="btn btn-default btn" flow-btn>Upload File</div>
+
+          <div class="btn btn-default btn" flow-btn>
+            <span ng-hide="episode.audio_url.length > 0">Upload audio</span>
+            <span ng-show="episode.audio_url.length > 0">Upload and overwrite existing</span>
+          </div>
 
           <div ng-repeat="file in $flow.files">
-            <table>
-              <tr>
-                  <td>{{$index+1}}</td>
-                  <td>{{file.name}}</td>
-                  <td>{{file.msg}}</td>
-              </tr>
-            </table>
-
             <div class="progress">
               <div class="progress-bar" role="progressbar" style="width: {{file.sizeUploaded() / file.size * 100 | number:10}}%;">
                 {{file.sizeUploaded() / file.size * 100 | number:0}}%
               </div>
             </div>
           </div>
-
         </div>
 			</uib-tab>
+
+
+
+      <uib-tab ng-show="episode.program.stream.length > 0" heading="Record from stream">
+      <br>
+      <p><strong>Stream source:</strong> {{episode.program.stream}}</p>
+      </uib-tab>
+
+
+
+      <uib-tab heading="Content logs">
+      <br>
+      
+      </uib-tab>
+
+
+      
 
 
 		</uib-tabset>
