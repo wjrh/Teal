@@ -41,7 +41,7 @@ services:
   image: nginx
   #get the nginx config file from the config folder
   volumes: 
-   - ./config/nginx.conf:/etc/nginx/nginx.conf:ro
+   - ./config/nginx-dev.conf:/etc/nginx/nginx.conf:ro
    - ./frontend:/frontend:ro
   ports:
    - "80:80"

@@ -61,6 +61,8 @@
 
 
 
+
+
       <uib-tab ng-show="episode.program.stream.length > 0" heading="Record from stream">
       <br>
       <p><strong>Stream source:</strong> {{episode.program.stream}}</p>
@@ -68,13 +70,50 @@
 
 
 
+
+
       <uib-tab heading="Content logs">
       <br>
+      <div class="panel panel-default">
+        <div class="panel-heading">Start/Stop show</div>
+          <div class="panel-body">
+            <button class="btn btn-success" ng-show="!episode.start_time && !episode.end_time" type="button" ng-click="startEpisode()">Start Show</button>
+            <button class="btn btn-warning" ng-show="episode.start_time && !episode.end_time" type="button" ng-click="endEpisode()">End Show</button>
+            <span class="pull-right" ng-show="episode.start_time">Started at {{ episode.start_time | date:"h:mma" }}</span>
+            <span class="pull-right" ng-show="episode.end_time">Ended at {{ episode.end_time | date:"h:mma" }}</span>
+          </div>
+        </div>
       
+      <div class="panel panel-default">
+        <div class="panel-heading">Track List</div>
+          <div class="panel-body">
+            <div class="input-group">
+              <input type="text" class="form-control" ng-model="newTrack.title" placeholder="title">
+              <span class="input-group-addon"> by </span>
+              <input type="text" class="form-control" ng-model="newTrack.artist" placeholder="artist">
+              <span class="input-group-btn">
+                <button class="btn btn-success" type="button" ng-click="saveNewTrack()">Add</button>
+              </span>
+            </div>
+          </div>
+
+        <!-- List group -->
+        <ul class="list-group">
+          <li ng-repeat="track in tracks| orderBy : '-log_time'"  class="list-group-item">
+            <input ng-show="track.editing" ng-model="track.title">
+            <input ng-show="track.editing" ng-model="track.artist">
+            <button ng-show="track.editing" class="btn btn-success btn-xs" type="button" ng-click="edittrack(track)">Save</button>
+            <button ng-show="track.editing" class="btn btn-default btn-xs" type="button" ng-click="track.editing = false">Cancel</button>
+            <button ng-show="track.editing" class="btn btn-danger btn-xs" type="button" ng-click="deleteTrack(track)"><i class="fa fa-trash-o"></i></button>
+            <span ng-hide="track.editing" ng-dblclick="track.editing = true">{{ track.title }} - {{ track.artist }}</span>
+            <button class="btn btn-default btn-xs pull-right" ng-show="episode.start_time && !episode.end_time &&!track.log_time" ng-click="logTrack(track)" type="button">Log song</button>
+            <span class="pull-right" ng-show="track.log_time && !track.editing">Logged {{ getTimeDiff(track) }} minutes into the episode</span>
+          </li>
+        </ul>
+      </div>
+
+
       </uib-tab>
-
-
-      
 
 
 		</uib-tabset>

@@ -56,8 +56,7 @@ class Program
 	def as_json(options={})
 		episodes.sort { |a,b| a.pubdate <=> b.pubdate }
 		if options[:detailed]
-			options = options.merge(:except => [:updated_at, :created_at, :_id, :program_id], :methods => [:id, :episodes])
-			
+			options = options.merge(:except => [:updated_at, :created_at, :_id, :program_id, :tracks], :methods => [:id, :episodes])
 		else
 			options = options.merge(:only => [:name, :shortname, :description, :image, :subtitle, :tags, :author])
 		end

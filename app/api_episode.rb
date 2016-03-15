@@ -75,7 +75,9 @@ module Teal
 			episode = Episode.find(params['id'])
 			if episode.program.owner?(current_user)
 				episode.destroy
-				episode.to_json(sdetailed: true)
+				path_to_file = File.join(Teal.config.media_path,"processed", "#{episode.id}.mp3")
+				File.delete(path_to_file) if File.exist?(path_to_file)
+				episode.to_json(detailed: true)
 			else
 				halt 401, "not allowed to perform such action"
 			end

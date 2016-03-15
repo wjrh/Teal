@@ -51,6 +51,7 @@ AUDIO UPLOADS and SERVING
 - [x] resque worker processes the upload and when complete, puts the url of where it can be found (predictable as it is by id)
 - [x] there is a url like api.teal.cool/episodes/23232323.mp3 which returns the file (for now --  will see if its a perf problem)
 - [x] this url also records all accesses to the file with their range requests (need to figure out what to log)
+- [ ] make shortname deriving system case insensitive or make shortname search case insentitive
 
 MISC MEDIA UPLOADS
 - [ ] make cover image uploadable
