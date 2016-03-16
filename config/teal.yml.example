@@ -1,17 +1,17 @@
 # teal configuration
-domain:
-front_end_subdomain:
-api_subdomain:
+domain: "teal.cool"
+front_end_subdomain: "http://teal.cool"
+api_subdomain: "http://api.teal.cool"
 
 #mongo and redis configuration
-mongo_url:
-redis_url:
+mongo_url: "mongo"
+redis_url: "redis://redis:6379"
 
 # email configuration
 smtp_server:
 smtp_user:
 smtp_password:
-login_source_email:
+login_source_email: "Teal <login@teal.cool>"
 
 #media storage configuration
-media_path:
+media_path: "/data/teal-media/"
