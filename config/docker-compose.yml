@@ -35,7 +35,7 @@ services:
   environment:
    - RACK_ENV=production
   command: "bundle exec rake resque:work QUEUE=encode"
- 
+
  nginx:
   container_name: nginx
   image: nginx
