@@ -53,7 +53,7 @@
 
 <h2>API Documentation</h2>
 <h3>Rate Limiting/Bursting</h3>
-<p>The API enforces a rate limit of around 2 requests/sec per IP. Bursting is provided as a convenience and for speedier uploads. Continuos usage above the rate limit might return a 403 status code.</p>
+<p>The API enforces a rate limit of around 3 requests/sec per IP. Bursting is provided as a convenience and for speedier uploads. Continuos usage above the rate limit might return a 403 status code.</p>
 <h3>Authentication</h3>
 <p>Every account is authenticated over email:</p>
 <pre>curl -X POST -d '{"email":"&lt;YOUR EMAIL&GT;"}' http://api.teal.cool/login</pre>
