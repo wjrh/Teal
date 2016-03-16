@@ -32,19 +32,16 @@
     <h4>Record from a stream</h4>
     <p>Teal allows you to record live programs from a remote online stream. This way you can turn your radio station broadcast into neatly cataloged programs and episodes.</p>
 
-    <h4>Show notes/markdown support</h4>
-    <p>Teal shows your show notes correctly on iTunes streams with markdown support.</p>
+    <h4>Show notes with Markdown</h4>
+    <p>Teal shows your show notes correctly on iTunes streams with markdown support. Links on iTunes and other providers become clickable.</p>
   </div>
 
   <div class="col-md-6">
-    <h4>No lock-in</h4>
-    <p>Teal hosts and helps you manage audio. Online services shoud empower you, not lock you in. Teal allows you to forward requests to your feed somewhere else if you change your mind after publishing.</p>
+    <h4>Flexible</h4>
+    <p>Teal allows you to forward requests to your feed somewhere else if you change your mind after publishing. You can just use Teal to host your feed and not your audio files or vice versa.</p>
 
     <h4>Unlimited programs and episodes</h4>
     <p>You can create unlimited programs and episodes.</p>
-
-    <h4>You control everything</h4>
-    <p>Teal can host audio files and your iTunes feed. You can also choose to do one of those yourself and create a hybrid solution. Teal gives you the ability to point where your audio file is for your feed.</p>
 
     <h4>Log songs</h4>
     <p>Teal allows you to keep track of the songs on your episode. You can also subscribe to the logs live using a pub/sub model if recording from a stream at the same time. This is handy if you have a broadcast stream and want to associate tracks with the time it played on the stream.</p>
@@ -55,6 +52,8 @@
 </div>
 
 <h2>API Documentation</h2>
+<h3>Rate Limiting/Bursting</h3>
+<p>The API enforces a rate limit of around 2 requests/sec per IP. Bursting is provided as a convenience and for speedier uploads. Continuos usage above the rate limit might return a 403 status code.</p>
 <h3>Authentication</h3>
 <p>Every account is authenticated over email:</p>
 <pre>curl -X POST -d '{"email":"&lt;YOUR EMAIL&GT;"}' http://api.teal.cool/login</pre>
