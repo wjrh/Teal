@@ -32,16 +32,14 @@
     <h4>Record from a stream</h4>
     <p>Teal allows you to record live programs from a remote online stream. This way you can turn your radio station broadcast into neatly cataloged programs and episodes.</p>
 
-    <h4>Show notes with Markdown</h4>
-    <p>Teal shows your show notes correctly on iTunes streams with markdown support. Links on iTunes and other providers become clickable.</p>
   </div>
 
   <div class="col-md-6">
     <h4>Flexible</h4>
     <p>Teal allows you to forward requests to your feed somewhere else if you change your mind after publishing. You can just use Teal to host your feed and not your audio files or vice versa.</p>
 
-    <h4>Unlimited programs and episodes</h4>
-    <p>You can create unlimited programs and episodes.</p>
+    <h4>Show notes with Markdown</h4>
+    <p>Teal shows your show notes correctly on iTunes streams with markdown support. Links on iTunes and other providers become clickable.</p>
 
     <h4>Log songs</h4>
     <p>Teal allows you to keep track of the songs on your episode. You can also subscribe to the logs live using a pub/sub model if recording from a stream at the same time. This is handy if you have a broadcast stream and want to associate tracks with the time it played on the stream.</p>
@@ -51,17 +49,7 @@
   </div>
 </div>
 
-<h2>API Documentation</h2>
-<h3>Rate Limiting/Bursting</h3>
-<p>The API enforces a rate limit of around 3 requests/sec per IP. Bursting is provided as a convenience and for speedier uploads. Continuos usage above the rate limit might return a 403 status code.</p>
-<h3>Authentication</h3>
-<p>Every account is authenticated over email:</p>
-<pre>curl -X POST -d '{"email":"&lt;YOUR EMAIL&GT;"}' http://api.teal.cool/login</pre>
-<p>or using the shortcut version:</p>
-<pre>curl -X POST http://api.teal.cool/login?email=&lt;YOUR EMAIL&GT;</pre>
-<p>The login method doesn't return any useful information. Once an email is sent, it will expire in 8 minutes. During this time, you can not request an other authentication email.</p>
-<p>When you open your email account you will see an email from login@teal.cool. At this point, you can choose to also login using the frontend. If you do, your key will be accessible at <code>api.teal.cool/key</code> from your browser. Note that every time you request a key, the old one will be invalidated.
-<p>You can also choose only to get your key directly:</p>
-<pre>curl http://api.teal.cool/auth?token=aZ3vNUb0Rjm7gBK4BeBjgg</pre>
-<p>API keys will never expire but every successful login will generate a new one.</p>
-<h3>Creating a show</h3>
+
+
+
+

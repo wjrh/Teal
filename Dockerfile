@@ -1,6 +1,4 @@
 FROM ruby:2.2
-
-
 RUN apt-get update && apt-get install -y \
       autoconf \
       automake \
@@ -31,9 +29,6 @@ RUN apt-get update && apt-get install -y \
       libav-tools \
       ruby \
       && rm -rf /var/lib/apt/lists/*
-
-#ADD script/build.sh /build.sh
-#RUN ["/bin/bash", "/build.sh"]
 
 # throw errors if Gemfile has been modified since Gemfile.lock
 RUN bundle config --global frozen 1

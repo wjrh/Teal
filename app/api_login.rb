@@ -120,8 +120,8 @@ module Teal
 		
 		#returns the email of the current user
 		def authenticate
-			identity = Identity.where(api_key: request.env["HTTP_TEAL_API_KEY"]).first if request.env["HTTP_TEAL_API_KEY"]
 			identity = Identity.where(cookie: request.cookies['teal']).first if request.cookies['teal']
+			identity = Identity.where(api_key: request.env["HTTP_TEAL_API_KEY"]).first if request.env["HTTP_TEAL_API_KEY"]
 			if identity
 				return identity.email
 			else

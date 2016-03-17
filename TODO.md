@@ -53,29 +53,26 @@ AUDIO UPLOADS and SERVING
 - [x] this url also records all accesses to the file with their range requests (need to figure out what to log)
 - [ ] make shortname deriving system case insensitive or make shortname search case insentitive
 
-MISC MEDIA UPLOADS
 - [ ] make cover image uploadable
 - [ ] make image uploadable
 - [ ] upload normally, which will return url of the uploaded media
 - [ ] POST uploaded media link normally
 - [ ] figure out where the misc media goes
 - [ ] deal with orphaned data
+- [ ] make sure no shortname is created with the special names we use for other things
 
-AUDIO UPLOAD:
 - [ ] upload audio file to a main endpoint/shortname
 
-DEPLOYMENT:
 - [ ] serve pure angualar app from teal.cool which is also the fancy login page.
 - [ ] api will check if one is already logged in and will not send an email but just foreard to the app
 - [ ] server backend from api.teal.cool
 
-TEAL-LIVE:
-websockets to push current song info to whomever wants it
+- [ ] websockets to push current song info to whomever wants it
 - [ ] serve teal-live from live.teal.cool
-log events trigger changes in the websocket server
-we run a socket.io server that listens to events to push
-all new events are pushed into the server which then deals with live people
-Will listen to the live websocket events and start recording if an episode signals the live-start
-When the show ends, the episode will signal live-end and the recording will stop.
-will upload the show just like a normal audio upload but without priviladge check
+- [ ] log events trigger changes in the websocket server
+- [ ] we run a socket.io server that listens to events to push
+- [ ] all new events are pushed into the server which then deals with live people
+- [ ] Will listen to the live websocket events and start recording if an episode signals the live-start
+- [ ] When the show ends, the episode will signal live-end and the recording will stop.
+- [ ] ill upload the show just like a normal audio upload but without priviladge check
 
