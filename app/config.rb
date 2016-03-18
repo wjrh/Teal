@@ -7,8 +7,6 @@ module Teal
   def self.config
     OpenStruct.new \
       :smtp_server 				=> ENV['SMTP_SERVER'] ||= yaml['smtp_server'],
-			:cookie_secret		 	=> ENV['COOKIE_SECRET'] ||= yaml['cookie_secret'],
-			:old_cookie_secret	=> ENV['OLD_COOKIE_SECRET'] ||= yaml['old_cookie_secret'],
 			:domain 						=> ENV['DOMAIN'] ||= yaml['domain'],
 			:front_end_subdomain=> ENV['FRONT_END_SUBDOMAIN'] ||= yaml['front_end_subdomain'],
 			:api_subdomain 			=> ENV['API_SUBDOMAIN'] ||= yaml['api_subdomain'],

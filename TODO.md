@@ -60,7 +60,7 @@ AUDIO UPLOADS and SERVING
 - [ ] figure out where the misc media goes
 - [ ] deal with orphaned data
 - [ ] make sure no shortname is created with the special names we use for other things
-
+- [ ] HIDE owner and organization
 - [ ] upload audio file to a main endpoint/shortname
 
 - [ ] serve pure angualar app from teal.cool which is also the fancy login page.

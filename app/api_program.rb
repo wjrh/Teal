@@ -8,6 +8,10 @@ module Teal
 			Program.where(:owners => current_user).all.to_json
 		end
 
+		get "/organizations/:organization/?" do
+			Program.where(:organizations => params[:organization]).all.to_json
+		end
+
 		# get info about a specific program
 		# returns 404 if the program requested cannot be found
 		# if program is found returns episodes in a sorted manner
