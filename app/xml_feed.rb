@@ -9,6 +9,7 @@ module Teal
 			program = Program.where(shortname: params['shortname']).first
 			halt 404 if program.nil?
 			program.episodes.sort! { |a,b| a.pubdate <=> b.pubdate }
+			redirect program.redirect_url if not (program.redirect_url.nil? or program.redirect_url.eql?(""))
 			return generatefeed(program)
 		end
 
