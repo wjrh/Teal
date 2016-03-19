@@ -13,10 +13,7 @@ module Teal
 			halt 500, "episode not found internally" if not File.exists?(path_to_file)
 
 			#log request
-			p "TIME=#{Time.new.utc} \t
-				FILE=#{episode_id}.mp3 
-				IP=#{request.ip} 
-				HTTP_RANGE=#{request.env["HTTP_RANGE"]}"
+			p "TIME=#{Time.new.utc} FILE=#{episode_id}.mp3 IP=#{request.ip} HTTP_RANGE=#{request.env["HTTP_RANGE"]}"
 
 			content_type episode.type
 			send_file path_to_file
