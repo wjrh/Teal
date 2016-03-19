@@ -10,7 +10,7 @@ module Teal
 	  #TODO: work on encoding problems, test this
 	  post "/episodes/:id/simpleupload/?" do
 			halt 400, "this episode does not exist" if not Episode.where(id: params["id"]).exists?
-			episode = Episode.find(params['id']).first
+			episode = Episode.find(params['id'])
 			halt 401, "not allowed to perform such action" if not episode.program.owner?(current_user)
 
 			filename = params["id"] + ".tmp"
