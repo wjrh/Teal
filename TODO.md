@@ -68,6 +68,7 @@ AUDIO UPLOADS and SERVING
 - [ ] server backend from api.teal.cool
 
 - [ ] better error messages
+- [ ] better xml feeds
 
 - [ ] websockets to push current song info to whomever wants it
 - [ ] serve teal-live from live.teal.cool
