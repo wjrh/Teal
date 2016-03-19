@@ -67,6 +67,8 @@ AUDIO UPLOADS and SERVING
 - [ ] api will check if one is already logged in and will not send an email but just foreard to the app
 - [ ] server backend from api.teal.cool
 
+- [ ] better error messages
+
 - [ ] websockets to push current song info to whomever wants it
 - [ ] serve teal-live from live.teal.cool
 - [ ] log events trigger changes in the websocket server
@@ -75,4 +77,6 @@ AUDIO UPLOADS and SERVING
 - [ ] Will listen to the live websocket events and start recording if an episode signals the live-start
 - [ ] When the show ends, the episode will signal live-end and the recording will stop.
 - [ ] ill upload the show just like a normal audio upload but without priviladge check
+
+
 

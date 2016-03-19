@@ -34,7 +34,7 @@ module Teal
 					properties = fileref.audio_properties
 					
 					episode.length = properties.length  #song length in seconds
-					p "episode length is #{episode.length}"
+					episode.type = "audio/mpeg"
 					episode.save
 				end
 			end

@@ -18,7 +18,7 @@ class Episode
 
 	# media related fields length is either in hh:mm:ss or mm:ss format
 	field :length,				type: String
-	field :type,					type: String, default: "audio/mpeg"
+	field :type,					type: String
 	field :audio_url,     type: String
 
 
