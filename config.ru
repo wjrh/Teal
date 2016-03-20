@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/app/app')
+require File.expand_path(File.dirname(__FILE__) + '/teal/app')
 require 'rack/throttle'
 
 #max 120 requests per minute
