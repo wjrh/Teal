@@ -8,13 +8,7 @@ require 'fileutils'
 require 'logger'
 require 'protected_attributes'
 
-
-module BSON
-  class ObjectId
-    alias :to_json :to_s
-    alias :as_json :to_s
-  end
-end
+require_relative 'bson'
 
 # load up the config
 # this reads our configuration file
@@ -44,18 +38,12 @@ require_relative 'api_track'
 module Teal
   class App < Sinatra::Base
 
-    
-
     configure do
-			#configure our MongoDB connection
 			Mongoid.load!("config/mongoid.yml")	
-			
 			$redis = Redis.new(:url => Teal.config.redis_url)
 			Resque.redis = $redis
-
     end
 
-	
     # make everything be a json response (callback to every route)
     before do
       content_type 'application/json'
@@ -86,7 +74,5 @@ module Teal
 
       halt 200
     end
-
-
   end
 end

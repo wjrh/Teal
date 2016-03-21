@@ -22,7 +22,7 @@ services:
    - redis
   volumes:
    - /data/teal-media:/data/teal-media
-  command: bundle exec puma -p 9000 -w 4 --preload
+  command: bundle exec puma
 
  encode_worker:
   build: .
