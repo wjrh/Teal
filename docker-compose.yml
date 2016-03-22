@@ -38,7 +38,7 @@ services:
 
  nginx:
   container_name: nginx
-  image: nginx
+  image: z7zmey/nginx-push-stream
   #get the nginx config file from the config folder
   volumes: 
    - ./config/nginx-dev.conf:/etc/nginx/nginx.conf:ro
