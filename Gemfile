@@ -15,5 +15,4 @@ gem 'redis' 									# in memory short term cache
 gem 'taglib-ruby' 						# process audio files, gather metadata
 gem 'rubocop', require: false # code styling
 gem 'resque'									# queueing in ruby
-gem 'rack-throttle'						# throttle incoming api requests in rack
 gem 'rake'										# run rasks
