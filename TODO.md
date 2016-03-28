@@ -12,3 +12,4 @@
 - [ ] better error messages
 - [ ] better XML feed
 - [ ] display seconds and minutes correnctly
+- [ ] make frontend more seo friendly https://ma.ttias.be/technical-guide-seo/
