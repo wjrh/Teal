@@ -17,19 +17,28 @@ services:
   environment:
    - RACK_ENV=production
   build: .
-  links:
+  depends_on:
    - mongo
    - redis
   volumes:
    - /data/teal-media:/data/teal-media
   command: bundle exec puma
 
+ recorder:
+  container_name: recorder
+  environment:
+   - RACK_ENV=production
+  build: ./recorder
+  depends_on:
+   - teal
+  command: ruby recorder.rb
+
  encode_worker:
   build: .
   container_name: encode_worker
   volumes:
    - /data/teal-media:/data/teal-media
-  links:
+  depends_on:
    - redis
    - mongo
   environment:
@@ -46,5 +55,5 @@ services:
   ports:
    - "80:80"
    - "443:443"
-  links:
+  depends_on:
    - teal

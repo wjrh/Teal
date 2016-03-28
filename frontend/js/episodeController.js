@@ -10,6 +10,7 @@ yellow.controller('episodeController', function ($http, teal, $scope, $location,
   $scope.episode = Episode.get({id: $route.current.params.id});
   $scope.tracks = Track.query({id: $route.current.params.id});
   $scope.newTrack = new Track();
+  $scope.endRecordingText = 'End recording';
 
 
   $scope.editEpisode = function (episode) {
@@ -32,16 +33,19 @@ yellow.controller('episodeController', function ($http, teal, $scope, $location,
   };
 
   $scope.startEpisode = function(){
-    $scope.episode.start_time = moment.utc();
-    $scope.episode.$save({id: $route.current.params.id}, function () {
-      $scope.episode = Episode.get({id: $route.current.params.id});
+    // $scope.episode.start_time = moment.utc();
+    // $scope.episode.$save({id: $route.current.params.id}, function () {
+    //   $scope.episode = Episode.get({id: $route.current.params.id});
+    // });
+    $http.post( teal + "/episodes/" + $route.current.params.id + "/start", {}).success(function(response) {
+        $scope.episode = Episode.get({id: $route.current.params.id}) 
     });
   };
 
   $scope.endEpisode = function(){
-    $scope.episode.end_time = moment.utc();
-    $scope.episode.$save({id: $route.current.params.id}, function () {
-      $scope.episode = Episode.get({id: $route.current.params.id});
+    $scope.endRecordingText = 'Ending...';
+    $http.post( teal + "/episodes/" + $route.current.params.id + "/stop", {}).success(function(response) {
+        $scope.episode = Episode.get({id: $route.current.params.id}) 
     });
   };
 
@@ -67,11 +71,15 @@ yellow.controller('episodeController', function ($http, teal, $scope, $location,
   };
 
   $scope.logTrack = function(track){
-    track.log_time = moment.utc();
-    track.$save({id: $route.current.params.id, track_id: track.id}, function () {
+    // track.log_time = moment.utc();
+    // track.$save({id: $route.current.params.id, track_id: track.id}, function () {
+    //   $scope.tracks = Track.query({id: $route.current.params.id});
+    // });
+    $http.post( teal + "/episodes/" + $route.current.params.id + "/tracks/" + track.id + "/log", {}).success(function(response) {
       $scope.tracks = Track.query({id: $route.current.params.id});
     });
   };
+
   $scope.deleteTrack = function (track) {
     track.$remove({id: $route.current.params.id, track_id: track.id},function () {
       track.editing = false;

@@ -7,6 +7,7 @@ require 'resque'
 require 'fileutils'
 require 'logger'
 require 'protected_attributes'
+require 'net/http'
 
 require_relative 'bson'
 
@@ -63,6 +64,7 @@ module Teal
     		"contact" => "renandincer+teal@gmail.com",
     		"authors" => ["Renan Dincer"] #add your name here if you're contributing.
     	}
+
     	JSON.pretty_generate(info)
     end
 

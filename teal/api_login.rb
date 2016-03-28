@@ -77,6 +77,10 @@ module Teal
 			authenticate
 		end
 
+		def getKey(user)
+			Identity.where(email: user).first.api_key
+		end
+
 		private
 
 		def has_valid_cookie?

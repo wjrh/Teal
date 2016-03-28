@@ -15,6 +15,9 @@ class Episode
 	field :start_time,		type: Time
 	field :end_time,			type: Time
 	field :guid, 					type: String
+	
+	field :delay, 				type: Integer
+
 
 	# media related fields length is either in hh:mm:ss or mm:ss format
 	field :length,				type: String
@@ -50,7 +53,7 @@ class Episode
 		if options[:detailed]
 			options = options.merge(:except => [:updated_at, :created_at, :program_id, :_id], :methods => [:id, :program])
 		else
-			options = options.merge(:only => [:name, :image, :pubdate, :audio_url])
+			options = options.merge(:only => [:name, :image, :pubdate, :audio_url], :methods => [:id])
 		end
 		super(options)
 	end

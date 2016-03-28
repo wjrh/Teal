@@ -1,4 +1,4 @@
-workers 2
+workers 4
 threads_count = 8
 threads threads_count, threads_count
 

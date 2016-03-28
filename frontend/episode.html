@@ -60,25 +60,13 @@
 			</uib-tab>
 
 
-
-
-
-      <uib-tab ng-show="episode.program.stream.length > 0" heading="Record from stream">
-      <br>
-      <p><strong>Stream source:</strong> {{episode.program.stream}}</p>
-      </uib-tab>
-
-
-
-
-
       <uib-tab heading="Content logs">
       <br>
-      <div class="panel panel-default">
-        <div class="panel-heading">Start/Stop show</div>
+      <div class="panel panel-default" ng-show="episode.program.stream.length > 0">
+        <div class="panel-heading">Start/Stop program</div>
           <div class="panel-body">
-            <button class="btn btn-success" ng-show="!episode.start_time && !episode.end_time" type="button" ng-click="startEpisode()">Start Show</button>
-            <button class="btn btn-warning" ng-show="episode.start_time && !episode.end_time" type="button" ng-click="endEpisode()">End Show</button>
+            <button class="btn btn-success" ng-show="!episode.start_time && !episode.end_time" type="button" ng-click="startEpisode()">Start recording</button>
+            <button class="btn btn-warning" ng-show="episode.start_time && !episode.end_time" type="button" ng-click="endEpisode()">{{ endRecordingText }}</button>
             <span class="pull-right" ng-show="episode.start_time">Started at {{ episode.start_time | date:"h:mma" }}</span>
             <span class="pull-right" ng-show="episode.end_time">Ended at {{ episode.end_time | date:"h:mma" }}</span>
           </div>

@@ -13,6 +13,5 @@ gem 'redcarpet' 							# for markdown processing
 gem 'pony' 										# email sender
 gem 'redis' 									# in memory short term cache
 gem 'taglib-ruby' 						# process audio files, gather metadata
-gem 'rubocop', require: false # code styling
 gem 'resque'									# queueing in ruby
 gem 'rake'										# run rasks

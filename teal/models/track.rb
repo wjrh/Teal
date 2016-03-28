@@ -6,7 +6,7 @@ class Track
 	field :title,						type: String
 	field :artist,					type: String
 	field :mbid,						type: String
-	field :log_time,					type: Time
+	field :log_time,				type: Time
 
 	# Tracks are embedded in episodes	
 	embedded_in :episode
