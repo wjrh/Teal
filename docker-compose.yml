@@ -50,8 +50,9 @@ services:
   image: z7zmey/nginx-push-stream
   #get the nginx config file from the config folder
   volumes: 
-   - ./config/nginx-dev.conf:/etc/nginx/nginx.conf:ro
+   - ./config/nginx-prod.conf:/etc/nginx/nginx.conf:ro
    - ./frontend:/frontend:ro
+   - /var/lib/acme/teal.cool/:/var/lib/acme/teal.cool/:ro
   ports:
    - "80:80"
    - "443:443"

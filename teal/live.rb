@@ -12,14 +12,14 @@ module Teal
 
   		sleep(delay.to_i)
 
-			uri = URI("http://nginx/programs/#{program.shortname}/live/publish")
+			uri = URI("http://nginx:23021/programs/#{program.shortname}/live/publish")
       http = Net::HTTP.new(uri.host, uri.port)
       request = Net::HTTP::Post.new(uri.request_uri)
       request.body = event.to_json
       response = http.request(request)
 
       program.organizations.each do |org|
-      	uri = URI("http://nginx/organizations/#{org}/live/publish")
+      	uri = URI("http://nginx:23021/organizations/#{org}/live/publish")
 	      http = Net::HTTP.new(uri.host, uri.port)
 	      request = Net::HTTP::Post.new(uri.request_uri)
 	      request.body = event.to_json

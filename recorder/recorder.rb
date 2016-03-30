@@ -11,7 +11,7 @@ module Recorder
   #   A call can be to start a show, end a show.
   #   At the end of the recording, recorder uploads the file back to the server.
   class Recorder < Sinatra::Base
-    API_URI = 'nginx'.freeze
+    API_URI = 'nginx:23021'.freeze
     LIMIT = 2
 
     configure do
