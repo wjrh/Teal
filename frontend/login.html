@@ -51,5 +51,331 @@
 
 
 
+<title>API Documentation</title>
 
+</head>
+<body>
+<h2>API Documentation</h2>
+
+<h3>Hostname, HTTPS and request/response format</h3>
+
+<p>All API requests are made to the hostname <code>https://api.teal.cool</code>. An API response is not guaranteed when using HTTP. Teal is configured to use <a href="https://mozilla.github.io/server-side-tls/ssl-config-generator/?server=nginx-1.9.5&amp;openssl=1.0.1e&amp;hsts=yes&amp;profile=modern">modern ciphers only</a> with HTTPS. Oldest compatible clients are Firefox 27, Chrome 30, IE 11 on Windows 7, Edge, Opera 17, Safari 9, Android 5.0, and Java 8.</p>
+
+<p>Request and response format will be composed of only the object (dictionary) or collection (array) requested. Except for the XML feeds, all responses will be in JSON format.</p>
+
+<h3>Rate Limiting/Bursting</h3>
+
+<p>The API enforces a rate limit of 4 requests/sec per IP. Bursting is provided as a convenience before requests are rejected with a 503 status code.</p>
+
+<h3>Authentication and Authorization</h3>
+
+<h4>Authentication</h4>
+
+<p>Authentication is required for performing create, update or delete actions, but not required to read. Some meta information (such as owners for programs) will be provided to authenticated and authorized users and not to others. Episodes that have upcoming publishing dates also will only be shown to authenticated and authorized users.</p>
+
+<p>Every account is authenticated over email:</p>
+
+<pre><code>curl -X POST -d '{"email":"&lt;YOUR EMAIL&gt;"}' https://api.teal.cool/login
+</code></pre>
+
+<p>or using the shortcut version:</p>
+
+<pre><code>curl -X POST https://api.teal.cool/login?email=&lt;YOUR EMAIL&gt;
+</code></pre>
+
+<p>The login method will not return any useful information. Once an email is sent, it will expire in 8 minutes. During this time, you can not request an other authentication email.</p>
+
+<p>When you open your email account you will see an email from login@teal.cool. Upon following this link, you will be logged in to the web interface. Your key will be accessible at <code>api.teal.cool/key</code> from your browser. Note that every time you request a key, the old one will be invalidated.</p>
+
+<p>You can also choose only to get your key directly without the web interface.</p>
+
+<pre><code>curl https://api.teal.cool/auth?token=aZ3vNUb0Rjm7gBK4BeBjgg
+</code></pre>
+
+<p>API keys will never expire but every successful login will generate a new one.</p>
+
+<h4>Authorization</h4>
+
+<p>To perform privileged actions, you will need to call requests with the <code>teal-api-key</code> HTTP header. Alternatively you can call it with a cookie that was passed on authentication. If successful, all authenticated responses will return the <code>teal-logged-in-as</code> HTTP header.</p>
+
+<p>Calling <code>api.teal.cool/whoami</code> will return the email of the currently logged in user.</p>
+
+<p>Authorization on Teal is done either using cookies or keys passed through request headers. API key takes precedence if both is used.</p>
+
+<p>General rule to remember about authorization is that most things are public as you create the records and you can change Programs, Episodes and Tracks only if you're one of the owners.</p>
+
+<h3>Models</h3>
+
+<p>Program is the only top level model. A program can have many episodes, an episode can have many tracks. When a program is returned, a an array of its episodes are also returned in abbreviated form. When an episode is returned by itself, it is returned with an abbreviated form of its program and all of its tracks.</p>
+
+<h4>Program</h4>
+
+<p>A program looks like this:</p>
+
+<pre><code>{
+    "active": true,
+    "author": "Ted and Renan",
+    "copyright": "Renan and Ted",
+    "cover_image": "http://i.imgur.com/Lcychlc.png",
+    "description": "An overall great program!",
+    "image": "http://i.imgur.com/1iQ6U4d.png",
+    "itunes_categories": null,
+    "language": "en-us",
+    "name": "DD-MM-YYYY",
+    "organizations": ["WJRH"],
+    "owners": ["renandincer@gmail.com"],
+    "redirect_url": null,
+    "scheduled_time": null,
+    "shortname": "sendnudes",
+    "stream": "listen.wjrh.org",
+    "subtitle": "Ted and Renan play music",
+    "tags": ["music"],
+    "id": "56e7675ce2b026000a0ec5f6",
+    "episodes": [...]
+}
+</code></pre>
+
+<p> A program's episodes is returned (not shown above) with some details left out as a part of a program. The <code>id</code> attribute from the program can be used to request the full episode object</p>
+
+<h4>Episode</h4>
+
+<p>An episode looks like this:</p>
+
+<pre><code>{
+    "audio_url": "http://api.teal.cool/download/56e76edfc49c530010f9a2e5.mp3",
+    "description": "Ted really likes his Jazz. Ted's friend Kate calls in. Ted likes cheese? Everyone's happy today.",
+    "end_time": "2016-03-15T03:02:41.824+00:00",
+    "guid": "025de47f-52e4-47ad-80d1-87164094150c",
+    "image": null,
+    "length": "3212",
+    "name": "14-03-2016",
+    "pubdate": "2016-03-15T02:09:25.228+00:00",
+    "start_time": "2016-03-15T02:09:39.896+00:00",
+    "tracks": [...]
+    "type": "audio/mpeg",
+    "id": "56e76edfc49c530010f9a2e5",
+    "program": {...}
+}
+</code></pre>
+
+<p>An episode's program is returned (not shown above) with some details left out. The <code>shortname</code> attribute from the show can be used to gather full show.</p>
+
+<h4>Track</h4>
+
+<p>A track looks like this:</p>
+
+<pre><code>{
+    "artist": "Beirut",
+    "log_time": "2016-03-15T02:54:02.016+00:00",
+    "mbid": "2984729d-fb43-420b-9d03-d9e34562d843",
+    "title": "Elephant Gun",
+    "id": "56e77948c49c530020f9a2e6"
+}
+</code></pre>
+
+<h3>Using programs</h3>
+
+<p>In order to get programs you own you can run the following:</p>
+
+<pre><code>curl --header "teal-api-key: thisisakeykeykey" https://api.teal.cool/programs
+</code></pre>
+
+<p>As a result, you will get an array of programs.
+One can request a particular program with a request like the following:</p>
+
+<pre><code>curl https://api.teal.cool/programs/example-program
+</code></pre>
+
+<h4>Creating a program</h4>
+
+<p>In order to create a program make a HTTP POST request to <code>/programs</code> with your program in valid JSON format. A simple example would be:</p>
+
+<pre><code>curl --header "teal-api-key: thisisakeykeykey" -X POST -d '{"name":"Example Program"}' https://api.teal.cool/programs
+</code></pre>
+
+<p>When submitted Teal will respond with the created object in JSON and a 200 OK status code. A program will not be created if there is a program with the same shortname already exists (in the example above where a short name is not specified, Teal assumes that the shortname requested is <code>example-show</code>. To circumvent this, once can specify a shortname upon creation:</p>
+
+<pre><code>curl --header "teal-api-key: thisisakeykeykey" -X POST -d '{"name":"Example Program", "shortname":"greatawesomeshow"}' https://api.teal.cool/programs
+</code></pre>
+
+<p>If created successfully, the response will be 200 OK and the created object.
+Once can later view the program by navigating to the program. A program will now be visible to all with the url similar to below:</p>
+
+<pre><code>curl https://api.teal.cool/programs/greatawesomeshow
+</code></pre>
+
+<h4>Updating and deleting a program</h4>
+
+<p>Requesting a program using GET, making any changes necessary and making a POST request back to the program URL will be enough to update any program. Deleting is done via a HTTP DELETE request:</p>
+
+<pre><code>curl -X DELETE --header "teal-api-key: thisisakeykeykey" https://api.teal.cool/episodes/56e76edfc49c530010f9a2e5
+</code></pre>
+
+<p>A program can not be deleted until every episode that belongs to the program is deleted.</p>
+
+<h4>Organizations</h4>
+
+<p>A program can be a part of none, one or many organizations. A program that is part of a organization is displayed when an organization is queried at <code>/organizations/&lt;ORGANIZATIONNAME&gt;</code>:</p>
+
+<pre><code>curl https://api.teal.cool/organizations/awesomeorg
+</code></pre>
+
+<h3>Using episodes</h3>
+
+<p>Episodes belong to programs. An array of episode IDs can be found in programs. With an episode ID, an episode is located at <code>/episode/&lt;EPISODEID&gt;</code>:</p>
+
+<pre><code>curl https://api.teal.cool/episodes/56e76edfc49c530010f9a2e5
+</code></pre>
+
+<h4>Creating an episode</h4>
+
+<p>A program to host an episode must exist prior the creation of an episode. An episode can be created in two ways, either to <code>/programs/&lt;SHORTNAME&gt;/episodes/</code> or to <code>/episodes/?shortname=&lt;SHORTNAME&gt;</code>:</p>
+
+<pre><code>curl --header "teal-api-key: thisisakeykeykey" -X POST -d '{"name":"Example Episode"}' https://api.teal.cool/programs/exampleprogram/episodes/
+</code></pre>
+
+<p>or</p>
+
+<pre><code>curl --header "teal-api-key: thisisakeykeykey" -X POST -d '{"name":"Example tEpisode"}' https://api.teal.cool/episodes/?shortname=exampleprogram
+</code></pre>
+
+<h4>Updating and deleting a episode</h4>
+
+<p>Just like a program deleting is done via a HTTP DELETE request. Requesting an episode using GET, making any changes necessary and making a POST request back to the episode URL will be enough to update any episode:</p>
+
+<pre><code>curl --header "teal-api-key: thisisakeykeykey" -X POST -d '{"name":"Updated name of this episode"}' https://api.teal.cool/episodes/56e76edfc49c530010f9a2e5
+</code></pre>
+
+<h3>Using tracks</h3>
+
+<p>Tracks belong to episodes and is a part of the standard episode response. Tracks can also be called separately at <code>/episodes/&lt;EPISODEID&gt;/tracks</code>:</p>
+
+<pre><code>curl https://api.teal.cool/episodes/56e76edfc49c530010f9a2e5/tracks/56e77948c49c530020f9a2e6
+</code></pre>
+
+<h4>Creating a track</h4>
+
+<p>An episode to host a track must exist prior the creation of a track. A track is created by posting to the following: <code>/episodes/&lt;EPISODEID&gt;/tracks</code>.</p>
+
+<pre><code>curl --header "teal-api-key: thisisakeykeykey" -X POST -d '{ \
+    "artist": "Beirut", \
+    "mbid": "2984729d-fb43-420b-9d03-d9e34562d843", \
+    "title": "Elephant Gun", \ 
+}' https://api.teal.cool/programs/exampleprogram/episodes/
+</code></pre>
+
+<h4>Updating and deleting a track</h4>
+
+<p>Making a POST request to the track URL at <code>/episodes/&lt;EPISODEID&gt;/tracks/&lt;TRACKID&gt;</code> is required update any track. Deleting is done via a HTTP DELETE request:</p>
+
+<pre><code>curl -X DELETE --header "teal-api-key: thisisakeykeykey" https://api.teal.cool/episodes/56e76edfc49c530010f9a2e5/tracks/56e77948c49c530020f9a2e6
+</code></pre>
+
+<h4>MusicBrainz ID in contact of a track</h4>
+
+<p>Tracks support an optional attribute <code>mbid</code>. This refers to the MusicBrainz Release id. MusicBrainz is a community-maintained open source encyclopedia of music information maintaining a large catalog of music information. An example of a MusicBrainz release is <a href="https://musicbrainz.org/release/9f1caff4-5fd2-4eca-99d9-b7ef4c5b93a5">Andrew Bird's Left Hand Kisses</a>. Including this information as songs are logged might make make future data digging easier.</p>
+
+<h3>Audio Uploads</h3>
+
+<p>Audio of an episode can be uploaded to <code>/episodes/&lt;EPSIODEID&gt;/simpleupload/</code> as a <code>application/octet-stream</code>.</p>
+
+<pre><code>curl --data-binary "@/Users/renandincer/Desktop/vbb/vbb59.flac" -H "Content-Type: application/octet-stream" -X POST --header "teal-api-key: thisisakeykeykey" https://api.teal.cool/episodes/56e76edfc49c530010f9a2e5
+</code></pre>
+
+<p>or alternatively, uploads via <a href="https://github.com/flowjs/flow.js">Flow</a> is supported at
+<code>/episodes/&lt;EPSIODEID&gt;/upload/</code>.</p>
+
+<p>All files that can be read by avconv is accepted. This includes a wide array of audio files.</p>
+
+<p>Only one file per episode is allowed. An upload following a successful upload will overwrite the old episode audio.</p>
+
+<h4>Encoding following an upload</h4>
+
+<p>All new uploads are placed on a first come first served queue for encoding. After the encoding process, <code>audio_url</code>, <code>length</code> and <code>type</code> attributes of an episode will be set. There is currently no way to track the progress encoding until it is done. No files are served until the encoding is complete. The only way to track progress of encoding is to look for the changing attributes following the encoding process.</p>
+
+<p>The encoding equivalent to running <code>avconv -qscale:a 3</code> which produces an MP3 file with an average bitrate of 175kbps with the bitrate range of 150 to 195kbps.</p>
+
+<p>Original files cannot be downloaded and might be deleted for more space for others. Please store them for your own archival purposes.</p>
+
+<h3>Live Operations</h3>
+
+<p>Teal supports metadata on live programs in addition to prerecorded episodes. Teal can capture live audio from a stream, and log tracks live for serving a live audience of listeners.</p>
+
+<p>To serve live listeners, you will need to set up your own stream and online broadcasting infrastructure. Given an online stream, Teal can record, encode and publish the episode.</p>
+
+<h4>Recording from a stream</h4>
+
+<p>To start recording, make a blank POST request to <code>/episodes/&lt;EPISODEID&gt;/start</code> which will add a <code>start_time</code> attribute to an episode and start recording. To stop recording, perform a POST request to <code>/episodes/&lt;EPISODEID&gt;/stop</code> which will add a <code>end_time</code> attribute to an episode.</p>
+
+<p>You will need a valid stream url such as the URL of an Icecast stream defined in the program to record. Teal will return an error if a stream is not defined, if the stream is not reachable, if unable to start recording.</p>
+
+<p>By default, recording start and recording end is delayed by 12 seconds. You can change this with a URL parameter to any other number of seconds below 30 seconds: <code>/episodes/&lt;EPISODEID&gt;/start?delay=2</code>. Any number above 30 will be treated as 30. Because of the delay, the request to <code>/episodes/&lt;EPISODEID&gt;/stop</code> will respond that many seconds late, when the stopping is actually complete.</p>
+
+<h4>Live track logging</h4>
+
+<p>Independently from the the timestamps or recording of an episode, tracks can be timestamped as well. To log a track, make a GET request to <code>/episodes/&lt;EPISODEID&gt;/tracks/&lt;TRACKID&gt;/log</code>. This will place a <code>log_time</code> attribute to the track.</p>
+
+<h4>Subscribing to live events</h4>
+
+<p>Whenever a live event (start of an episode, end of an episode or the logging of a track) happens this event is published on one or more <a href="https://en.wikipedia.org/wiki/Server-sent_events">Server Sent Events</a> channels.</p>
+
+<p>Every program has its own channel at <code>/programs/&lt;SHORTNAME&gt;/live</code> that receives these events. In addition all organizations a program belongs to also receive the event at <code>/organizations/&lt;ORGANIZATIONNAME&gt;/live</code>:</p>
+
+<pre><code>data: {
+    "id": 1,
+    "event": {
+        "type": "episode-start",
+        "episode" : {...}
+    }
+}
+</code></pre>
+
+<p>Episode start and end events contain the same information, the epsiode. The end episode will also have contain updated tracks, if any exist.</p>
+
+<pre><code>data: {
+    "id": 1,
+    "event": {
+        "type": "episode-end",
+        "episode" : {...}
+    }
+}
+</code></pre>
+
+<p>An example of a track log event - note that both track and episode are included.</p>
+
+<pre><code>data: {
+    "id": 1,
+    "event": {
+        "type": "track-log",
+        "episode" : {...},
+        "track" : {
+            "artist": "Beirut",
+            "log_time": "2016-03-15T02:54:02.016+00:00",
+            "mbid": "2984729d-fb43-420b-9d03-d9e34562d843",
+            "title": "Elephant Gun",
+            "id": "56e77948c49c530020f9a2e6"
+        }
+    }
+}
+</code></pre>
+
+<h5>Handling timestamps manually</h5>
+
+<p>Just like any other field, <code>start_time</code>, <code>end_time</code> and <code>log_time</code> attributes can be set via a JSON HTTP POST request just like when editing the <code>name</code> or <code>description</code> attributes. However, this method of setting time will not send live events.</p>
+
+<h3>XML Feed (for iTunes and other podcasting clients)</h3>
+
+<p>Teal produces an iTunes compliant XML feed for podcasting. This can be found at <code>/programs/&lt;SHORTNAME&gt;/feed.xml</code>:</p>
+
+<pre><code>curl https://api.teal.cool/programs/exampleprogram/feed.xml
+</code></pre>
+
+<h4>Leaving Teal (redirection to an outside feed)</h4>
+
+<p>Many podcast clients doesn't let you change feed addresses after creation or they cache it which makes it harder to change hosting providers. Setting the <code>redirect_url</code> attribute of a program will redirect every hit to <code>/programs/&lt;SHORTNAME&gt;/feed.xml</code>. In addition, using a new feed url xml tag in your new feed will be helpful at making a permanent change:</p>
+
+<pre><code>&lt;itunes:new-feed-url&gt;http://newlocation.com/example.rss&lt;/itunes:new-feed-url&gt;
+</code></pre>
+</body>
+</html>
 

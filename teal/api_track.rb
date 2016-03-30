@@ -67,11 +67,7 @@ module Teal
 				track.log_time = Time.now + episode.delay
 				episode.save
 
-				uri = URI("http://nginx/programs/#{episode.program.shortname}/live/publish")
-	      http = Net::HTTP.new(uri.host, uri.port)
-	      request = Net::HTTP::Post.new(uri.request_uri)
-	      request.body = {:type => "track-log", :track => track, :epsiode => episode}.to_json
-	      response = http.request(request)
+	      Live.publish( {:type => "track-log", :track => track, :epsiode => episode}, episode.program, episode.delay)
 
 				return track.to_json
 			else

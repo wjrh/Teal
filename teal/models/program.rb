@@ -60,6 +60,7 @@ class Program
 		else
 			options = options.merge(:only => [:name, :shortname, :description, :image, :subtitle, :tags, :author])
 		end
+
 		super(options)
 	end
 	

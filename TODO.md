@@ -12,4 +12,9 @@
 - [ ] better error messages
 - [ ] better XML feed
 - [ ] display seconds and minutes correnctly
+
 - [ ] make frontend more seo friendly https://ma.ttias.be/technical-guide-seo/
+- [ ] when an episode is deleted go back to that episode
+- [ ] if a user had only one epsiode just go to that episode
+
+- [ ] fix the async issue in logging

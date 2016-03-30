@@ -18,8 +18,6 @@ module Teal
 			:media_path				  => ENV['MEDIA_PATH'] ||= yaml['media_path']
   end
 
-
-
 	private
 
   # Load the config YAML.

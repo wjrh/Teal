@@ -93,15 +93,11 @@ module Teal
 																						 'delay' => params['delay'] | 12
 																						 })
 			halt 500, "recorder could not be started" if (response.code.to_i != 200)
-			episode.delay = params['delay'] | 12
+			episode.delay = params['delay'].to_i | 12
 			episode.start_time = Time.now + episode.delay
 			episode.save
 
-      uri = URI("http://nginx/programs/#{episode.program.shortname}/live/publish")
-      http = Net::HTTP.new(uri.host, uri.port)
-      request = Net::HTTP::Post.new(uri.request_uri)
-      request.body = {:type => "episode-start", :episode => episode }.to_json
-      response = http.request(request)
+      Live.publish( {:type => "episode-start", :episode => episode }, episode.program, episode.delay)
 
 			200
 		end
@@ -119,11 +115,7 @@ module Teal
 			episode.end_time = Time.now + episode.delay #delay
 			episode.save
 
-			uri = URI("http://nginx/programs/#{episode.program.shortname}/live/publish")
-      http = Net::HTTP.new(uri.host, uri.port)
-      request = Net::HTTP::Post.new(uri.request_uri)
-      request.body = {:type => "episode-end", :episode => episode }.to_json
-      response = http.request(request)
+      Live.publish( {:type => "episode-end", :episode => episode }, episode.program, 0)
 
 			200
 		end

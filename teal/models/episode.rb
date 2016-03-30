@@ -45,7 +45,6 @@ class Episode
 		document.pubdate = Time.now if not document.guid
 	end
 
-
 	#overrides the json representation of this class.
 	#this is the place where the necessary information is shared with public
 	# TODO(renandincer): dont display past timed episodes
@@ -55,6 +54,7 @@ class Episode
 		else
 			options = options.merge(:only => [:name, :image, :pubdate, :audio_url], :methods => [:id])
 		end
+		
 		super(options)
 	end
 	
