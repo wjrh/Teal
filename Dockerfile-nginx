@@ -1,0 +1,8 @@
+FROM z7zmey/nginx-push-stream
+
+COPY ./config/nginx-prod.conf /etc/nginx/nginx.conf
+COPY ./frontend /frontend
+
+EXPOSE 443
+
+CMD ["nginx", "-g", "daemon off;"]

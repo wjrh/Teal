@@ -45,7 +45,7 @@ module Teal
 
 			cookie = identity.generate_cookie
 
-			response.set_cookie 'teal', cookie
+			response.set_cookie 'teal', { value: cookie, secure: true, httponly: true }
 			redirect URI::join(Teal.config.front_end_subdomain, 'loggedin') , identity.generate_api_key
 		end
 		
@@ -64,7 +64,7 @@ module Teal
 			halt 401, "you are unauthenticated" if not identity
 			identity.cookie = nil
 			identity.save
-			redirect Teal.config.front_end_subdomain
+			halt 200, "logged out".to_json
 		end
 
 		#returns if the current user is authenticated

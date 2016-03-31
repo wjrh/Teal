@@ -1,9 +1,19 @@
-yellow.controller('programsController', function (teal, $scope, $uibModal, $resource, $log) {
+yellow.controller('programsController', function (teal, $http, $scope, $uibModal, $resource, $log, $location) {
 
   var Program = $resource( teal + '/programs/:shortname',
    {shortname:'@shortname'});
 
   $scope.programs = Program.query();
+  $scope.logOut = function() {
+    $http.get(teal + "/logout", {}).then(
+    function () {
+      $location.path('/login');
+    },
+    function () {
+      $location.path('/login');
+    }
+    );
+  };
 
 $scope.newProgram = function () {
     var newProgram = new Program();

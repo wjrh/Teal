@@ -37,7 +37,7 @@ yellow.config(['$resourceProvider', function ($resourceProvider) {
   $resourceProvider.defaults.stripTrailingSlashes = false;
 }]);
 
-yellow.constant('teal', 'http://api.teal.cool');
+yellow.constant('teal', 'https://api.teal.cool');
 
 
 yellow.directive('fileModel', ['$parse', function ($parse) {
