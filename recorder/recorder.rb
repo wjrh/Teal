@@ -75,14 +75,14 @@ module Recorder
 
     def upload_stream(stream)
       tmp_path = File.join '/tmp', stream.episode_id
-      _encoding, s2 = Open3.capture2e("curl --data-binary '@#{tmp_path}'\
+      encoding, s2 = Open3.capture2e("curl --data-binary '@#{tmp_path}'\
         -H 'Content-Type: application/octet-stream'\
         -X POST\
         --header 'teal-api-key: #{stream.user_key}'\
         #{API_URI}/episodes/#{stream.episode_id}/simpleupload")
-
       p "uploaded episode #{stream.episode_id}" if s2.to_i == 0
       p "failed upload episode #{stream.episode_id}" if s2.to_i != 0
+      p encoding
       File.delete(tmp_path)
       halt 400 if s2.to_i != 0
     end

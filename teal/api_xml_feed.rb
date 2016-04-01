@@ -21,7 +21,7 @@ module Teal
 		         xml.channel do
 		           xml.title program["name"]
 		           xml.link "http://wjrh.org/#{program["shortname"]}"
-		           xml['itunes'].image('href' => "http://wjrh.org/vbb/logo2.jpg")
+		           xml['itunes'].image('href' => program['image'])
 		           
 		           xml.copyright program["copyright"] if program ["copyright"]
 		           xml['itunes'].subtitle program["subtitle"] if program["subtitle"]
@@ -48,7 +48,11 @@ module Teal
 			               xml.title episode['name']
 			               xml['itunes'].author program['author']
 			               xml.guid episode["guid"] ||= episode["id"]
-			               xml['itunes'].image("href" => episode['image'])
+			               if episode['image']
+			               	xml['itunes'].image("href" => episode['image'])
+			               else
+			               	xml['itunes'].image("href" => program['image'])
+			               end
 			               xml.pubDate episode["pubdate"].rfc2822
 			               xml['itunes'].duration episode['length']
 			               
