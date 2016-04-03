@@ -104,13 +104,16 @@ module Teal
 			token = identity.generate_login_token
 			link = Teal.config.api_subdomain + "/auth?token=" + token
 			expiry_time = Time.now + EMAIL_WAIT_TIMER
-			message_with_link = "Please follow this link to log in:\n#{link}\n\nThis link will expire at #{expiry_time.utc}."
+			message_with_link = "<p>You have requested to log into Teal.</p>
+			<strong><a href='#{link}'>Follow this link to log in to Teal</a></strong>
+			<p>This link will expire at #{expiry_time.utc}.</p>"
 
 			Pony.mail({
 				:to => params["email"],
 				:from => Teal.config.login_source_email,
 				:body => message_with_link,
 				:subject => "Teal login",
+				:headers => { 'Content-Type' => 'text/html' },
 				:via => :smtp,
 				:via_options => {
 					:address 	=> Teal.config.smtp_server,

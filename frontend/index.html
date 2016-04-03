@@ -1,27 +1,12 @@
 <!-- index.html -->
     <!DOCTYPE html>
 <html>
-  <head>
+  <head ng-csp ng-cloak>
     <!-- SCROLLS -->
     <!-- load bootstrap and fontawesome via CDN -->
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" />
-    <style type="text/css">.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }</style>
-    <style type="text/css">
-        @media (min-width: 768px) {
-          .container {
-            max-width: 730px;
-          }
-          .login {
-            padding-bottom: 40px;
-            padding-top: 10px;
-          }
-          .features {
-            padding-bottom: 100px;
-          }
-        }
-
-    </style>
+    <link rel="stylesheet" type="text/css" href="/styles.css" />
 
     <!-- SPELLS -->
     <!-- load angular and angular route via CDN -->
@@ -44,7 +29,7 @@
     <base href="/">
   </head>
 
-  <body ng-app="yellow" ng-controller="programsController">
+  <body ng-app="yellow" ng-csp ng-controller="programsController">
     <div class="container">
       <div ng-view></div>
     </div>
