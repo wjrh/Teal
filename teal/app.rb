@@ -41,6 +41,7 @@ module Teal
   class App < Sinatra::Base
 
     configure do
+      set :protection, :except => :json_csrf
 			Mongoid.load!("config/mongoid.yml")	
 			$redis = Redis.new(:url => Teal.config.redis_url)
 			Resque.redis = $redis
