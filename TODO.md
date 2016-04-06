@@ -18,3 +18,5 @@
 - [ ] if a user had only one epsiode just go to that episode
 
 - [ ] fix the async issue in logging
+
+- [ ] remove cookies with logout
