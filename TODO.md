@@ -20,3 +20,4 @@
 - [ ] fix the async issue in logging
 
 - [ ] remove cookies with logout
+- [ ] block certain program shortnames to be created with a list
