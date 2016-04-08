@@ -51,9 +51,7 @@
 
           <div ng-repeat="file in $flow.files">
             <div class="progress">
-              <div class="progress-bar" role="progressbar" style="width: {{file.sizeUploaded() / file.size * 100 | number:10}}%;">
-                {{file.sizeUploaded() / file.size * 100 | number:0}}%
-              </div>
+              <p><strong>Progress: </strong>{{file.sizeUploaded() / file.size * 100 | number:0}}%</p>
             </div>
           </div>
         </div>
