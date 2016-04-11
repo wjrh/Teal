@@ -97,9 +97,7 @@
           </div>
 
           <div ng-repeat="file in $flow.files">
-            <div class="progress">
               <p><strong>Progress: </strong>{{file.sizeUploaded() / file.size * 100 | number:0}}%</p>
-            </div>
           </div>
         </div>
 			</uib-tab>
