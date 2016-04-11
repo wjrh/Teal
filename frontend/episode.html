@@ -13,13 +13,26 @@
     
 		<uib-tabset>
 
+      <uib-tab heading="Content logs">
+      <br>
+      <div class="panel panel-default" ng-show="episode.program.stream.length > 0">
+        <div class="panel-heading">Start/Stop program</div>
+          <div class="panel-body">
+            <button class="btn btn-success" ng-show="!episode.start_time && !episode.end_time" type="button" ng-click="startEpisode()">Start recording</button>
+            <button class="btn btn-warning" ng-show="episode.start_time && !episode.end_time" type="button" ng-click="endEpisode()">{{ endRecordingText }}</button>
+            <span class="pull-right" ng-show="episode.start_time">Started at {{ episode.start_time | date:"h:mma" }}</span>
+            <span class="pull-right" ng-show="episode.end_time">Ended at {{ episode.end_time | date:"h:mma" }}</span>
+          </div>
+        </div>
 
-			<uib-tab heading="Episode Info">
+
+			<uib-tab heading="Episode Details">
 				<br>
 				<p><strong>Name:</strong> {{ episode.name }}</p>
  				<p><strong>Description:</strong> {{ episode.description }}</p>
 		    <p><strong>Image:</strong> {{ episode.image }} </p>
-  	    <p><strong>Publish date</strong> {{episode.pubdate |  date : 'EEEE, MMMM dd, yyyy h:mm a'}}</p>
+  	    <p><strong>Publish date:</strong> {{episode.pubdate |  date : 'EEEE, MMMM dd, yyyy h:mm a'}}</p>
+        <p><strong>Hits:</strong> {{episode.hits || 0}}</p>
         <div ng-show="episode.audio_url.length > 0">
           <p><strong>Audio Link:</strong> {{episode.audio_url}}</p>
           <p><strong>Audio Length:</strong> {{episode.length}} seconds</p>
@@ -58,17 +71,7 @@
 			</uib-tab>
 
 
-      <uib-tab heading="Content logs">
-      <br>
-      <div class="panel panel-default" ng-show="episode.program.stream.length > 0">
-        <div class="panel-heading">Start/Stop program</div>
-          <div class="panel-body">
-            <button class="btn btn-success" ng-show="!episode.start_time && !episode.end_time" type="button" ng-click="startEpisode()">Start recording</button>
-            <button class="btn btn-warning" ng-show="episode.start_time && !episode.end_time" type="button" ng-click="endEpisode()">{{ endRecordingText }}</button>
-            <span class="pull-right" ng-show="episode.start_time">Started at {{ episode.start_time | date:"h:mma" }}</span>
-            <span class="pull-right" ng-show="episode.end_time">Ended at {{ episode.end_time | date:"h:mma" }}</span>
-          </div>
-        </div>
+      
       
       <div class="panel panel-default">
         <div class="panel-heading">Track List</div>

@@ -17,7 +17,7 @@ class Episode
 	field :guid, 					type: String
 	
 	field :delay, 				type: Integer
-
+	field :hits,					type: Integer, default: 0
 
 	# media related fields length is either in hh:mm:ss or mm:ss format
 	field :length,				type: String

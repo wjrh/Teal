@@ -14,7 +14,7 @@ module Teal
 
 			#log request
 			p "TIME=#{Time.new.utc} FILE=#{episode_id}.mp3 IP=#{request.ip} HTTP_RANGE=#{request.env["HTTP_RANGE"]}"
-
+			episode.inc(hits: 1)
 			content_type episode.type
 			send_file path_to_file
 		end
