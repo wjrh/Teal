@@ -4,7 +4,7 @@ module Teal
 		# Return the list of all programs
 		# TODO(renandincer): this will in the future return only the programs owned
 		get "/programs/?" do
-			return Program.get_all.to_json if current_user === "renandincer@gmail.com"
+			return Program.get_all.to_json if Teal.config.god_emails.include? (current_user)
 			Program.where(:owners => current_user).all.to_json
 		end
 

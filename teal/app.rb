@@ -66,7 +66,7 @@ module Teal
     		"contact" => "renandincer+teal@gmail.com",
     		"authors" => ["Renan Dincer"] #add your name here if you're contributing.
     	}
-
+      
     	JSON.pretty_generate(info)
     end
 

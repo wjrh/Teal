@@ -15,3 +15,7 @@ login_source_email: "Teal <login@teal.cool>"
 
 #media storage configuration
 media_path: "/data/teal-media/"
+
+#administration
+god_emails:
+ - "example@example.com"
