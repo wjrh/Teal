@@ -51,7 +51,7 @@ module Teal
     before do
       content_type 'application/json'
 
-      headers 'Access-Control-Allow-Origin' => "*",
+      headers 'Access-Control-Allow-Origin' => "#{Teal.config.front_end_subdomain}",
             'Access-Control-Allow-Methods' => ['OPTIONS', 'GET', 'POST', 'DELETE'],
 						'Access-Control-Allow-Credentials' => true,
             'teal-logged-in-as' => current_user
