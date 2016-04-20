@@ -7,28 +7,31 @@
   <div class="row">
     <div class="col-xs-12">
       <uib-accordion>
-         <uib-accordion-group heading="Essentials" is-open="true">
+         <uib-accordion-group heading="What is this program?">
           Name: <input class="form-control" type="text" ng-model="program.name">
-          Image Link: <input class="form-control" type="text" ng-model="program.image">
+          Subtitle: <input class="form-control" type="text" ng-model="program.subtitle">
+          Square Image URL (1400x1400): <input class="form-control" type="text" ng-model="program.image">
+          Cover Image URL (480x960): <input class="form-control" type="text" ng-model="program.cover_image">
           Description: <textarea style="height:10em" class="form-control" ng-model="program.description"></textarea>
          </uib-accordion-group>
-         <uib-accordion-group heading="Meta Information">
+         <uib-accordion-group heading="Who is involved with the program?">
           Author(s): <input class="form-control" type="text"  ng-model="program.author">
           Owner Emails: {{ program.owners }} <input class="form-control" ng-list ng-model="program.owners">
          </uib-accordion-group>
+         <uib-accordion-group heading="When is the program?">
+          Scheduled Time: <input class="form-control" type="text" ng-model="program.scheduled_time">
+         </uib-accordion-group>
+         <uib-accordion-group heading="Advanced Options">
+          Language: <input class="form-control" type="text" ng-model="program.language">
+          iTunes Categories: {{ program.itunes_categories }} <input class="form-control" ng-list ng-model="program.itunes_categories">
+          Copyright Notice: <input class="form-control" type="text" ng-model="program.copyright">
+          Tags: {{ program.tags }} <input class="form-control" ng-list ng-model="program.tags">
+          Organizations: {{ program.organizations }} <input class="form-control" ng-list ng-model="program.organizations">
+          Shortname: <input class="form-control" type="text" ng-model="program.shortname">
+          Redirect URL: <input class="form-control" ng-model="program.redirect_url">
+          Stream: <input class="form-control" type="text"  ng-model="program.stream">
+         </uib-accordion-group>
       </uib-accordion>
-      Shortname: <input class="form-control" type="text" ng-model="program.shortname">
-      Copyright Notice: <input class="form-control" type="text" ng-model="program.copyright">
-      Scheduled Time: <input class="form-control" type="text" ng-model="program.scheduled_time">
-      Subtitle: <input class="form-control" type="text" ng-model="program.subtitle">
-      Language: <input class="form-control" type="text" ng-model="program.language">
-      iTunes Categories: {{ program.itunes_categories }} <input class="form-control" ng-list ng-model="program.itunes_categories">
-      Cover Image (480x960): <input class="form-control" type="text" ng-model="program.cover_image">
-      Tags: {{ program.tags }} <input class="form-control" ng-list ng-model="program.tags">
-      
-      Redirect URL: <input class="form-control" ng-model="program.redirect_url">
-      Organizations: {{ program.organizations }} <input class="form-control" ng-list ng-model="program.organizations">
-      Stream: <input class="form-control" type="text"  ng-model="program.stream">
     </div>
   </div>
 </div>
