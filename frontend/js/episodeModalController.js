@@ -1,6 +1,8 @@
 yellow.controller('episodeModalController', function ($scope, $location, $uibModalInstance,$log,  episode) {
   $scope.episode = episode;
 
+  $scope.isFirstOpen = true;
+  
   $scope.save = function () {
     $scope.episode.$save(function () {
       $uibModalInstance.close();

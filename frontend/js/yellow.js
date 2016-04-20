@@ -70,11 +70,3 @@ yellow.service('fileUpload', ['$http', function ($http) {
         });
     }
 }]);
-
-
-// yellow.config(['flowFactoryProvider', function (flowFactoryProvider) {
-//     flowFactoryProvider.defaults = {
-//         target: function(){ return teal + '/episodes/' + $route.current.params.id + '/upload'},
-//         permanentErrors:[404, 500, 501]
-//     };
-// }]);

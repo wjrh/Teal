@@ -6,11 +6,21 @@
 <div class="modal-body">
 	<div class="row">
 		<div class="col-xs-12">
-			Name: <input class="form-control" type="text" ng-model="episode.name">
-			Description: <textarea style="height:10em" class="form-control" ng-model="episode.description"></textarea>
-			Image Link: <input class="form-control" type="text" ng-model="episode.image">
-			Pubdate: <input class="form-control" type="text" ng-model="episode.pubdate"><br>
-			(<strong>Publish date</strong> {{episode.pubdate |  date : 'EEEE, MMMM dd, yyyy h:mm a'}}.)
+			<uib-accordion>
+         <uib-accordion-group heading="What is this episode?" is-open="isFirstOpen">
+         <label>Name:</label>
+					<input class="form-control" type="text" ng-model="episode.name">
+					<label>Description:</label>
+					<textarea style="height:10em" class="form-control" ng-model="episode.description"></textarea>
+				 	</uib-accordion-group>
+				 	<uib-accordion-group heading="Advanced settings">
+				 	<label>Image Link:</label>
+				 	<p>You can add an episode image unique to this episode if different from the Program image.</p><input class="form-control" type="text" ng-model="episode.image">
+				 	<label>Pubdate:</label>
+				 	<p>Pubdate is the date this episode is published.</p>
+					<input class="form-control" type="text" ng-model="episode.pubdate"><br>
+					(<strong>Publish date</strong> {{episode.pubdate |  date : 'EEEE, MMMM dd, yyyy h:mm a'}}.)
+				 </uib-accordion-group>
 		</div>
 	</div>
 </div>

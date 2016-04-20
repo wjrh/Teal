@@ -8,28 +8,45 @@
     <div class="col-xs-12">
       <uib-accordion>
          <uib-accordion-group heading="What is this program?">
-          Name: <input class="form-control" type="text" ng-model="program.name">
-          Subtitle: <input class="form-control" type="text" ng-model="program.subtitle">
-          Square Image URL (1400x1400): <input class="form-control" type="text" ng-model="program.image">
-          Cover Image URL (480x960): <input class="form-control" type="text" ng-model="program.cover_image">
-          Description: <textarea style="height:10em" class="form-control" ng-model="program.description"></textarea>
+          <label>Name:</label>
+          <input class="form-control" type="text" ng-model="program.name">
+          <label>Subtitle:</label>
+          <input class="form-control" type="text" ng-model="program.subtitle">
+          <label>Square Image URL (1400x1400):</label>
+          <input class="form-control" type="text" ng-model="program.image">
+          <label>Cover Image URL (480x960):</label>
+          <input class="form-control" type="text" ng-model="program.cover_image">
+          <label>Description:</label>
+          <textarea style="height:10em" class="form-control" ng-model="program.description"></textarea>
          </uib-accordion-group>
          <uib-accordion-group heading="Who is involved with the program?">
-          Author(s): <input class="form-control" type="text"  ng-model="program.author">
-          Owner Emails: {{ program.owners }} <input class="form-control" ng-list ng-model="program.owners">
+          <label>Author(s):</label>
+          <input class="form-control" type="text"  ng-model="program.author">
+          <label>Owner Emails:</label>
+          {{ program.owners }} <input class="form-control" ng-list ng-model="program.owners">
          </uib-accordion-group>
          <uib-accordion-group heading="When is the program?">
-          Scheduled Time: <input class="form-control" type="text" ng-model="program.scheduled_time">
+          <label>Scheduled Time:</label>
+          <input class="form-control" type="text" ng-model="program.scheduled_time">
          </uib-accordion-group>
          <uib-accordion-group heading="Advanced Options">
-          Language: <input class="form-control" type="text" ng-model="program.language">
-          iTunes Categories: {{ program.itunes_categories }} <input class="form-control" ng-list ng-model="program.itunes_categories">
-          Copyright Notice: <input class="form-control" type="text" ng-model="program.copyright">
-          Tags: {{ program.tags }} <input class="form-control" ng-list ng-model="program.tags">
-          Organizations: {{ program.organizations }} <input class="form-control" ng-list ng-model="program.organizations">
-          Shortname: <input class="form-control" type="text" ng-model="program.shortname">
-          Redirect URL: <input class="form-control" ng-model="program.redirect_url">
-          Stream: <input class="form-control" type="text"  ng-model="program.stream">
+         <label>Language: </label>
+          <input class="form-control" type="text" ng-model="program.language">
+          <label>iTunes Categories: </label>
+          {{ program.itunes_categories }} <input class="form-control" ng-list ng-model="program.itunes_categories">
+          <label>Copyright Notice: </label>
+          <input class="form-control" type="text" ng-model="program.copyright">
+          <label>Tags: </label>
+          {{ program.tags }} 
+          <input class="form-control" ng-list ng-model="program.tags" >
+          <label>Organizations: </label>
+          {{ program.organizations }} <input class="form-control" ng-list ng-model="program.organizations">
+          <label>Shortname: </label>
+          <input class="form-control" type="text" ng-model="program.shortname">
+          <label>Redirect URL: </label>
+          <input class="form-control" ng-model="program.redirect_url">
+          <label>Stream: </label>
+          <input class="form-control" type="text"  ng-model="program.stream">
          </uib-accordion-group>
       </uib-accordion>
     </div>
