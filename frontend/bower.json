@@ -1,0 +1,17 @@
+{
+  "name": "teal-frontend",
+  "homepage": "https://github.com/wjrh/Teal",
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-tags": "^0.2.10"
+  }
+}
