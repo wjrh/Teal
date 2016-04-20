@@ -47,10 +47,11 @@ services:
 
  nginx:
   container_name: nginx
-  image: z7zmey/nginx-push-stream
+  build:
+   context: .
+   dockerfile: Dockerfile-nginx
   volumes: 
-   - ./config/nginx-dev.conf:/etc/nginx/nginx.conf:ro
-   - ./frontend:/frontend:ro
+   - /frontend:/usr/src/app/frontend:ro
   ports:
    - "80:80"
   depends_on:
