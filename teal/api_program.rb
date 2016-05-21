@@ -38,6 +38,11 @@ module Teal
 				data.merge!(shortname: shortname)
 			end
 			
+			# make all owners lowercase
+			data["owners"].each do |email|
+				email = email.downcase
+			end
+			
 			#get the program
 			#prevent new program creation when a program is changing shortnames. this is why we need ids.
 			program = Program.where(id: data['id']).first || Program.where(shortname: params["shortname"]).first_or_initialize
