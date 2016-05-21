@@ -23,7 +23,7 @@ module Teal
 			request.body.rewind
 			body =  request.body.read
 			data = JSON.parse body
-			params["email"] = data["email"] if data["email"]
+			params["email"] = data["email"].downcase if data["email"] #translate to lowercase-only email
 			#halt if its not a valid email or empty
 			if not valid_email?(params["email"])
 				halt 400, "invalid email".to_json
