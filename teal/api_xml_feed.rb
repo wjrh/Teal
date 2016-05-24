@@ -8,6 +8,7 @@ module Teal
    	get "/programs/:shortname/feed.xml/?" do
 			program = Program.where(shortname: params['shortname']).first
 			halt 404 if program.nil?
+			content_type 'text/xml'
 			program.episodes.sort! { |a,b| a.pubdate <=> b.pubdate }
 			redirect program.redirect_url if not (program.redirect_url.nil? or program.redirect_url.eql?(""))
 			return generatefeed(program)
@@ -26,6 +27,9 @@ module Teal
 		           xml.copyright program["copyright"] if program ["copyright"]
 		           xml['itunes'].subtitle program["subtitle"] if program["subtitle"]
 		           xml['itunes'].author program["author"] if program["author"]
+		           xml['itunes'].explicit program["explicit"] if program["explicit"]
+		           xml.language program["language"] if program["language"]
+
 		           if program["itunes_categories"]
 			           program["itunes_categories"].each do |category|
 			           	xml['itunes'].category("text" => category) 
@@ -47,6 +51,7 @@ module Teal
 			             xml.item do
 			               xml.title episode['name']
 			               xml['itunes'].author program['author']
+			               xml['itunes'].explicit episode["explicit"] if episode["explicit"]
 			               xml.guid episode["guid"] ||= episode["id"]
 			               if episode['image']
 			               	xml['itunes'].image("href" => episode['image'])

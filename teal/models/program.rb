@@ -24,11 +24,13 @@ class Program
 	field :redirect_url,				type: String # url to redirect for the podcast xml
 	field :organizations,				type: Array
 	field :stream,							type: String #stream to capture the audio
+	field :explicit, 						type: Boolean
 
+	#set mass assignable (through api) values here
 	attr_accessible :name, :copyright, :shortname, :description, :image,
 									:scheduled_time, :subtitle, :language, :itunes_categories,
 									:author, :cover_image, :owners, :tags, :active,
-									:redirect_url, :organizations, :stream
+									:redirect_url, :organizations, :stream, :explicit
 
 	# Index shortname and check for uniqueness
 	index({ shortname: 1 }, { unique: true })

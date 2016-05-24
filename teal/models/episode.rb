@@ -15,6 +15,7 @@ class Episode
 	field :start_time,		type: Time
 	field :end_time,			type: Time
 	field :guid, 					type: String
+	field :explicit, 			type: Boolean
 	
 	field :delay, 				type: Integer
 	field :hits,					type: Integer, default: 0
@@ -24,10 +25,10 @@ class Episode
 	field :type,					type: String
 	field :audio_url,     type: String
 
-
+	#set mass assignable (through api) values here
 	attr_accessible :name, :description, :image, :pubdate,
 									:start_time, :end_time, :guid, :length,
-									:type, :audio_url
+									:type, :audio_url, :explicit
 
 
 	# Episodes belong to programs

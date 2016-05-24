@@ -13,13 +13,20 @@
 					<label>Description:</label>
 					<textarea style="height:10em" class="form-control" ng-model="episode.description"></textarea>
 				 	</uib-accordion-group>
-				 	<uib-accordion-group heading="Advanced settings">
+				 <uib-accordion-group heading="Advanced settings">
 				 	<label>Image Link:</label>
 				 	<p>You can add an episode image unique to this episode if different from the Program image.</p><input class="form-control" type="text" ng-model="episode.image">
 				 	<label>Pubdate:</label>
 				 	<p>Pubdate is the date this episode is published.</p>
 					<input class="form-control" type="text" ng-model="episode.pubdate"><br>
-					(<strong>Publish date</strong> {{episode.pubdate |  date : 'EEEE, MMMM dd, yyyy h:mm a'}}.)
+					(<strong>Publish date</strong> {{episode.pubdate |  date : 'EEEE, MMMM dd, yyyy h:mm a'}}.)<br>
+					<label>Explicit content:</label>
+					<p>Mark explicit if this episode contains any explicit content.</p>
+					<div class="btn-group">
+						<label class="btn btn-default" ng-model="episode.explicit" uib-btn-radio="null" >Unset</label>
+		        <label class="btn btn-default" ng-model="episode.explicit" uib-btn-radio="true" >Explicit</label>
+		        <label class="btn btn-default" ng-model="episode.explicit" uib-btn-radio="false" >Clean</label>
+			    </div>
 				 </uib-accordion-group>
 		</div>
 	</div>

@@ -47,6 +47,13 @@
           <input class="form-control" ng-model="program.redirect_url">
           <label>Stream: </label>
           <input class="form-control" type="text"  ng-model="program.stream">
+          <label>Explicit content:</label>
+          <p>Mark explicit if this program contains any explicit content.</p>
+          <div class="btn-group">
+            <label class="btn btn-default" ng-model="program.explicit" uib-btn-radio="null" >Unset</label>
+            <label class="btn btn-default" ng-model="program.explicit" uib-btn-radio="true" >Explicit</label>
+            <label class="btn btn-default" ng-model="program.explicit" uib-btn-radio="false" >Clean</label>
+          </div>
          </uib-accordion-group>
       </uib-accordion>
     </div>
