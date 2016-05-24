@@ -21,3 +21,4 @@
 - [ ] remove cookies with logout
 - [ ] block certain program shortnames to be created with a list
 - [ ] make username checking case insensitive
+- [ ] change this to a preview url: xml.link "http://wjrh.org/#{program["shortname"]}"
