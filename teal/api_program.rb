@@ -38,10 +38,7 @@ module Teal
 				data.merge!(shortname: shortname)
 			end
 			
-			# make all owners lowercase
-			data["owners"].each do |email|
-				email = email.downcase
-			end
+			
 			
 			#get the program
 			#prevent new program creation when a program is changing shortnames. this is why we need ids.
@@ -52,15 +49,19 @@ module Teal
 				halt 400, "you need log in to enter a new program".to_json if not authenticated?
 				program.update_attributes(data)
 				program.push(owners: current_user)
-				program.save
-				program.to_json
 			elsif program.owner?(current_user)
 				program.update_attributes(data)
-				program.save
-				program.to_json
 			else
 				halt 401, "not allowed to perform such action"
 			end
+
+			# make all owners lowercase
+			data["owners"].each do |email|
+				email = email.downcase
+			end
+			program.save
+			program.to_json
+			
 		end
 
 
