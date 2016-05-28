@@ -49,7 +49,7 @@ module Teal
 				halt 400, "you need log in to enter a new program".to_json if not authenticated?
 				program.update_attributes(data)
 				program.push(owners: current_user)
-			elsif ?(current_user)
+			elsif program.owner?(current_user)
 				program.update_attributes(data)
 			else
 				halt 401, "not allowed to perform such action"
