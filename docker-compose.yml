@@ -1,6 +1,7 @@
 #docker compose file for teal
 version: '2'
 services:
+
  redis:
   container_name: redis
   image: redis
@@ -54,6 +55,7 @@ services:
    - /frontend:/usr/src/app/frontend:ro
    - /var/lib/acme/:/var/lib/acme/:ro
   ports:
+   - "80:80"
    - "443:443"
   depends_on:
    - teal
