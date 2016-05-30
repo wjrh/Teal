@@ -1,6 +1,7 @@
 require 'nokogiri'
 require 'tilt'
 require 'tilt/redcarpet'
+require 'uri'
 
 module Teal
 	class App < Sinatra::Base
@@ -10,7 +11,17 @@ module Teal
 			halt 404 if program.nil?
 			content_type 'text/xml'
 			program.episodes.sort! { |a,b| a.pubdate <=> b.pubdate }
-			redirect program.redirect_url if not (program.redirect_url.nil? or program.redirect_url.eql?(""))
+
+			if (!program.redirect_url.nil? && !program.redirect_url.include?("api.teal.cool"))
+				redirect program.redirect_url if not (program.redirect_url.nil? or program.redirect_url.eql?(""))
+			end
+
+			#convert all links to http to satisfy iTunes requirements. those links can be redirected to https later
+			program.episodes.each do |episode|
+				if !episode["audio_url"].nil? && episode["audio_url"].start_with?("https")
+					episode["audio_url"].gsub!("https", "http")
+				end
+			end
 			return generatefeed(program)
 		end
 
@@ -27,8 +38,12 @@ module Teal
 		           xml.copyright program["copyright"] if program ["copyright"]
 		           xml['itunes'].subtitle program["subtitle"] if program["subtitle"]
 		           xml['itunes'].author program["author"] if program["author"]
-		           xml['itunes'].explicit program["explicit"] if program["explicit"]
+		           xml['itunes'].explicit program["explicit"] if not program["explicit"].nil?
 		           xml.language program["language"] if program["language"]
+		           if (program["redirect_url"] =~ URI::regexp)
+		           	xml['itunes'].send(:"new-feed-url", program["redirect_url"])
+							 end
+		           
 
 		           if program["itunes_categories"]
 			           program["itunes_categories"].each do |category|
