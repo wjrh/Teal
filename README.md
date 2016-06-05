@@ -19,4 +19,5 @@ Teal is composed of several Docker containers, managed with Docker Compose:
 It is useful to push an update to the production but this should be done without stopping stateful containers such as the `encode_worker` or `recorder` so that ongoing recordings or encodings don't get cut in half. The following will rebuild only the containers and restart the containers only if there is a change.
 
 Teal: `docker-compose build teal && docker-compose up -d --no-deps teal`
+
 Frontend: `docker-compose build nginx && docker-compose up -d --no-deps nginx`
