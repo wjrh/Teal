@@ -64,8 +64,7 @@ module Teal
     		"about" => "Teal is WJRH's DJ-Program-Episode management API",
     		"documentation" => "github.com/wjrh/Teal",
     		"contact" => "renandincer+teal@gmail.com",
-    		"authors" => ["Renan Dincer"] #add your name here if you're contributing.
-    	}
+    		"authors" => ["Renan Dincer","Eric Weber"]    	}
       
     	JSON.pretty_generate(info)
     end

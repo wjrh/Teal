@@ -1,15 +1,15 @@
 # teal configuration
 domain: "teal.cool"
-front_end_subdomain: "http://teal.cool"
-api_subdomain: "http://api.teal.cool"
+front_end_subdomain: "https://teal.cool"
+api_subdomain: "https://api.teal.cool"
 
 #mongo and redis configuration
 mongo_url: "mongo"
 redis_url: "redis://redis:6379"
 
 # email configuration
-smtp_server:
-smtp_user:
+smtp_server: "smtp.example.com"
+smtp_user: 
 smtp_password:
 login_source_email: "Teal <login@teal.cool>"
 
