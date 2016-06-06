@@ -112,7 +112,7 @@ module Teal
 			response = Net::HTTP.post_form(uri, {'episode_id' => params['id']})
 			p "RESPONSE FROM STOP RECORDER IS #{response.code}"
 			halt 500, "recorder could not be stopped" if (response.code.to_i != 200)
-			episode.end_time = Time.now + episode.delay #delay
+			episode.end_time = Time.now #delay is already added at the recorder
 			episode.save
 
       Live.publish( {:type => "episode-end", :episode => episode }, episode.program, 0)

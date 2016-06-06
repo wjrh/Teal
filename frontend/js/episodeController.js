@@ -1,4 +1,4 @@
-yellow.controller('episodeController', function ($http, teal, $scope, $location, $resource, $uibModal, $route, $log) {
+yellow.controller('episodeController', function ($interval, $filter, $http, teal, $scope, $location, $resource, $uibModal, $route, $log) {
 
   // program class
   var Episode = $resource( teal + '/episodes/:id',
@@ -11,6 +11,22 @@ yellow.controller('episodeController', function ($http, teal, $scope, $location,
   $scope.tracks = Track.query({id: $route.current.params.id});
   $scope.newTrack = new Track();
   $scope.endRecordingText = 'End recording';
+
+  // interval to increment the timer
+  var timerinterval = $interval( $scope.timer, 1000);
+
+  $scope.timer = function(){
+    var start = $scope.episode.start_time;
+    var end = $scope.episode.end_time;
+    if (start && end)  {
+      $interval.cancel(timerinterval);
+      return ""
+    } else if (start && !end) {
+      return $filter('date')(new Date() - Date.parse(start) + 12000, 'H:mm:ss', "+0000");
+    } else {
+      return "0:00:00";
+    }
+  }
 
 
   $scope.editEpisode = function (episode) {
@@ -43,6 +59,7 @@ yellow.controller('episodeController', function ($http, teal, $scope, $location,
   };
 
   $scope.endEpisode = function(){
+    $interval.cancel(timerinterval);
     $scope.endRecordingText = 'Ending...';
     $http.post( teal + "/episodes/" + $route.current.params.id + "/stop", {}).success(function(response) {
         $scope.episode = Episode.get({id: $route.current.params.id}) 

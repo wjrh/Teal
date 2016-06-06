@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-xs-12">
   	 <ol class="breadcrumb" style="background-color: #F9F9F9">
           <li><a href="/programs/">All Programs</a></li>
           <li><a href="/programs/{{ episode.program.shortname }}">{{ episode.program.name }}</a></li>
@@ -18,13 +18,31 @@
       <div class="panel panel-default" ng-show="episode.program.stream.length > 0">
         <div class="panel-heading">Start/Stop program</div>
           <div class="panel-body">
-            <button class="btn btn-success" ng-show="!episode.start_time && !episode.end_time" type="button" ng-click="startEpisode()">Start recording</button>
-            <button class="btn btn-warning" ng-show="episode.start_time && !episode.end_time" type="button" ng-click="endEpisode()">{{ endRecordingText }}</button>
-            <span class="pull-right" ng-show="episode.start_time">Started at {{ episode.start_time | date:"h:mma" }}</span>
-            <span class="pull-right" ng-show="episode.end_time">Ended at {{ episode.end_time | date:"h:mma" }}</span>
+            <div class="row">
+              <div class="col-xs-6 col-xs-offset-3">
+                <p class="text-center" style="font-size:60px; font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;">{{ timer() }}</p>
+
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-6 col-xs-offset-3">
+
+                <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                  <div class="btn-group" role="group">
+                    <button class="btn btn-success btn-sm" ng-if="!episode.start_time && !episode.end_time" type="button" ng-click="startEpisode()">Start recording</button>
+                    <button type="button" ng-if="episode.start_time" class="center-block btn btn-default btn-sm" disabled="disabled">Started {{ episode.start_time | date:"h:mma" }}</button>
+                  </div>
+                  <div class="btn-group" role="group">
+                    <button class="btn btn-warning btn-sm" ng-if="!episode.end_time" ng-disabled="!episode.start_time" type="button" ng-click="endEpisode()">{{ endRecordingText }}</button>
+                    <button type="button" ng-if="episode.end_time" class="center-block btn btn-default btn-sm" disabled="disabled">Ended {{ episode.end_time | date:"h:mma" }}</button>
+                  </div>
+                </div>
+
+            </div>
           </div>
         </div>
-      
+      </div>
+
       <div class="panel panel-default">
         <div class="panel-heading">Track List</div>
           <div class="panel-body">
@@ -58,8 +76,6 @@
 
 
 
-
-
 			<uib-tab heading="Episode Details">
 				<br>
 				<p><strong>Name:</strong> {{ episode.name }}</p>
@@ -74,8 +90,6 @@
         </div>
         <p ng-hide="episode.audio_url.length > 0">You have no audio file linked to this episode.</p>
 			</uib-tab>
-
-
 
 
 			<uib-tab heading="Manual Upload">
@@ -101,8 +115,6 @@
           </div>
         </div>
 			</uib-tab>
-
-
 
 
 
