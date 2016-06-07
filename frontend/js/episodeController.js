@@ -22,7 +22,7 @@ yellow.controller('episodeController', function ($interval, $filter, $http, teal
       $interval.cancel(timerinterval);
       return ""
     } else if (start && !end) {
-      return $filter('date')(new Date() - Date.parse(start) + 12000, 'H:mm:ss', "+0000");
+      return $filter('date')(new Date() - Date.parse(start) + ($scope.episode.delay * 1000), 'H:mm:ss', "+0000");
     } else {
       return "0:00:00";
     }
