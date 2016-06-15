@@ -67,7 +67,7 @@ module Teal
 				track.log_time = Time.now + episode.delay
 				episode.save
 
-	      Live.publish( {:type => "track-log", :track => track, :epsiode => episode}, episode.program, episode.delay)
+	      Live.publish( {:type => "track-log", :track => track, :epsiode => episode, :program => episode.program}, episode.program, episode.delay)
 
 				return track.to_json
 			else

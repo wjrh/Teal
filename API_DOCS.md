@@ -271,7 +271,8 @@ Every program has its own latest log event at `/programs/<SHORTNAME>/latest`. In
 ```
 {
 	"type": "episode-start",
-	"episode" : {...}
+	"episode" : {...},
+	"program" : {...}
 }
 
 ```
@@ -280,7 +281,8 @@ Episode start and end events contain the same information, the epsiode. The end 
 ```
 {
 	"type": "episode-end",
-	"episode" : {...}
+	"episode" : {...},
+	"program" : {...}
 }
 
 ```
@@ -290,6 +292,7 @@ An example of a track log event - note that both track and episode are included.
 ```
 {
 	"type": "track-log",
+	"program" : {...},
 	"episode" : {...},
 	"track" : {
 		"artist": "Beirut",
