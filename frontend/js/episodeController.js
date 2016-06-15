@@ -10,7 +10,7 @@ yellow.controller('episodeController', function ($interval, $filter, $http, teal
   $scope.episode = Episode.get({id: $route.current.params.id});
   $scope.tracks = Track.query({id: $route.current.params.id});
   $scope.newTrack = new Track();
-  $scope.endRecordingText = 'End recording';
+  $scope.endRecordingText = 'End episode';
 
   // interval to increment the timer
   var timerinterval = $interval( $scope.timer, 1000);
