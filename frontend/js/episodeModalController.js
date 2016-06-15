@@ -3,6 +3,7 @@ yellow.controller('episodeModalController', function ($scope, $location, $uibMod
 
   $scope.isFirstOpen = true;
   
+  $scope.episode.name = $filter('date')(new Date(), 'MM-dd-yyyy');
   $scope.save = function () {
     $scope.episode.$save(function () {
       $uibModalInstance.close();
