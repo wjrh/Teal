@@ -12,7 +12,7 @@ module Recorder
   #   At the end of the recording, recorder uploads the file back to the server.
   class Recorder < Sinatra::Base
     API_URI = 'nginx:23021'.freeze
-    LIMIT = 2
+    LIMIT = 3
 
     configure do
       set :port, 80
@@ -32,7 +32,7 @@ module Recorder
 
       halt 400 if @@recording.length == LIMIT # limit reached
 
-      stream.thread = Thread.new { timeout(10_800) { record(stream) } }
+      stream.thread = Thread.new { timeout(25_200) { record(stream) } }
       @@recording.push(stream)
       @@recording.each do |s|
         p "Stream ep id is: #{s.episode_id}"
