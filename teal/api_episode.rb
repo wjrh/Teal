@@ -97,7 +97,7 @@ module Teal
 			episode.start_time = Time.now + episode.delay
 			episode.save
 
-      Live.publish( {:type => "episode-start", :episode => episode, :program => episode.program }, episode.program, episode.delay)
+      Live.publish( {:event => "episode-start", :episode => episode, :program => episode.program }, episode.program, episode.delay)
 
 			200
 		end
@@ -115,7 +115,7 @@ module Teal
 			episode.end_time = Time.now #delay is already added at the recorder
 			episode.save
 
-      Live.publish( {:type => "episode-end", :episode => episode, :program => episode.program }, episode.program, 0)
+      Live.publish( {:event => "episode-end", :episode => episode, :program => episode.program }, episode.program, 0)
 
 			200
 		end
