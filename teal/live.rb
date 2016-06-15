@@ -25,6 +25,20 @@ module Teal
 	      request.body = event.to_json
 	      response = http.request(request)
       end
+
+			uri = URI("http://live-manager:8080/programs/#{program.shortname}")
+      http = Net::HTTP.new(uri.host, uri.port)
+      request = Net::HTTP::Post.new(uri.request_uri)
+      request.body = event.to_json
+      response = http.request(request)
+
+      program.organizations.each do |org|
+      	uri = URI("http://live-manager:8080/organizations/#{org}")
+	      http = Net::HTTP.new(uri.host, uri.port)
+	      request = Net::HTTP::Post.new(uri.request_uri)
+	      request.body = event.to_json
+	      response = http.request(request)
+      end
     end
 	end
 end

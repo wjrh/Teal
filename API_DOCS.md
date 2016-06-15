@@ -264,31 +264,23 @@ By default, recording start and recording end is delayed by 12 seconds. You can 
 Independently from the the timestamps or recording of an episode, tracks can be timestamped as well. To log a track, make a GET request to `/episodes/<EPISODEID>/tracks/<TRACKID>/log`. This will place a `log_time` attribute to the track.
 
 
-#### Subscribing to live events
+#### Querying latest log
 
-Whenever a live event (start of an episode, end of an episode or the logging of a track) happens this event is published on one or more [Server Sent Events](https://en.wikipedia.org/wiki/Server-sent_events) channels.
-
-Every program has its own channel at `/programs/<SHORTNAME>/live` that receives these events. In addition all organizations a program belongs to also receive the event at `/organizations/<ORGANIZATIONNAME>/live`:
+Every program has its own latest log event at `/programs/<SHORTNAME>/latest`. In addition, all organizations a program belongs to also gets the latest event at `/organizations/<ORGANIZATIONNAME>/latest`:
 
 ```
-data: {
-	"id": 1,
-	"event": {
-		"type": "episode-start",
-		"episode" : {...}
-	}
+{
+	"type": "episode-start",
+	"episode" : {...}
 }
 
 ```
 Episode start and end events contain the same information, the epsiode. The end episode will also have contain updated tracks, if any exist.
 
 ```
-data: {
-	"id": 1,
-	"event": {
-		"type": "episode-end",
-		"episode" : {...}
-	}
+{
+	"type": "episode-end",
+	"episode" : {...}
 }
 
 ```
@@ -296,25 +288,22 @@ data: {
 An example of a track log event - note that both track and episode are included.
 
 ```
-data: {
-	"id": 1,
-	"event": {
-		"type": "track-log",
-		"episode" : {...},
-		"track" : {
-			"artist": "Beirut",
-			"log_time": "2016-03-15T02:54:02.016+00:00",
-			"mbid": "2984729d-fb43-420b-9d03-d9e34562d843",
-			"title": "Elephant Gun",
-			"id": "56e77948c49c530020f9a2e6"
-		}
+{
+	"type": "track-log",
+	"episode" : {...},
+	"track" : {
+		"artist": "Beirut",
+		"log_time": "2016-03-15T02:54:02.016+00:00",
+		"mbid": "2984729d-fb43-420b-9d03-d9e34562d843",
+		"title": "Elephant Gun",
+		"id": "56e77948c49c530020f9a2e6"
 	}
 }
 
 ```
 
 ##### Handling timestamps manually
-Just like any other field, `start_time`, `end_time` and `log_time` attributes can be set via a JSON HTTP POST request just like when editing the `name` or `description` attributes. However, this method of setting time will not send live events.
+Just like any other field, `start_time`, `end_time` and `log_time` attributes can be set via a JSON HTTP POST request just like when editing the `name` or `description` attributes. However, this method of setting time will not send live events or update the latest logs.
 
 ### XML Feed (for iTunes and other podcasting clients)
 Teal produces an iTunes compliant XML feed for podcasting. This can be found at `/programs/<SHORTNAME>/feed.xml`:

@@ -6,6 +6,10 @@ services:
   container_name: redis
   image: redis
 
+ live_manager: 
+  container_name: live-manager
+  build: ./live-manager
+
  mongo:
   container_name: mongo
   image: mongo
@@ -52,7 +56,6 @@ services:
    context: .
    dockerfile: Dockerfile-nginx
   volumes: 
-   - /frontend:/usr/src/app/frontend:ro
    - /var/lib/acme/:/var/lib/acme/:ro
   ports:
    - "80:80"
