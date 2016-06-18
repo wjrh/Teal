@@ -4,7 +4,7 @@ Teal is a audio and feed host with a program-episode relationship. It automatica
 
 Teal is composed of several Docker containers, managed with Docker Compose:
 
-![Teal Setup](http://i.imgur.com/PVnNXVZ.png)
+![Teal Setup](http://i.imgur.com/ReGG0xs.png)
 
 ### Simple deployment (using docker-compose)
 
