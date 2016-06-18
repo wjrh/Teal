@@ -27,7 +27,7 @@ module Teal
 			
 			halt 401, "not allowed to perform such action" if not episode.program.owner?(current_user)
 			
-			if params["track_id"] #if the track already exists
+			if params["track_id"] #if the track id is specified
 				begin
 					track = episode.tracks.where(id: params["track_id"]).first
 				rescue Mongoid::Errors::DocumentNotFound
@@ -36,7 +36,16 @@ module Teal
 				track.update_attributes(data)
 				episode.save
 				return track.to_json
-			else
+			elsif data.kind_of?(Array) #check of the new track has multiple tracks and make them the new tracks
+				newtracks = []
+				data.each do |track|
+					newtrack = Track.new(track)
+					newtracks << newtrack
+				end
+				episode.tracks = newtracks
+				episode.save
+				return episode.tracks.to_json
+			else #finally, if the track is a standalone track object
 				newtrack = Track.new(data)
 				episode.tracks << newtrack
 				episode.save
