@@ -62,7 +62,7 @@ module Teal
     	content_type :json
     	info = {
     		"about" => "Teal is WJRH's DJ-Program-Episode management API",
-    		"documentation" => "github.com/wjrh/Teal",
+    		"documentation" => "github.com/wjrh/Teal/blob/master/API_DOCS.md",
     		"contact" => "renandincer+teal@gmail.com",
     		"authors" => ["Renan Dincer","Eric Weber"]    	}
       
