@@ -261,7 +261,7 @@ You will need a valid stream url such as the URL of an Icecast stream defined in
 By default, recording start and recording end is delayed by 12 seconds. You can change this with a URL parameter to any other number of seconds below 30 seconds: `/episodes/<EPISODEID>/start?delay=2`. Any number above 30 will be treated as 30. Because of the delay, the request to `/episodes/<EPISODEID>/stop` will respond that many seconds late, when the stopping is actually complete.
 
 #### Live track logging
-Independently from the the timestamps or recording of an episode, tracks can be timestamped as well. To log a track, make a GET request to `/episodes/<EPISODEID>/tracks/<TRACKID>/log`. This will place a `log_time` attribute to the track.
+Independently from the the timestamps or recording of an episode, tracks can be timestamped as well. To log a track, make a POST request to `/episodes/<EPISODEID>/tracks/<TRACKID>/log`. This will place a `log_time` attribute to the track.
 
 
 #### Querying latest log
