@@ -106,23 +106,23 @@ module Teal
 			expiry_time = Time.now + EMAIL_WAIT_TIMER
 			message_with_link = email_template(link, token, expiry_time)
 
-			Pony.mail({
-				:to => params["email"],
-				:from => Teal.config.login_source_email,
-				:body => message_with_link,
-				:subject => "Teal login",
-				:headers => { 'Content-Type' => 'text/html' },
-				:via => :smtp,
-				:via_options => {
-					:address 	=> Teal.config.smtp_server,
-					:port 		=> '587',
-					:user_name=> Teal.config.smtp_user,
-					:password => Teal.config.smtp_password,
-					:authentication => :login
-				}
-				})
-		end
-		
+			resp = $ses.send_email({
+			  source: Teal.config.login_source_email, # required
+			  destination: { # required
+			    to_addresses: [params["email"]],
+			  },
+			  message: { # required
+			    subject: { # required
+			      data: "Teal login", # required
+			    },
+			    body: { # required
+			      html: {
+			        data: message_with_link, # required
+			      },
+			    },
+			  },
+			})
+
 		#returns the email of the current user
 		def authenticate
 			identity = Identity.where(cookie: request.cookies['teal']).first if request.cookies['teal']

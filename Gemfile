@@ -15,3 +15,5 @@ gem 'redis' 									# in memory short term cache
 gem 'taglib-ruby' 						# process audio files, gather metadata
 gem 'resque'									# queueing in ruby
 gem 'rake'										# run rasks
+gem 'aws-sdk', '~> 2'
+

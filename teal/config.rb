@@ -16,7 +16,9 @@ module Teal
 			:smtp_password			=> yaml['smtp_password'],
 			:login_source_email => yaml['login_source_email'],
 			:media_path				  => yaml['media_path'],
-			:god_emails					=> yaml['god_emails']
+			:god_emails					=> yaml['god_emails'],
+			:aws_key					=> yaml['aws_key'],
+			:aws_secret				=> yaml['aws_secret']
   end
 
 	private

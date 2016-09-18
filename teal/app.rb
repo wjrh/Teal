@@ -45,6 +45,11 @@ module Teal
 			Mongoid.load!("config/mongoid.yml")	
 			$redis = Redis.new(:url => Teal.config.redis_url)
 			Resque.redis = $redis
+      Aws.config.update({
+          region: 'us-east-1',
+          credentials: Aws::Credentials.new(Teal.config.aws_key, Teal.config.aws_secret)
+      })
+      $ses = Aws::SES::Client.new(region: 'us-east-1')
     end
 
     # make everything be a json response (callback to every route)
