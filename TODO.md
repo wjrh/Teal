@@ -5,6 +5,7 @@
 - [2] enforce itunes podcast spec character limits
 - [ ] make shortname deriving system case insensitive or make shortname search case insentitive
 - [ ] make sure no shortname is created with the special names we use for other things
+- [ ] make sure shortname collisions don't happen
 - [ ] HIDE owner and organization
 
 - [ ] better error messages
