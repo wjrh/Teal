@@ -122,6 +122,7 @@ module Teal
 			    },
 			  },
 			})
+    end
 
 		#returns the email of the current user
 		def authenticate
