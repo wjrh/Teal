@@ -59,8 +59,13 @@ yellow.controller('episodeController', function ($interval, $filter, $http, teal
   };
 
   $scope.endEpisode = function(){
+    if($scope.episodeEnding == true){
+      $scope.endRecordingText = 'Hold your horses!'
+      return;
+    }
     $interval.cancel(timerinterval);
     $scope.endRecordingText = 'Ending...';
+    $scope.episodeEnding = true;
     $http.post( teal + "/episodes/" + $route.current.params.id + "/stop", {}).success(function(response) {
         $scope.episode = Episode.get({id: $route.current.params.id}) 
     });
