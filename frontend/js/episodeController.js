@@ -62,13 +62,14 @@ yellow.controller('episodeController', function ($interval, $filter, $http, teal
     if($scope.episodeEnding == true){
       $scope.endRecordingText = 'Hold your horses!';
       return;
-    }
+    } else {
     $interval.cancel(timerinterval);
     $scope.endRecordingText = 'Ending...';
     $scope.episodeEnding = true;
     $http.post( teal + "/episodes/" + $route.current.params.id + "/stop", {}).success(function(response) {
         $scope.episode = Episode.get({id: $route.current.params.id}) 
     });
+    }
   };
 
   $scope.submit = function($files, $event, $flow){
