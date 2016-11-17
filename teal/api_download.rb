@@ -12,7 +12,7 @@ module Teal
         s3_redirect_url = obj.presigned_url(:get, expires_in: 7200)
         redirect to(s3_redirect_url), 302
       else
-			  halt 500, "episode not found internally" if not File.exists?(path_to_file)
+			  halt 500, "episode recording not found"
       end
 		end
 	end
