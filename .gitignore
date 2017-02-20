@@ -47,4 +47,4 @@ _testmain.go
 *.test
 *.prof
 
-*.bak.zip
+*.zip
