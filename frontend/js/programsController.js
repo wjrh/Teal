@@ -14,7 +14,21 @@ yellow.controller('programsController', function (teal, $http, $scope, $uibModal
     }
     );
   };
-  
+
+$scope.newProgram = function () {
+    var newProgram = new Program();
+    var modalInstance = $uibModal.open({
+      animation: $scope.animationsEnabled,
+      templateUrl: 'programModal.html',
+      controller: 'programModalController',
+      resolve: {
+        program: function () {
+          return newProgram;
+        } 
+      }
+    });
+
+
     modalInstance.result.then(function () {
       $scope.programs = Program.query();
     }, function () {
