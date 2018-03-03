@@ -49,9 +49,9 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	} else {
 		//determine if the first part of the url is orgs or progs
 		if urlPath[0] == "organizations" {
-			fmt.Fprintf(w, organizations[entityName])
+			w.Write([]byte(organizations[entityName]))
 		} else if urlPath[0] == "programs" {
-			fmt.Fprintf(w, programs[entityName])
+			w.Write([]byte(programs[entityName]))
 		} else {
 			fmt.Fprintf(w, "{'error':'url not properly formatted'}")
 		}
